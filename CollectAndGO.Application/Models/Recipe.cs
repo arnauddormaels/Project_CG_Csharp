@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CG.Application.Models
 {
+    /// <summary>
+    /// Recepenten klas commentaar!!!!
+    /// </summary>
     public class Recipe
     {
         private int _id;

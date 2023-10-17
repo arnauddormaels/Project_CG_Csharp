@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace CG.Application.Repositorys
 {
-    public interface IRecipeRepository
+    public interface IProductRepository
     {
-        public List<Recipe> GetRecipes();
-        public void AddRecipe(Recipe recipe);
+        List<Product> GetProducts(int recipeId);
 
-        public void RemoveRecipe(string recipe);
+
     }
 }

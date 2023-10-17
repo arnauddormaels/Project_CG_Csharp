@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\Project_Collect_and_Go_t5\\CG.API.csproj": {}
+    "D:\\8e semester\\project\\Project_CG_Csharp\\Project_Collect_and_Go_t5\\CG.API.csproj": {}
   },
   "projects": {
-    "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\Project_Collect_and_Go_t5\\CG.API.csproj": {
+    "D:\\8e semester\\project\\Project_CG_Csharp\\Project_Collect_and_Go_t5\\CG.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\Project_Collect_and_Go_t5\\CG.API.csproj",
+        "projectUniqueName": "D:\\8e semester\\project\\Project_CG_Csharp\\Project_Collect_and_Go_t5\\CG.API.csproj",
         "projectName": "CG.API",
-        "projectPath": "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\Project_Collect_and_Go_t5\\CG.API.csproj",
+        "projectPath": "D:\\8e semester\\project\\Project_CG_Csharp\\Project_Collect_and_Go_t5\\CG.API.csproj",
         "packagesPath": "C:\\Users\\arnau\\.nuget\\packages\\",
-        "outputPath": "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\Project_Collect_and_Go_t5\\obj\\",
+        "outputPath": "D:\\8e semester\\project\\Project_CG_Csharp\\Project_Collect_and_Go_t5\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

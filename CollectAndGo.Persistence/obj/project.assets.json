@@ -33,11 +33,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\CollectAndGo.Persistence\\CG.Persistence.csproj",
+      "projectUniqueName": "D:\\8e semester\\project\\Project_CG_Csharp\\CollectAndGo.Persistence\\CG.Persistence.csproj",
       "projectName": "CG.Persistence",
-      "projectPath": "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\CollectAndGo.Persistence\\CG.Persistence.csproj",
+      "projectPath": "D:\\8e semester\\project\\Project_CG_Csharp\\CollectAndGo.Persistence\\CG.Persistence.csproj",
       "packagesPath": "C:\\Users\\arnau\\.nuget\\packages\\",
-      "outputPath": "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\CollectAndGo.Persistence\\obj\\",
+      "outputPath": "D:\\8e semester\\project\\Project_CG_Csharp\\CollectAndGo.Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -57,8 +57,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\CollectAndGO.Application\\CG.Application.csproj": {
-              "projectPath": "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\CollectAndGO.Application\\CG.Application.csproj"
+            "D:\\8e semester\\project\\Project_CG_Csharp\\CollectAndGO.Application\\CG.Application.csproj": {
+              "projectPath": "D:\\8e semester\\project\\Project_CG_Csharp\\CollectAndGO.Application\\CG.Application.csproj"
             }
           }
         }

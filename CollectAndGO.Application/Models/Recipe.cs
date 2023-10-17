@@ -12,16 +12,20 @@ namespace CG.Application.Models
         private string _name;
         private string _imgUrl;
         private string _videoUrl;
-        //private List<object> _ingredients= new List<object>();              //object aanpassen naar (ingredient?)
+        private bool _isActive;
 
-        public Recipe(int id, string name, string imgUrl, string videoUrl, List<object> ingredients)
+        public Recipe(int id, string name, string imgUrl, string videoUrl) : this(name,imgUrl,videoUrl)
         {
-            Id = id;
+            Id = id;           
+        }
+         public Recipe(string name, string imgUrl, string videoUrl)
+        {
             Name = name;
             ImgUrl = imgUrl;
             VideoUrl = videoUrl;
-            //_ingredients = ingredients;                                     //Ingredients (property?)
+            _isActive = false;
         }
+        
 
         public void AddIngredient(/*Ingredient ingedient*/)
         {
@@ -36,10 +40,12 @@ namespace CG.Application.Models
             }
             
         }
-        public int Id { get;private set; }
+        public int Id { get { return _id; } private set { _id = value; } }
         public string Name { get { return _name;} private set { _name = value; } }
         public string ImgUrl { get { return _imgUrl;} private set { _imgUrl = value; } }
         public string VideoUrl { get { return _videoUrl;} private set { _videoUrl = value; } }
+
+        public bool IsActive { get => _isActive; private set => _isActive = value; }
 
         public override string? ToString()
         {

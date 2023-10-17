@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dhgPgMqmM+JH7SNd/iLysIb7kzO6eaUjmQjOXKoO6wNwYMHPIuLlbEy36nb0TUiiaKWHudA9kxaCqcwokJKUpw==",
+  "dgSpecHash": "vxRRZE1+HZoIdNiD7YoYszYW3amfT13HbG2N7zyBnt351ZY0BwHvCtJ4DFfDfI5eugD4TwPn7WLwIYhvuFekXQ==",
   "success": true,
-  "projectFilePath": "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\CollectAndGo.Persistence\\CG.Persistence.csproj",
+  "projectFilePath": "D:\\8e semester\\project\\Project_CG_Csharp\\CollectAndGo.Persistence\\CG.Persistence.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

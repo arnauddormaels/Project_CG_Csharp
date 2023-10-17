@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\CollectAndGO.Application\\CG.Application.csproj": {}
+    "D:\\8e semester\\project\\Project_CG_Csharp\\CollectAndGO.Application\\CG.Application.csproj": {}
   },
   "projects": {
-    "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\CollectAndGO.Application\\CG.Application.csproj": {
+    "D:\\8e semester\\project\\Project_CG_Csharp\\CollectAndGO.Application\\CG.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\CollectAndGO.Application\\CG.Application.csproj",
+        "projectUniqueName": "D:\\8e semester\\project\\Project_CG_Csharp\\CollectAndGO.Application\\CG.Application.csproj",
         "projectName": "CG.Application",
-        "projectPath": "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\CollectAndGO.Application\\CG.Application.csproj",
+        "projectPath": "D:\\8e semester\\project\\Project_CG_Csharp\\CollectAndGO.Application\\CG.Application.csproj",
         "packagesPath": "C:\\Users\\arnau\\.nuget\\packages\\",
-        "outputPath": "D:\\8e semester\\project\\Project_Collect_and_Go_t5\\CollectAndGO.Application\\obj\\",
+        "outputPath": "D:\\8e semester\\project\\Project_CG_Csharp\\CollectAndGO.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

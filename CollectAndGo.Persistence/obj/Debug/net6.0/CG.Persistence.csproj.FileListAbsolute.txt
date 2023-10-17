@@ -1,0 +1,15 @@
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\bin\Debug\net6.0\CG.Persistence.deps.json
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\bin\Debug\net6.0\CG.Persistence.dll
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\bin\Debug\net6.0\CG.Persistence.pdb
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\bin\Debug\net6.0\CG.Application.dll
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\bin\Debug\net6.0\CG.Application.pdb
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\obj\Debug\net6.0\CG.Persistence.csproj.AssemblyReference.cache
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\obj\Debug\net6.0\CG.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\obj\Debug\net6.0\CG.Persistence.AssemblyInfoInputs.cache
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\obj\Debug\net6.0\CG.Persistence.AssemblyInfo.cs
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\obj\Debug\net6.0\CG.Persistence.csproj.CoreCompileInputs.cache
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\obj\Debug\net6.0\CG.Persistence.csproj.CopyComplete
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\obj\Debug\net6.0\CG.Persistence.dll
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\obj\Debug\net6.0\refint\CG.Persistence.dll
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\obj\Debug\net6.0\CG.Persistence.pdb
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGo.Persistence\obj\Debug\net6.0\ref\CG.Persistence.dll

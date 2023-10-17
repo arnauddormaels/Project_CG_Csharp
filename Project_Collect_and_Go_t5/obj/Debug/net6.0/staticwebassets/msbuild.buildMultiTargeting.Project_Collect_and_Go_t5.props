@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Project_Collect_and_Go_t5.props" />
+</Project>

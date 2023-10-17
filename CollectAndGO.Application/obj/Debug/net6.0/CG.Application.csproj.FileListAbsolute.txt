@@ -1,0 +1,12 @@
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\bin\Debug\net6.0\CG.Application.deps.json
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\bin\Debug\net6.0\CG.Application.dll
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\bin\Debug\net6.0\CG.Application.pdb
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\obj\Debug\net6.0\CG.Application.csproj.AssemblyReference.cache
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\obj\Debug\net6.0\CG.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\obj\Debug\net6.0\CG.Application.AssemblyInfoInputs.cache
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\obj\Debug\net6.0\CG.Application.AssemblyInfo.cs
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\obj\Debug\net6.0\CG.Application.csproj.CoreCompileInputs.cache
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\obj\Debug\net6.0\CG.Application.dll
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\obj\Debug\net6.0\refint\CG.Application.dll
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\obj\Debug\net6.0\CG.Application.pdb
+D:\8e semester\project\Project_Collect_and_Go_t5\CollectAndGO.Application\obj\Debug\net6.0\ref\CG.Application.dll

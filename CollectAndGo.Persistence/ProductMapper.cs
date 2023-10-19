@@ -8,26 +8,24 @@ namespace CG.Persistence
 
         private List<Product> _products = new List<Product>()                //dummycode 
         {
-            new Product("Melk", new DateTime(2000, 1, 1, 0, 0, 0), new DateTime(2000, 1, 1, 0, 30, 0), 0, 0,0),
-            new Product("CacaoPoeder", new DateTime(2000, 1, 1, 0, 15, 0), new DateTime(2000, 1, 1, 0, 30, 0), 1, 1,0),
-            new Product("Suiker", new DateTime(2000, 1, 1, 0, 20, 0), new DateTime(2000, 1, 1, 0, 25, 0), 2, 2,0),
-            new Product("Tomaten", new DateTime(2000, 1, 1, 0, 20, 0), new DateTime(2000, 1, 1, 0, 25, 0), 3, 3,2),
-            new Product("Biefstuk", new DateTime(2000, 1, 1, 0, 15, 0), new DateTime(2000, 1, 1, 0, 40, 0), 4, 4,1),
-            new Product("Boter", new DateTime(2000, 1, 1, 0, 00, 0), new DateTime(2000, 1, 1, 0, 15, 0), 5, 5,1),
-            new Product("Frieten", new DateTime(2000, 1, 1, 0, 20, 0), new DateTime(2000, 1, 1, 0, 25, 0), 6, 6,1),
-            new Product("Spaghetti", new DateTime(2000, 1, 1, 0, 10, 0), new DateTime(2000, 1, 1, 0, 25, 0), 7, 7,2),
-            new Product("Gehakt", new DateTime(2000, 1, 1, 0, 20, 0), new DateTime(2000, 1, 1, 0, 25, 0), 8, 8,2)
-
-            };             
+            new Product(1, "Melk",new BrandProduct(1, "melkMerk", 2.2M, "hallo ik ben een melk descriptie", "imgUrlMerk1"),"imageUrl1"),
+            new Product(2, "Bread", new BrandProduct(2, "breadMerk", 1.5M, "This is a bread description.", "imgUrlMerk2"), "imageUrl2"),
+            new Product(3, "Eggs", new BrandProduct(3, "eggsMerk", 3.0M, "Fresh eggs from local farms.", "imgUrlMerk3"), "imageUrl3"),
+            new Product(4, "Cheese", new BrandProduct(4, "cheeseMerk", 5.99M, "A variety of delicious cheeses.", "imgUrlMerk4"), "imageUrl4"),
+            new Product(5, "Apples", new BrandProduct(5, "applesMerk", 2.49M, "Fresh and crispy apples.", "imgUrlMerk5"), "imageUrl5"),
+            new Product(6, "Pasta", new BrandProduct(6, "pastaMerk", 1.79M, "High-quality pasta for your recipes.", "imgUrlMerk6"), "imageUrl6"),
+            new Product(7, "Tomatoes", new BrandProduct(7, "tomatoesMerk", 1.99M, "Ripe and juicy tomatoes.", "imgUrlMerk7"), "imageUrl7"),
+            new Product(8, "Chicken", new BrandProduct(8, "chickenMerk", 7.49M, "Farm-fresh chicken meat.", "imgUrlMerk8"), "imageUrl8")
+            };
 
         public ProductMapper()
         {
         }
 
-        public List<Product> GetProducts(int recipeId)
+        public List<Product> GetProducts()
         {
             //In de databank zoeken naar de producten met hetzelfde recipeId en deze returnen
-            return _products.Where(p => p.RecipeId == recipeId).ToList();
+            return _products;
         }
     }
 }

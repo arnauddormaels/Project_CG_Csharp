@@ -13,5 +13,6 @@ namespace CG.Application.Repositorys
         public void AddRecipe(Recipe recipe);
 
         public void RemoveRecipe(string recipe);
+        public void ActivateRecipe(string recipeId);
     }
 }

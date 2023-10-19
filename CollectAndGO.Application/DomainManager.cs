@@ -18,18 +18,24 @@ namespace CollectAndGO.Application
         {
             return _recipeRepo.GetRecipes();
         }
-        public List<Product> GetProducts(int recipeId) {
-        return _productRepo.GetProducts(recipeId);
+        public List<Product> GetProducts() {
+            return _productRepo.GetProducts();
         }
 
-        public void AddRecipe(List<string> stringListRecipe)
+        public void AddRecipe(List<string> recipeInfo)
         {
-            Recipe recipe = new Recipe(stringListRecipe[0], stringListRecipe[1], stringListRecipe[2]);
+            Recipe recipe = new Recipe(recipeInfo[0], recipeInfo[1], recipeInfo[2]);
             _recipeRepo.AddRecipe(recipe);
         }
-        public void RemoveRecipe(string recipeId)
+        public void RemoveRecipe(string recipeId)   
         {
             _recipeRepo.RemoveRecipe(recipeId);
-        }
+        }       //Not Implemented
+
+        public void ActivateRecipe(string recipeId)
+        {
+            _recipeRepo.ActivateRecipe(recipeId);
+        }  //not implemented
+
     }
 }

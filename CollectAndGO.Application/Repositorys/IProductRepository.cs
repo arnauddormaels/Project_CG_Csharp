@@ -9,7 +9,7 @@ namespace CG.Application.Repositorys
 {
     public interface IProductRepository
     {
-        List<Product> GetProducts(int recipeId);
+        List<Product> GetProducts();
 
 
     }

@@ -14,17 +14,15 @@ namespace CG.StartUp
         static void Main(string[] args)
         {
 
-            ShowRecipes();
+            //ShowRecipes();
 
-            //ShowProductsFromRecipe(1);
+            ////ShowProductsFromRecipe(1);                  //not finished
 
-            //ShowProductsFromRecipes();
+            //ShowProducts();
 
-            // AddRecipe(new List<string>{ "Lasagna", "/videoUrlLasagna", "/ImgUrlLasagna"});
+             //AddRecipe(new List<string>{ "Lasagna", "/videoUrlLasagna", "/ImgUrlLasagna"});
+
             
-            
-
-
 
         }
         public static void ShowRecipes()
@@ -35,24 +33,24 @@ namespace CG.StartUp
                 Console.WriteLine();
             });
         }
-        public static void ShowProductsFromRecipe(int recipeId)
-        {
+        //public static void ShowProductsFromRecipe(int recipeId)            //Not finished
+        //{
 
-            Console.WriteLine("Lijst van producten met Id " + recipeId);
-            Console.WriteLine();
-            manager.GetProducts(recipeId).ForEach(p =>
-            {
-                Console.WriteLine(p.ToString());
-                Console.WriteLine();
-            });
-        }
-        public static void ShowProductsFromRecipes()
+        //    Console.WriteLine("Lijst van producten met Id " + recipeId);
+        //    Console.WriteLine();
+        //    manager.GetProducts().ForEach(p =>
+        //    {
+        //        Console.WriteLine(p.ToString());
+        //        Console.WriteLine();
+        //    });
+        //}
+        public static void ShowProducts()
         {
             manager.GetRecipes().ForEach(r =>
             {
                 Console.WriteLine(r.ToString());
                 Console.WriteLine();
-                manager.GetProducts(r.Id).ForEach(p =>
+                manager.GetProducts().ForEach(p =>
                 {
                     Console.WriteLine(p.ToString());
                     Console.WriteLine();

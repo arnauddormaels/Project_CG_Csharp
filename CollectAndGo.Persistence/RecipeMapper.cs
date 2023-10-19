@@ -27,10 +27,16 @@ namespace CG.Persistence
             _recipes.Add(recipe);
         }
 
-        public void RemoveRecipe(string recipe)
+        public void RemoveRecipe(string recipe)              
         {
             //IsActiveOp False zetten in databank.
+            throw new NotImplementedException();
+
         }
 
+        public void ActivateRecipe(string recipeId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

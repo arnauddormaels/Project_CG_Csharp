@@ -8,42 +8,30 @@ namespace CG.Application.Models
 {
     public class Product
     {
-        private string _productName; 
-        private DateTime _startTime;
-        private DateTime _endTime;
         private int _productId;
-        private int _brandId;
-        private int recipeId;
+        private string _productName;
+        private string _imgUrl;
+        private BrandProduct BrandProduct { get; set; }
 
-        public Product(string productName, DateTime startTime, DateTime endTime, int productId, int brandId)
+        public Product( string productName,BrandProduct brandProduct, string imgUrl)
         {
             ProductName = productName;
-            StartTime = startTime;
-            EndTime = endTime;
+            BrandProduct = brandProduct;
+            ImgUrl = imgUrl;
+        }
+
+        public Product(int productId,string productName, BrandProduct brandProduct,string imgUrl) : this(productName,brandProduct, imgUrl)
+        {
             ProductId = productId;
-            BrandId = brandId;
         }
 
-        public Product(string productName, DateTime startTime, DateTime endTime, int productId, int brandId, int recipeId) : this(productName, startTime, endTime, productId, brandId)
-        {
-            this.recipeId = recipeId;
-        }
-
-        public DateTime StartTime { get => _startTime; private set => _startTime = value; }
         public string ProductName { get => _productName; private set => _productName = value; }
-        public DateTime EndTime { get => _endTime; private set => _endTime = value; }
         public int ProductId { get => _productId; private set => _productId = value; }
-        public int BrandId { get => _brandId; private set => _brandId = value; }
-        public int RecipeId { get => recipeId; private set => recipeId = value; }
+        public string ImgUrl { get => _imgUrl; set => _imgUrl = value; }
 
-        public string ToString()
+        public override string ToString()
         {
-            return $"product : {ProductName} \n" +
-                $"startTime : {StartTime} \n" +
-                $"endTime : {EndTime} \n" +
-                $"recipeId : {RecipeId} \n" +
-                $"pId : {ProductId} \n" +
-                $"brandId : {BrandId}";
+            return $"{ProductName}|{ImgUrl}|{BrandProduct.ToString()}";
         }
     }
 }

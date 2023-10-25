@@ -1,3 +1,7 @@
+using CG.Application.Repositorys;
+using CG.Persistence;
+using CollectAndGO.Application;
+
 namespace Project_Collect_and_Go_t5
 {
     public class Program
@@ -7,11 +11,17 @@ namespace Project_Collect_and_Go_t5
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            
+            builder.Services.AddSingleton<IProductRepository, ProductMapper>();
+            builder.Services.AddSingleton<IRecipeRepository,RecipeMapper>();
+            builder.Services.AddSingleton<DomainManager>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+
 
             var app = builder.Build();
 

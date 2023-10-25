@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="7.0.13" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\Input\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CollectAndGO.Application\CG.Application.csproj" />
+    <ProjectReference Include="..\CollectAndGo.Persistence\CG.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

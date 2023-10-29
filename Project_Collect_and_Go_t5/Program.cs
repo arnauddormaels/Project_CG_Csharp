@@ -1,5 +1,5 @@
 using CG.Application.Repositorys;
-using CG.Persistence;
+using CG.Persistence.Repositorys;
 using CollectAndGO.Application;
 
 namespace Project_Collect_and_Go_t5

@@ -1,7 +1,7 @@
 ﻿using CG.Application.Models;
 using CG.Application.Repositorys;
 
-namespace CG.Persistence
+namespace CG.Persistence.Repositorys
 {
     public class ProductMapper : IProductRepository
     {

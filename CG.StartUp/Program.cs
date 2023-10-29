@@ -1,5 +1,7 @@
 ﻿using CG.Application.Repositorys;
 using CG.Persistence;
+using CG.Persistence.Data;
+using CG.Persistence.Repositorys;
 using CollectAndGO.Application;
 using System.Security.Cryptography.X509Certificates;
 
@@ -11,20 +13,30 @@ namespace CG.StartUp
         static IProductRepository productRepo = new ProductMapper();
         static DomainManager manager = new DomainManager(recipeRepo, productRepo);
 
+        //Datalaag test!
+        static string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Collect&Go;Integrated Security=True;TrustServerCertificate=True";
+
         static void Main(string[] args)
         {
+            CreateDB();
 
             //ShowRecipes();
 
-            ////ShowProductsFromRecipe(1);                  //not finished
+            //ShowProductsFromRecipe(1);                  //not finished
 
             //ShowProducts();
 
              //AddRecipe(new List<string>{ "Lasagna", "/videoUrlLasagna", "/ImgUrlLasagna"});
 
-            
-
         }
+
+        public static void CreateDB()
+        {
+            RecipeContext context = new RecipeContext(connectionString);
+            context.Database.EnsureDeleted();//deze database zal verwijderen
+            context.Database.EnsureCreated();//niet save maar snel en gemakkelijk..... 
+        }
+
         public static void ShowRecipes()
         {
             manager.GetRecipes().ForEach(r =>
@@ -63,8 +75,5 @@ namespace CG.StartUp
             manager.AddRecipe(stringListRecipe);
             ShowRecipes();
         }
-
-
-
     }
 }

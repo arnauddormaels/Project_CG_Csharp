@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CG.Persistence
+namespace CG.Persistence.Repositorys
 {
     public class RecipeMapper : IRecipeRepository
 
     {
         private List<Recipe> _recipes = new List<Recipe>() {
                 new Recipe(1, "Biefstuk met frietjes", "/ImgUrlBiefstuk", "/videoUrl"),
-                new Recipe(2, "Spaghetti bolongaise", "/ImgUrlPaghetti", "/videoUrl") 
+                new Recipe(2, "Spaghetti bolongaise", "/ImgUrlPaghetti", "/videoUrl")
             };
         public List<Recipe> GetRecipes()
         {
@@ -27,7 +27,7 @@ namespace CG.Persistence
             _recipes.Add(recipe);
         }
 
-        public void RemoveRecipe(string recipe)              
+        public void RemoveRecipe(string recipe)
         {
             //IsActiveOp False zetten in databank.
             throw new NotImplementedException();

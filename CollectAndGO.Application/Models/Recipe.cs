@@ -15,6 +15,7 @@ namespace CG.Application.Models
     {
         private int _recipeId;
         private string _name;
+        private string _category;
         private string _imgUrl;
         private string _videoUrl;
         private List<Timing> timings;
@@ -69,6 +70,7 @@ namespace CG.Application.Models
        
         public int RecipeId { get { return _recipeId; } private set { _recipeId = value; } }
         public string Name { get { return _name;} private set { _name = value; } }
+        public string Category { get { return _category; } private set { _category = value; } }
         public string ImgUrl { get { return _imgUrl;} private set { _imgUrl = value; } }
         public string VideoUrl { get { return _videoUrl;} private set {_videoUrl = value; } }
 

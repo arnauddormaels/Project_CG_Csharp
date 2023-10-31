@@ -13,9 +13,6 @@ namespace CG.StartUp
         static IProductRepository productRepo = new ProductMapper();
         static DomainManager manager = new DomainManager(recipeRepo, productRepo);
 
-        //Datalaag test!
-        static string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Collect&Go;Integrated Security=True;TrustServerCertificate=True";
-
         static void Main(string[] args)
         {
             CreateDB();
@@ -32,9 +29,14 @@ namespace CG.StartUp
 
         public static void CreateDB()
         {
-            RecipeContext context = new RecipeContext(connectionString);
-            context.Database.EnsureDeleted();//deze database zal verwijderen
-            context.Database.EnsureCreated();//niet save maar snel en gemakkelijk..... 
+            RecipeContext context = new RecipeContext();
+            context.Database.EnsureDeleted();//deze database verwijderen
+            context.Database.EnsureCreated();//niet save maar snel en gemakkelijk aanmaken..... 
+        }
+
+        public static void addBoek()
+        {
+            RecipeEFRepository repository = new RecipeEFRepository();
         }
 
         public static void ShowRecipes()

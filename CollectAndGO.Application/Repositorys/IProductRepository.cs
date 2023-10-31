@@ -10,7 +10,6 @@ namespace CG.Application.Repositorys
     public interface IProductRepository
     {
         List<Product> GetProducts();
-
-
+        
     }
 }

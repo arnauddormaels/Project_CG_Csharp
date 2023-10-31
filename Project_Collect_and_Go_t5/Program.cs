@@ -21,10 +21,19 @@ namespace Project_Collect_and_Go_t5
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("MyCorsPolicy", builder =>
+                {
+                    builder
+                        .WithOrigins("http://localhost:5173") // Replace with the origin that needs access
+                        .AllowAnyOrigin();
+                        
+                }); ;
+            });
 
             var app = builder.Build();
-
+            app.UseCors("MyCorsPolicy");
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

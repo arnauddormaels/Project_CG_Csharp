@@ -21,7 +21,21 @@ namespace CG.API.Controllers
             this.manager = manager;
             dummyDTOlist = new List<RecipeRESToutputDTO> { dummyDTO,new RecipeRESToutputDTO(2,"lasagne","imgUrl","vidUrl",true) };
         }
-
+        [Route("/api/Recipes")]
+        [HttpGet]
+        public ActionResult<List<RecipeRESToutputDTO>> GetRecipes()
+        {
+            try
+            {
+                return dummyDTOlist;
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+                throw;
+            }
+        }
+        //[Route("https://localhost:7226/api/Recipe")]
         [HttpGet("({recipeId})")]
         public ActionResult<RecipeRESToutputDTO>GetRecipe(int recipeId)
         {
@@ -42,7 +56,7 @@ namespace CG.API.Controllers
             dummyDTOlist.Add(recipeRESToutputDTO);
             return recipeRESToutputDTO;
         }
-
+        
         [HttpPut("{id}")]
         public ActionResult<RecipeRESToutputDTO> EditRecipe(int id ,[FromBody] RecipeRESToutputDTO recipeRESToutputDTO)
         {

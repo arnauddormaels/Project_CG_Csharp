@@ -2,7 +2,7 @@ using Xunit;
 using CG.Application.Models;
 using CG.Application.Exceptions;
 
-namespace CG.UnitTests
+namespace CG.BusinessLayer.Tests
 {
     public class BrandProductTests
     {
@@ -45,6 +45,7 @@ namespace CG.UnitTests
             string expected = $"{name}|{price}|{imgUrl}|{description}";
             Assert.Equal(expected, result);
         }
+
     }
 
     public class RecipeTests

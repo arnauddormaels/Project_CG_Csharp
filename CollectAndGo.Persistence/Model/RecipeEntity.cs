@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CG.Persistence.Model
 {
-    public class Recipe
+    public class RecipeEntity
     {
-        public Recipe(string name, string category, bool active, string imgUrl, string videoUrl)
+        public RecipeEntity(string name, string category, bool active, string imgUrl, string videoUrl)
         {
             Name = name;
             Category = category;
@@ -23,6 +23,6 @@ namespace CG.Persistence.Model
         public bool Active { get; set; }
         public string ImgUrl { get; set; }
         public string VideoUrl { get; set; }
-        public List<Timing> Timings { get; set; }
+        public List<TimingEntity> Timings { get; set; }
     }
 }

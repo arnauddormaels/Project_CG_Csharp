@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace CG.Persistence.Model
 {
-    public class Timing
+    public class TimingEntity
     {
-        public Timing(TimeSpan startTijd, TimeSpan endTijd)
+        public TimingEntity(int startTijd, int endTijd)
         {
             StartTijd = startTijd;
             EndTijd = endTijd;
         }
 
         public int Id { get; set; }
-        public TimeSpan StartTijd { get; set; }
-        public TimeSpan EndTijd { get; set; }
-        public Product Product { get; set; }
+        public int StartTijd { get; set; }
+        public int EndTijd { get; set; }
+        public ProductEntity Product { get; set; }
     }
 }

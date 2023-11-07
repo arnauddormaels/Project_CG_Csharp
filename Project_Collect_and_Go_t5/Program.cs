@@ -1,4 +1,5 @@
 using CG.Application.Repositorys;
+using CG.Persistence.Data;
 using CG.Persistence.Repositorys;
 using CollectAndGO.Application;
 
@@ -11,9 +12,9 @@ namespace Project_Collect_and_Go_t5
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            
-            builder.Services.AddSingleton<IProductRepository, ProductMapper>();
-            builder.Services.AddSingleton<IRecipeRepository,RecipeMapper>();
+            //builder.Services.AddSingleton<DatabaseContext>();
+            builder.Services.AddSingleton<IProductRepository, ProductRepository>();
+            builder.Services.AddSingleton<IRecipeRepository,RecipeRepository>();
             builder.Services.AddSingleton<DomainManager>();
 
             builder.Services.AddControllers();

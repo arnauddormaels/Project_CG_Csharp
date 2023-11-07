@@ -1,4 +1,5 @@
-﻿using CG.API.Model.Output;
+﻿using CG.API.Mappers;
+using CG.API.Model.Output;
 using CG.Application.Models;
 using CollectAndGO.Application;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +12,7 @@ namespace CG.API.Controllers
     [ApiController]
     public class RecipeController : ControllerBase
     {
-        private RecipeRESToutputDTO dummyDTO = new RecipeRESToutputDTO(1, "pasta", "imgUrl", "vidUrl", true); 
+        private RecipeRESToutputDTO dummyDTO = new RecipeRESToutputDTO(1, "pasta Bolognaise", "https://jenzvandevelde-images-host.onrender.com/tagliatelle%20bolognaise.jpeg", "https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4", true);
         private List<RecipeRESToutputDTO> dummyDTOlist ;
         private DomainManager manager ;
         private string url = "http://localhost:5209";
@@ -19,7 +20,7 @@ namespace CG.API.Controllers
         public RecipeController(DomainManager manager)
         {
             this.manager = manager;
-            dummyDTOlist = new List<RecipeRESToutputDTO> { dummyDTO,new RecipeRESToutputDTO(2,"lasagne","imgUrl","vidUrl",true) };
+            dummyDTOlist = new List<RecipeRESToutputDTO> { dummyDTO, new RecipeRESToutputDTO(2, "lasagne", "https://jenzvandevelde-images-host.onrender.com/ui.jpeg", "vidUrl", true) };
         }
         [Route("/api/Recipes")]
         [HttpGet]

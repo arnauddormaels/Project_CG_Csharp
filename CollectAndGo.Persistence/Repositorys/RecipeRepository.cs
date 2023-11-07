@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 
 namespace CG.Persistence.Repositorys
 {
-    public class RecipeEFRepository : IRecipeRepository
+    public class RecipeRepository : IRecipeRepository
     {
-        private RecipeContext ctx = new();
+        DatabaseContext ctx = new DatabaseContext();
+
+
         public void ActivateRecipe(string recipeId)
         {
             throw new NotImplementedException();
@@ -21,7 +23,7 @@ namespace CG.Persistence.Repositorys
         public void AddRecipe(Recipe recipe)
         {
             //how to convert bl to dl??? Timings???
-            Model.Recipe DLRecipe = new(recipe.Name,recipe.Category,recipe.IsActive,recipe.ImgUrl,recipe.VideoUrl);
+            Model.RecipeEntity DLRecipe = new(recipe.Name,recipe.Category,recipe.IsActive,recipe.ImgUrl,recipe.VideoUrl);
             ctx.Recipe.Add(DLRecipe);
             ctx.SaveChanges();
         }

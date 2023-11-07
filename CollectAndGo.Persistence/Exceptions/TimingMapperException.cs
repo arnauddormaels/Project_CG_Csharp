@@ -10,6 +10,7 @@ namespace CG.Persistence.Exceptions
     {
         public TimingMapperException(string? message) : base(message)
         {
+
         }
 
         public TimingMapperException(string? message, Exception? innerException) : base(message, innerException)

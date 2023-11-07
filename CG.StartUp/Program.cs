@@ -3,14 +3,15 @@ using CG.Persistence;
 using CG.Persistence.Data;
 using CG.Persistence.Repositorys;
 using CollectAndGO.Application;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.X509Certificates;
 
 namespace CG.StartUp
 {
     internal class Program
     {
-        static IRecipeRepository recipeRepo = new RecipeMapper();
-        static IProductRepository productRepo = new ProductMapper();
+        static IRecipeRepository recipeRepo = new RecipeRepository();
+        static IProductRepository productRepo = new ProductRepository();
         static DomainManager manager = new DomainManager(recipeRepo, productRepo);
 
         static void Main(string[] args)
@@ -23,20 +24,20 @@ namespace CG.StartUp
 
             //ShowProducts();
 
-             //AddRecipe(new List<string>{ "Lasagna", "/videoUrlLasagna", "/ImgUrlLasagna"});
+            //AddRecipe(new List<string>{ "Lasagna", "/videoUrlLasagna", "/ImgUrlLasagna"});
 
         }
 
         public static void CreateDB()
         {
-            RecipeContext context = new RecipeContext();
+            DatabaseContext context = new DatabaseContext();
             context.Database.EnsureDeleted();//deze database verwijderen
             context.Database.EnsureCreated();//niet save maar snel en gemakkelijk aanmaken..... 
         }
 
         public static void addBoek()
         {
-            RecipeEFRepository repository = new RecipeEFRepository();
+            RecipeRepository repository = new RecipeRepository();
         }
 
         public static void ShowRecipes()

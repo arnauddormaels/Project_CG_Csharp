@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CG.Persistence.Model
 {
-    public class Product
+    public class ProductEntity
     {
-        public Product(string name, string category, string imgUrl)
+        public ProductEntity(string name, string category, string imgUrl)
         {
             Name = name;
             Category = category;
@@ -19,6 +19,6 @@ namespace CG.Persistence.Model
         public string Name { get; set; }
         public string Category { get; set; }
         public string ImgUrl { get; set; }
-        public Brand Brand { get; set; }
+        public BrandEntity Brand { get; set; }
     }
 }

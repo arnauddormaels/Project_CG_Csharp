@@ -1,7 +1,7 @@
 using Xunit;
-using CG.Persistence.Model;
+using CG.DL.Model;
 
-namespace CG.Persistence.Model.Tests
+namespace CG.DL.Model.Tests
 {
     public class DataLayerTests
     {

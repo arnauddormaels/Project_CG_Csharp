@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CollectAndGO.Application\CG.Application.csproj" />
-    <ProjectReference Include="..\CollectAndGo.Persistence\CG.Persistence.csproj" />
+    <ProjectReference Include="..\CG.BL\CG.BL.csproj" />
+    <ProjectReference Include="..\CG.DL\CG.DL.csproj" />
   </ItemGroup>
 
 </Project>

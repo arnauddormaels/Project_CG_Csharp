@@ -1,6 +1,6 @@
 using Xunit;
-using CG.Application.Models;
-using CG.Application.Exceptions;
+using CG.BL.Models;
+using CG.BL.Exceptions;
 
 namespace CG.BusinessLayer.Tests
 {

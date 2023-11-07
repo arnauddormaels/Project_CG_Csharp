@@ -1,7 +1,7 @@
-﻿using CG.Application.Repositorys;
-using CG.Persistence;
-using CG.Persistence.Data;
-using CG.Persistence.Repositorys;
+﻿using CG.BL.Repositorys;
+using CG.DL;
+using CG.DL.Data;
+using CG.DL.Repositorys;
 using CollectAndGO.Application;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.X509Certificates;

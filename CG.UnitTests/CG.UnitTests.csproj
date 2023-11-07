@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CollectAndGO.Application\CG.Application.csproj" />
-    <ProjectReference Include="..\Project_Collect_and_Go_t5\CG.API.csproj" />
+    <ProjectReference Include="..\CG.API\CG.API.csproj" />
+    <ProjectReference Include="..\CG.BL\CG.BL.csproj" />
   </ItemGroup>
 
 </Project>

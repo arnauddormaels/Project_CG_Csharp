@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CG.DL.Model
+namespace CG.DL.Entities
 {
     public class RecipeEntity
     {

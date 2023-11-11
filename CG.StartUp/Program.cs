@@ -4,28 +4,37 @@ using CG.DL.Data;
 using CG.DL.Repositorys;
 using CollectAndGO.Application;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System.Security.Cryptography.X509Certificates;
 
 namespace CG.StartUp
 {
     internal class Program
     {
-        static IRecipeRepository recipeRepo = new RecipeRepository();
-        static IProductRepository productRepo = new ProductRepository();
-        static DomainManager manager = new DomainManager(recipeRepo, productRepo);
+        readonly static IRecipeRepository recipeRepo = new RecipeRepository();
+        readonly static IProductRepository productRepo = new ProductRepository();
+        readonly static DomainManager manager = new DomainManager(recipeRepo, productRepo);
 
         static void Main(string[] args)
         {
             CreateDB();
+            //FillDatabase(); //work in progress
 
-            //ShowRecipes();
+            //Testmethodes 
+            /*
+            //ShowRecipes();               //Werkt met EF
 
-            //ShowProductsFromRecipe(1);                  //not finished
+            //ShowProductsFromRecipe(1);                
 
             //ShowProducts();
 
             //AddRecipe(new List<string>{ "Lasagna", "/videoUrlLasagna", "/ImgUrlLasagna"});
-
+            */
+        }
+        
+        private static void FillDatabase()
+        {
+            //Work in progress :)
         }
 
         public static void CreateDB()
@@ -33,12 +42,7 @@ namespace CG.StartUp
             DatabaseContext context = new DatabaseContext();
             context.Database.EnsureDeleted();//deze database verwijderen
             context.Database.EnsureCreated();//niet save maar snel en gemakkelijk aanmaken..... 
-        }
-
-        public static void addBoek()
-        {
-            RecipeRepository repository = new RecipeRepository();
-        }
+        }  //done
 
         public static void ShowRecipes()
         {
@@ -47,7 +51,7 @@ namespace CG.StartUp
                 Console.WriteLine(r.ToString());
                 Console.WriteLine();
             });
-        }
+        }   //done
         //public static void ShowProductsFromRecipe(int recipeId)            //Not finished
         //{
 

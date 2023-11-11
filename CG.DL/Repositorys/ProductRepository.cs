@@ -12,7 +12,7 @@ namespace CG.DL.Repositorys
 {
     public class ProductRepository : IProductRepository
     {
-        DatabaseContext ctx = new DatabaseContext();
+        readonly DatabaseContext ctx = new DatabaseContext();
 
         public List<Product> GetProducts()
         {

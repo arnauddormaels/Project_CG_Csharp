@@ -1,6 +1,10 @@
 ﻿using CG.BL.Models;
 using CG.BL.Repositorys;
 using CG.DL.Data;
+using CG.DL.Entities;
+using CG.DL.Mappers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -12,7 +16,7 @@ namespace CG.DL.Repositorys
 {
     public class RecipeRepository : IRecipeRepository
     {
-        DatabaseContext ctx = new DatabaseContext();
+        readonly DatabaseContext ctx = new DatabaseContext();
 
 
         public void ActivateRecipe(string recipeId)
@@ -23,14 +27,16 @@ namespace CG.DL.Repositorys
         public void AddRecipe(Recipe recipe)
         {
             //how to convert bl to dl??? Timings???
-            Model.RecipeEntity DLRecipe = new(recipe.Name,recipe.Category,recipe.IsActive,recipe.ImgUrl,recipe.VideoUrl);
-            ctx.Recipe.Add(DLRecipe);
+            RecipeEntity recipeEntity = MapFromDomain.MapFromDomainRecipe(recipe);
+            ctx.Recipe.Add(recipeEntity);
             ctx.SaveChanges();
         }
 
         public List<Recipe> GetRecipes()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return ctx.Recipe.ToList().Select(r => MapToDomain.MapToDomainRecipe(r)).ToList();
+            
         }
 
         public void RemoveRecipe(string recipe)

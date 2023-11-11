@@ -15,8 +15,12 @@ namespace CG.API.Mappers
             }
             catch (Exception ex)
             {
-                throw new MapFromDomainException("Eroor with mapping from domain", ex);
+                throw new MapFromDomainException("Error with mapping from domain", ex);
             }
+        }
+        public static List<RecipeRESToutputDTO> MapRecipies(List<Recipe> recipies)
+        {
+           return recipies.Select(r => MapFromRecipeDomain((Recipe)r)).ToList();
         }
 
 

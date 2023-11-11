@@ -4,22 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CG.DL.Model
+namespace CG.DL.Entities
 {
-    public class BrandEntity
+    public class ProductEntity
     {
-        public BrandEntity(string name, decimal price, string description, string imgUrl)
+        public ProductEntity(string name, string category, string imgUrl)
         {
             Name = name;
-            Price = price;
-            Description = description;
+            Category = category;
             ImgUrl = imgUrl;
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
-        public string Description { get; set; }
+        public string Category { get; set; }
         public string ImgUrl { get; set; }
+        public int BrandId { get; set; }
+        public BrandEntity Brand { get; set; }
     }
 }

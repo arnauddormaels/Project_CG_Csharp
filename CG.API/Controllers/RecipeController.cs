@@ -13,7 +13,7 @@ namespace CG.API.Controllers
     public class RecipeController : ControllerBase
     {
         private RecipeRESToutputDTO dummyDTO = new RecipeRESToutputDTO(1, "pasta Bolognaise", "https://jenzvandevelde-images-host.onrender.com/tagliatelle%20bolognaise.jpeg", "https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4", true);
-        private List<RecipeRESToutputDTO> dummyDTOlist ;
+        private List<RecipeRESToutputDTO> dummyDTOlist;
         private DomainManager manager ;
         private string url = "http://localhost:5209";
 
@@ -24,11 +24,11 @@ namespace CG.API.Controllers
         }
         [Route("/api/Recipes")]
         [HttpGet]
-        public ActionResult<List<RecipeRESToutputDTO>> GetRecipes()
+        public ActionResult<List<RecipeRESToutputDTO>> GetRecipes()         //Eerste connectie met de databank is geslaag whoop whoop 
         {
             try
             {
-                return dummyDTOlist;
+                return MapFromDomain.MapRecipies(manager.GetRecipes());
             }
             catch (Exception ex)
             {

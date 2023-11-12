@@ -1,5 +1,6 @@
 using Xunit;
 using CG.DL.Model;
+using CG.DL.Entities;
 
 namespace CG.DL.Model.Tests
 {

@@ -18,8 +18,14 @@ namespace CollectAndGO.Application
         {
             return _recipeRepo.GetRecipes();
         }
-        public List<Product> GetProducts() {
+        public List<Product> GetProducts() 
+        {
             return _productRepo.GetProducts();
+        }
+
+        public Recipe GetRecipe(int recipeId)
+        {
+            return _recipeRepo.GetRecipe(recipeId);
         }
 
         public void AddRecipe(List<string> recipeInfo)

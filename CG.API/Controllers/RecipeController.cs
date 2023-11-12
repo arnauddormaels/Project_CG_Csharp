@@ -24,11 +24,26 @@ namespace CG.API.Controllers
         }
         [Route("/api/Recipes")]
         [HttpGet]
-        public ActionResult<List<RecipeRESToutputDTO>> GetRecipes()         //Eerste connectie met de databank is geslaag whoop whoop 
+        public ActionResult<List<RecipeRESToutputDTO>> GetAllRecipes()         //Eerste connectie met de databank is geslaag whoop whoop 
         {
             try
             {
                 return MapFromDomain.MapRecipies(manager.GetRecipes());
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+                throw;
+            }
+        }
+
+        [Route("/api/Products")]
+        [HttpGet]
+        public ActionResult<List<ProductRESToutputDTO>> GetAllProduct()
+        {
+            try
+            {
+                return MapFromDomain.MapProducs(manager.GetProducts());
             }
             catch (Exception ex)
             {
@@ -42,7 +57,8 @@ namespace CG.API.Controllers
         {
             try
             {
-                return dummyDTOlist.Where(r => r.RecipeId == recipeId).First();
+                return MapFromDomain.MapFromRecipeDomain(manager.GetRecipe(recipeId));
+                /*return dummyDTOlist.Where(r => r.RecipeId == recipeId).First();*/
             }
             catch (Exception ex)
             {
@@ -73,5 +89,6 @@ namespace CG.API.Controllers
             dummyDTOlist.Remove(dummyDTOlist[index]);
             return dummyDTOlist;
         }
+
     }
 }

@@ -17,7 +17,7 @@ namespace CG.StartUp
 
         static void Main(string[] args)
         {
-            CreateDB();
+            //CreateDB();
             //FillDatabase(); //work in progress
 
             //Testmethodes 

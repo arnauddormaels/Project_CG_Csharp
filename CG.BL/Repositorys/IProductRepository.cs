@@ -10,6 +10,9 @@ namespace CG.BL.Repositorys
     public interface IProductRepository
     {
         List<Product> GetProducts();
-        
+        void AddProduct(Product product);
+        List<Product> GetBrandProducts();
+        void AddBrandProduct(BrandProduct brandproduct);
+
     }
 }

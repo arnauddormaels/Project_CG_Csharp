@@ -10,8 +10,8 @@ namespace CG.BL.Repositorys
     public interface IRecipeRepository
     {
         public List<Recipe> GetRecipes();
+        public Recipe GetRecipe(int recipeId);
         public void AddRecipe(Recipe recipe);
-
         public void RemoveRecipe(string recipe);
         public void ActivateRecipe(string recipeId);
     }

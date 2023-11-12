@@ -32,11 +32,32 @@ namespace CG.DL.Repositorys
             ctx.SaveChanges();
         }
 
+        public Recipe GetRecipe(int recipeId)
+        {
+            try
+            {
+                //thow exception if the id doesnt match! TODO
+                return MapToDomain.MapToDomainRecipe(ctx.Recipe.Where(r => r.Id == recipeId)
+                    .AsNoTracking().FirstOrDefault());
+            }
+            catch (Exception ex)
+            {
+                //add custom exception
+                throw new NotImplementedException();
+            }
+        }
+
         public List<Recipe> GetRecipes()
         {
-            //throw new NotImplementedException();
-            return ctx.Recipe.ToList().Select(r => MapToDomain.MapToDomainRecipe(r)).ToList();
-            
+            try
+            {
+                return ctx.Recipe.AsNoTracking().Select(r => MapToDomain.MapToDomainRecipe(r)).ToList();
+            }
+            catch(Exception ex)
+            {
+                //add custom exception
+                throw new NotImplementedException();
+            }
         }
 
         public void RemoveRecipe(string recipe)

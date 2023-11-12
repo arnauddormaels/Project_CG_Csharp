@@ -1,6 +1,7 @@
 ﻿using CG.BL.Models;
 using CG.BL.Repositorys;
 using CG.DL.Data;
+using CG.DL.Entities;
 using CG.DL.Mappers;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,22 @@ namespace CG.DL.Repositorys
 
         public List<Product> GetProducts()
         {
-            throw new NotImplementedException();
+            return ctx.Product.ToList().Select(p => MapToDomain.MapToDomainProduct(p)).ToList();
         }
 
         public void AddProduct(Product product)
         {
+            //ProductEntity productEntity = MapFromDomain
+        }
 
+        public List<Product> GetBrandProducts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddBrandProduct(BrandProduct brandproduct)
+        {
+            throw new NotImplementedException();
         }
     }
 }

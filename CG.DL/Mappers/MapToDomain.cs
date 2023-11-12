@@ -20,9 +20,36 @@ namespace CG.DL.Mappers
             }
             catch (Exception ex)
             {
-                throw new MapFromDomainException("Error with mapping to to domain in Data Layer", ex);
+                throw new MapFromDomainException("Error with mapping recipe to domain in Data Layer", ex);
             }
 
+        }
+
+        public static Product MapToDomainProduct(ProductEntity productEntity)
+        {
+            try
+            {
+                Product product = new Product(productEntity.Id, productEntity.Name,productEntity.Category, productEntity.ImgUrl);
+                return product;
+            }
+            catch(Exception ex)
+            {
+                throw new MapFromDomainException("MapToDomainProduct", ex);
+            }
+            
+        }
+
+        public static BrandProduct MapToDomainBrandProduct(BrandEntity brandEntity)
+        {
+            try
+            {
+                BrandProduct brandProduct = new(brandEntity.Id, brandEntity.Name, brandEntity.Price, brandEntity.Description, brandEntity.ImgUrl);
+                return brandProduct;
+            }
+            catch (Exception ex)
+            {
+                throw new MapFromDomainException("MapToDomainBrandProduct", ex);
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Project_Collect_and_Go_t5
             //builder.Services.AddSingleton<DatabaseContext>();
             builder.Services.AddSingleton<IProductRepository, ProductRepository>();
             builder.Services.AddSingleton<IRecipeRepository,RecipeRepository>();
+            builder.Services.AddSingleton<ITimingRepository,TimingRepository>();
             builder.Services.AddSingleton<DomainManager>();
 
             builder.Services.AddControllers();

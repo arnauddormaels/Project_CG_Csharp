@@ -7,11 +7,13 @@ namespace CollectAndGO.Application
     {
         private readonly IRecipeRepository _recipeRepo;
         private readonly IProductRepository _productRepo;
+        private readonly ITimingRepository _timingRepository;
 
-        public DomainManager(IRecipeRepository recipeRepo, IProductRepository productRepo)
+        public DomainManager(IRecipeRepository recipeRepo, IProductRepository productRepo, ITimingRepository timingRepository)
         {
             _recipeRepo = recipeRepo;
             _productRepo = productRepo;
+            _timingRepository = timingRepository;
         }
 
         public List<Recipe> GetRecipes()

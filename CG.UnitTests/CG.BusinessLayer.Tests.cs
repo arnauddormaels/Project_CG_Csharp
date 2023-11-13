@@ -130,7 +130,7 @@ namespace CG.BusinessLayer.Tests
             int timingId = 1;
             var startTime = TimeSpan.FromHours(10);
             var endTime = TimeSpan.FromHours(11);
-            var product = new Product("Product Name", null, "product_image_url");
+            var product = new Product("Product Name", "catagory", "product_image_url", null);
 
             // Act
             var timing = new Timing(timingId, startTime, endTime, product);
@@ -148,7 +148,7 @@ namespace CG.BusinessLayer.Tests
             // Arrange
             var startTime = TimeSpan.FromHours(10);
             var endTime = TimeSpan.FromHours(11);
-            var product = new Product("Product Name", null, "product_image_url");
+            var product = new Product("Product Name", "catagory", "product_image_url", null);
 
             // Act
             var timing = new Timing(startTime, endTime, product);
@@ -167,6 +167,7 @@ namespace CG.BusinessLayer.Tests
                 // Arrange
                 int productId = 1;
                 string productName = "Product Name";
+                string catagory = "catagory";
                 decimal brandProductPrice = 10.99m;
                 string brandProductDescription = "Brand Product Description";
                 string brandProductImgUrl = "brand_image_url";
@@ -174,7 +175,7 @@ namespace CG.BusinessLayer.Tests
                 string imgUrl = "product_image_url";
 
                 // Act
-                var product = new Product(productId, productName, brandProduct, imgUrl);
+                var product = new Product(productId, catagory, productName, imgUrl, brandProduct);
 
                 // Assert
                 Assert.Equal(productId, product.ProductId);
@@ -187,12 +188,13 @@ namespace CG.BusinessLayer.Tests
             {
                 // Arrange
                 string productName = "Product Name";
+                string catagory = "catagory";
                 decimal brandProductPrice = 10.99m;
                 string brandProductDescription = "Brand Product Description";
                 string brandProductImgUrl = "brand_image_url";
                 var brandProduct = new BrandProduct(2, "Brand Product", brandProductPrice, brandProductDescription, brandProductImgUrl);
                 string imgUrl = "product_image_url";
-                var product = new Product(productName, brandProduct, imgUrl);
+                var product = new Product(productName, catagory, imgUrl, brandProduct);
 
                 // Act
                 string result = product.ToString();
@@ -207,9 +209,10 @@ namespace CG.BusinessLayer.Tests
             {
                 // Arrange
                 string productName = "Product Name";
+                string catagory = "catagory";
                 string initialImgUrl = "initial_image_url";
                 var brandProduct = new BrandProduct(2, "Brand Product", 10.99m, "Brand Product Description", "brand_image_url");
-                var product = new Product(productName, brandProduct, initialImgUrl);
+                var product = new Product(productName, catagory, initialImgUrl, brandProduct);
                 string newImgUrl = "new_image_url";
 
                 // Act

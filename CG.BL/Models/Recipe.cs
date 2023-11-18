@@ -21,13 +21,14 @@ namespace CG.BL.Models
         private List<Timing> timings;
         private bool _isActive = false;
 
-        public Recipe(int id, string name, string imgUrl, string videoUrl) : this(name,imgUrl,videoUrl)
+        public Recipe(int id, string name,string category,string imgUrl, string videoUrl) : this(name,category,imgUrl,videoUrl)
         {
             RecipeId = id;           
         }
-         public Recipe(string name, string imgUrl, string videoUrl)
+        public Recipe(string name, string category, string imgUrl, string videoUrl)
         {
             Name = name;
+            Category = category;
             ImgUrl = imgUrl;
             VideoUrl = videoUrl;
             timings= new List<Timing>();
@@ -48,8 +49,6 @@ namespace CG.BL.Models
                 throw new RecipeException("No timing found with this Id");
             }
             
-
-            
         }
 
 
@@ -65,15 +64,11 @@ namespace CG.BL.Models
             }
         }
 
-
-
-       
         public int RecipeId { get { return _recipeId; } private set { _recipeId = value; } }
         public string Name { get { return _name;} private set { _name = value; } }
         public string Category { get { return _category; } private set { _category = value; } }
         public string ImgUrl { get { return _imgUrl;} private set { _imgUrl = value; } }
         public string VideoUrl { get { return _videoUrl;} private set {_videoUrl = value; } }
-
         public bool IsActive { get => _isActive; set => _isActive = value; }
 
         public override string? ToString()

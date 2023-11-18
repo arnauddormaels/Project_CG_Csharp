@@ -17,7 +17,8 @@ namespace CG.DL.Repositorys
     public class RecipeRepository : IRecipeRepository
     {
         readonly DatabaseContext ctx = new DatabaseContext();
-
+        //mappers die niet static mogen zijn! - nog injecteren in de constuctor! //TODO
+        private MapFromDomain mapfromdomain = new MapFromDomain();
 
         public void ActivateRecipe(string recipeId)
         {
@@ -27,7 +28,7 @@ namespace CG.DL.Repositorys
         public void AddRecipe(Recipe recipe)
         {
             //how to convert bl to dl??? Timings???
-            RecipeEntity recipeEntity = MapFromDomain.MapFromDomainRecipe(recipe);
+            RecipeEntity recipeEntity = mapfromdomain.MapFromDomainRecipe(recipe);
             ctx.Recipe.Add(recipeEntity);
             ctx.SaveChanges();
         }
@@ -36,7 +37,7 @@ namespace CG.DL.Repositorys
         {
             try
             {
-                //thow exception if the id doesnt match! TODO
+                //throw exception if the id doesnt match! TODO
                 return MapToDomain.MapToDomainRecipe(ctx.Recipe.Where(r => r.Id == recipeId)
                     .AsNoTracking().FirstOrDefault());
             }

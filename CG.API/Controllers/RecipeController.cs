@@ -12,15 +12,18 @@ namespace CG.API.Controllers
     [ApiController]
     public class RecipeController : ControllerBase
     {
-        private RecipeRESToutputDTO dummyDTO = new RecipeRESToutputDTO(1, "pasta Bolognaise", "https://jenzvandevelde-images-host.onrender.com/tagliatelle%20bolognaise.jpeg", "https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4", true);
+        private RecipeRESToutputDTO dummyDTO = new RecipeRESToutputDTO(1, "pasta Bolognaise", "Pasta", "https://jenzvandevelde-images-host.onrender.com/tagliatelle%20bolognaise.jpeg", "https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4", true);
         private List<RecipeRESToutputDTO> dummyDTOlist;
         private DomainManager manager ;
         private string url = "http://localhost:5209";
+        //mappers - moet nog injecteert worden!
+        private MapToDomain maptodomain = new MapToDomain();
+        private MapFromDomain mapfromdomain = new MapFromDomain();
 
         public RecipeController(DomainManager manager)
         {
             this.manager = manager;
-            dummyDTOlist = new List<RecipeRESToutputDTO> { dummyDTO, new RecipeRESToutputDTO(2, "lasagne", "https://jenzvandevelde-images-host.onrender.com/ui.jpeg", "vidUrl", true) };
+            dummyDTOlist = new List<RecipeRESToutputDTO> { dummyDTO, new RecipeRESToutputDTO(2, "lasagne", "lasagne","https://jenzvandevelde-images-host.onrender.com/ui.jpeg", "vidUrl", true) };
         }
         [Route("/api/Recipes")]
         [HttpGet]
@@ -28,7 +31,7 @@ namespace CG.API.Controllers
         {
             try
             {
-                return MapFromDomain.MapRecipies(manager.GetRecipes());
+                return mapfromdomain.MapRecipies(manager.GetRecipes());
             }
             catch (Exception ex)
             {
@@ -43,7 +46,7 @@ namespace CG.API.Controllers
         {
             try
             {
-                return MapFromDomain.MapProducs(manager.GetProducts());
+                return mapfromdomain.MapProducs(manager.GetProducts());
             }
             catch (Exception ex)
             {
@@ -57,7 +60,7 @@ namespace CG.API.Controllers
         {
             try
             {
-                return MapFromDomain.MapFromRecipeDomain(manager.GetRecipe(recipeId));
+                return mapfromdomain.MapFromRecipeDomain(manager.GetRecipe(recipeId));
                 /*return dummyDTOlist.Where(r => r.RecipeId == recipeId).First();*/
             }
             catch (Exception ex)
@@ -70,8 +73,19 @@ namespace CG.API.Controllers
         [HttpPost]
         public ActionResult<RecipeRESToutputDTO>AddRecipe([FromBody] RecipeRESToutputDTO recipeRESToutputDTO)
         {
-            dummyDTOlist.Add(recipeRESToutputDTO);
-            return recipeRESToutputDTO;
+            try
+            {
+                //voeg toe? return de toegevoegde waarde?
+                manager.AddRecipe(maptodomain.MapToDomainRecipe(recipeRESToutputDTO));
+                return recipeRESToutputDTO;
+            }
+            catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+                throw;
+            }
+/*            dummyDTOlist.Add(recipeRESToutputDTO);
+            return recipeRESToutputDTO;*/
         }
         
         [HttpPut("{id}")]

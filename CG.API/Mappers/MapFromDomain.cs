@@ -4,10 +4,10 @@ using CG.BL.Models;
 
 namespace CG.API.Mappers
 {
-    public static class MapFromDomain
+    public class MapFromDomain
     {
 
-        public static ProductRESToutputDTO MapFromProductDomain(Product product)
+        public ProductRESToutputDTO MapFromProductDomain(Product product)
         {
             try
             {
@@ -20,11 +20,11 @@ namespace CG.API.Mappers
             }
         }
 
-        public static RecipeRESToutputDTO MapFromRecipeDomain(Recipe recipe)
+        public RecipeRESToutputDTO MapFromRecipeDomain(Recipe recipe)
         {
             try
             {
-                RecipeRESToutputDTO recipeDTO = new RecipeRESToutputDTO(recipe.RecipeId, recipe.Name, recipe.ImgUrl, recipe.VideoUrl, recipe.IsActive);
+                RecipeRESToutputDTO recipeDTO = new RecipeRESToutputDTO(recipe.RecipeId, recipe.Name,recipe.Category ,recipe.ImgUrl, recipe.VideoUrl, recipe.IsActive) ;
                 return recipeDTO;
             }
             catch (Exception ex)
@@ -33,18 +33,18 @@ namespace CG.API.Mappers
             }
         }
 
-        public static TimingRESToutputDTO MapFromTimingDomain(Timing timing, ProductRESToutputDTO productDTO)
+        public TimingRESToutputDTO MapFromTimingDomain(Timing timing, ProductRESToutputDTO productDTO)
         {
             TimingRESToutputDTO timingDTO = new TimingRESToutputDTO(timing.TimingId,timing.StartTime,timing.EndTime,productDTO);
             return timingDTO;
         }
 
-        public static List<ProductRESToutputDTO> MapProducs(List<Product> products)
+        public List<ProductRESToutputDTO> MapProducs(List<Product> products)
         {
             return products.Select(p => MapFromProductDomain(p)).ToList();
         }
 
-        public static List<RecipeRESToutputDTO> MapRecipies(List<Recipe> recipies)
+        public List<RecipeRESToutputDTO> MapRecipies(List<Recipe> recipies)
         {
            return recipies.Select(r => MapFromRecipeDomain(r)).ToList();
         }

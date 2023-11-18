@@ -13,7 +13,8 @@ namespace CG.StartUp
     {
         readonly static IRecipeRepository recipeRepo = new RecipeRepository();
         readonly static IProductRepository productRepo = new ProductRepository();
-        readonly static DomainManager manager = new DomainManager(recipeRepo, productRepo);
+        readonly static ITimingRepository timingRepo = new TimingRepository();
+        readonly static DomainManager manager = new DomainManager(recipeRepo, productRepo,timingRepo);
 
         static void Main(string[] args)
         {
@@ -77,10 +78,10 @@ namespace CG.StartUp
                 });
             });
         }
-        public static void AddRecipe(List<string> stringListRecipe)
+/*        public static void AddRecipe(List<string> stringListRecipe)
         {
             manager.AddRecipe(stringListRecipe);
             ShowRecipes();
-        }
+        }*/
     }
 }

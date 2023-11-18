@@ -30,9 +30,9 @@ namespace CollectAndGO.Application
             return _recipeRepo.GetRecipe(recipeId);
         }
 
-        public void AddRecipe(List<string> recipeInfo)
+        public void AddRecipe(Recipe recipe)
         {
-            Recipe recipe = new Recipe(recipeInfo[0], recipeInfo[1], recipeInfo[2]);
+            //Recipe recipe = new Recipe(recipeInfo[0], recipeInfo[1], recipeInfo[2]);
             _recipeRepo.AddRecipe(recipe);
         }
         public void RemoveRecipe(string recipeId)   

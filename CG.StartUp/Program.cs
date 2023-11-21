@@ -1,6 +1,7 @@
 ﻿using CG.BL.Repositorys;
 using CG.DL;
 using CG.DL.Data;
+using CG.DL.Mappers;
 using CG.DL.Repositorys;
 using CollectAndGO.Application;
 using Microsoft.EntityFrameworkCore;
@@ -11,8 +12,10 @@ namespace CG.StartUp
 {
     internal class Program
     {
-        readonly static IRecipeRepository recipeRepo = new RecipeRepository();
-        readonly static IProductRepository productRepo = new ProductRepository();
+        private static MapFromEntity fromEntity = new MapFromEntity();
+        private static MapToEntity toEntity = new();
+        readonly static IRecipeRepository recipeRepo = new RecipeRepository(fromEntity,toEntity);
+        readonly static IProductRepository productRepo = new ProductRepository(fromEntity, toEntity);
         readonly static ITimingRepository timingRepo = new TimingRepository();
         readonly static DomainManager manager = new DomainManager(recipeRepo, productRepo,timingRepo);
 
@@ -35,7 +38,14 @@ namespace CG.StartUp
         
         private static void FillDatabase()
         {
-            //Work in progress :)
+            //voeg Recipes
+
+            //voeg timings
+
+            //voeg products
+
+            //voeg Brandproducts
+
         }
 
         public static void CreateDB()
@@ -44,6 +54,11 @@ namespace CG.StartUp
             context.Database.EnsureDeleted();//deze database verwijderen
             context.Database.EnsureCreated();//niet save maar snel en gemakkelijk aanmaken..... 
         }  //done
+
+        public static void TransferDataToCVS()
+        {
+
+        }
 
         public static void ShowRecipes()
         {
@@ -78,7 +93,7 @@ namespace CG.StartUp
                 });
             });
         }
-/*        public static void AddRecipe(List<string> stringListRecipe)
+        /*        public static void AddRecipe(List<string> stringListRecipe)
         {
             manager.AddRecipe(stringListRecipe);
             ShowRecipes();

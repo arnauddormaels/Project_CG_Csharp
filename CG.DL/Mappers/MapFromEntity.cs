@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CG.DL.Mappers
 {
-    internal static class MapToDomain
+    public class MapFromEntity
     {
-        public static Recipe MapToDomainRecipe(RecipeEntity recipeEntity)
+        public Recipe MapToDomainRecipe(RecipeEntity recipeEntity)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace CG.DL.Mappers
 
         }
 
-        public static Product MapToDomainProduct(ProductEntity productEntity)
+        public Product MapToDomainProduct(ProductEntity productEntity)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace CG.DL.Mappers
             
         }
 
-        public static BrandProduct MapToDomainBrandProduct(BrandEntity brandEntity)
+        public BrandProduct MapToDomainBrandProduct(BrandEntity brandEntity)
         {
             try
             {

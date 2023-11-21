@@ -4,7 +4,7 @@ using CG.BL.Models;
 
 namespace CG.API.Mappers
 {
-    public class MapFromDomain
+    public class MapToDTO
     {
 
         public ProductRESToutputDTO MapFromProductDomain(Product product)

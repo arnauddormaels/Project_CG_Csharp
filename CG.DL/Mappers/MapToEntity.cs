@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CG.DL.Mappers
 {
-    public class MapFromDomain
+    public class MapToEntity
     {
         public RecipeEntity MapFromDomainRecipe(Recipe recipe)
         {

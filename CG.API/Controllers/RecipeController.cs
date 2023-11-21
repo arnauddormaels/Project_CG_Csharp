@@ -1,4 +1,5 @@
 ﻿using CG.API.Mappers;
+using CG.API.Model.Input;
 using CG.API.Model.Output;
 using CG.BL.Models;
 using CollectAndGO.Application;
@@ -17,21 +18,23 @@ namespace CG.API.Controllers
         private DomainManager manager ;
         private string url = "http://localhost:5209";
         //mappers - moet nog injecteert worden!
-        private MapToDomain maptodomain = new MapToDomain();
-        private MapFromDomain mapfromdomain = new MapFromDomain();
+        private MapFromDTO mapFromDTO;
+        private MapToDTO mapToDTO;
 
-        public RecipeController(DomainManager manager)
+        public RecipeController(DomainManager manager,MapFromDTO mapFromDTO, MapToDTO mapToDTO)
         {
             this.manager = manager;
+            this.mapFromDTO = mapFromDTO;
+            this.mapToDTO = mapToDTO;
             dummyDTOlist = new List<RecipeRESToutputDTO> { dummyDTO, new RecipeRESToutputDTO(2, "lasagne", "lasagne","https://jenzvandevelde-images-host.onrender.com/ui.jpeg", "vidUrl", true) };
         }
-        [Route("/api/Recipes")]
+
         [HttpGet]
         public ActionResult<List<RecipeRESToutputDTO>> GetAllRecipes()         //Eerste connectie met de databank is geslaag whoop whoop 
         {
             try
             {
-                return mapfromdomain.MapRecipies(manager.GetRecipes());
+                return mapToDTO.MapRecipies(manager.GetRecipes());
             }
             catch (Exception ex)
             {
@@ -40,13 +43,13 @@ namespace CG.API.Controllers
             }
         }
 
-        [Route("/api/Products")]
+        [Route("/api/Product")]
         [HttpGet]
         public ActionResult<List<ProductRESToutputDTO>> GetAllProduct()
         {
             try
             {
-                return mapfromdomain.MapProducs(manager.GetProducts());
+                return mapToDTO.MapProducs(manager.GetProducts());
             }
             catch (Exception ex)
             {
@@ -60,7 +63,7 @@ namespace CG.API.Controllers
         {
             try
             {
-                return mapfromdomain.MapFromRecipeDomain(manager.GetRecipe(recipeId));
+                return mapToDTO.MapFromRecipeDomain(manager.GetRecipe(recipeId));
                 /*return dummyDTOlist.Where(r => r.RecipeId == recipeId).First();*/
             }
             catch (Exception ex)
@@ -69,15 +72,15 @@ namespace CG.API.Controllers
                 throw;
             }
         }
-
+        //inputDTo aanmaken waar er geen id in zit!
         [HttpPost]
-        public ActionResult<RecipeRESToutputDTO>AddRecipe([FromBody] RecipeRESToutputDTO recipeRESToutputDTO)
+        public ActionResult<RecipeRESTinputDTO> AddRecipe([FromBody] RecipeRESTinputDTO recipeRESTinputDTO)
         {
             try
             {
                 //voeg toe? return de toegevoegde waarde?
-                manager.AddRecipe(maptodomain.MapToDomainRecipe(recipeRESToutputDTO));
-                return recipeRESToutputDTO;
+                manager.AddRecipe(mapFromDTO.MapToDomainRecipe(recipeRESTinputDTO));
+                return recipeRESTinputDTO;
             }
             catch(Exception ex)
             {
@@ -88,6 +91,7 @@ namespace CG.API.Controllers
             return recipeRESToutputDTO;*/
         }
         
+        //
         [HttpPut("{id}")]
         public ActionResult<RecipeRESToutputDTO> EditRecipe(int id ,[FromBody] RecipeRESToutputDTO recipeRESToutputDTO)
         {

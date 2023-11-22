@@ -25,5 +25,34 @@ namespace CG.DL.Mappers
             }
 
         }
+
+        internal ProductEntity mapFromDomainProduct(Product product)
+        {
+            try
+            {
+                ProductEntity productEntity = new(product.ProductName, product.Category, product.ImgUrl);
+                productEntity.BrandId = product.BrandProduct.BrandId;
+                return productEntity;
+            }
+            catch (Exception ex)
+            {
+                throw new MapFromDomainException("mapFromDomainProduct", ex);
+            }
+        }
+
+        internal TimingEntity mapFromDomainTiming(Timing timing)
+        {
+            try
+            {
+                TimingEntity timingEntity = new(timing.StartTime,timing.EndTime);
+                //die moet je dus meegeven want product bevat nog geen ID of je haalt het af uit de databank...!
+                timingEntity.ProductId = timing.Product.ProductId;
+                return timingEntity;
+            }
+            catch (Exception ex)
+            {
+                throw new MapFromDomainException("mapFromDomainTiming", ex);
+            }
+        }
     }
 }

@@ -32,7 +32,6 @@ namespace CG.BL.Models
             ImgUrl = imgUrl;
             VideoUrl = videoUrl;
             timings= new List<Timing>();
-            
         }
        
         public List<Timing> GetTimings()

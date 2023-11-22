@@ -1,6 +1,8 @@
 ﻿using CG.BL.Models;
+using CG.DL.Data;
 using CG.DL.Entities;
 using CG.DL.Exceptions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +31,7 @@ namespace CG.DL.Mappers
         {
             try
             {
-                Product product = new Product(productEntity.Id, productEntity.Name,productEntity.Category, productEntity.ImgUrl);
+                Product product = new Product(productEntity.Id, productEntity.Name, productEntity.Category, productEntity.ImgUrl,new BrandProduct(productEntity.BrandId));
                 return product;
             }
             catch(Exception ex)
@@ -49,6 +51,22 @@ namespace CG.DL.Mappers
             catch (Exception ex)
             {
                 throw new MapFromDomainException("MapToDomainBrandProduct", ex);
+            }
+        }
+
+        public Timing MapToDomainTiming(TimingEntity timingEntity, ProductEntity productEntity)
+        {
+            try
+            {
+                //throw exception if the id doesnt match! TODO
+                Product product = MapToDomainProduct(productEntity);
+                Timing timing = new Timing(timingEntity.Id, timingEntity.StartTijd, timingEntity.EndTijd,product);
+
+                return timing;
+            }
+            catch(Exception ex)
+            {
+                throw new MapFromDomainException("MapToDomainTiming", ex);
             }
         }
     }

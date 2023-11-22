@@ -9,8 +9,8 @@ namespace CG.BL.Repositorys
 {
     public interface ITimingRepository
     {
-        public List<Timing> GetTiming(int recipeId);
-        public void AddTiming(Timing timing);
-        public void RemoveTiming(string timing);
+        public List<Timing> GetAllTimingsFromRecipe(int recipeId);
+        public void AddTimingToRecipe(int recipeId, Timing timing);
+        public void RemoveTimingFromRecipe(string timing);
     }
 }

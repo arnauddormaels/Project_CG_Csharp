@@ -16,6 +16,7 @@ namespace CollectAndGO.Application
             _timingRepository = timingRepository;
         }
 
+        //Recipes Methodes
         public List<Recipe> GetRecipes()
         {
             return _recipeRepo.GetRecipes();
@@ -40,10 +41,34 @@ namespace CollectAndGO.Application
             _recipeRepo.RemoveRecipe(recipeId);
         }       //Not Implemented
 
+        public void UpdateRecipe(int recipeId, Recipe recipe)
+        {
+            _recipeRepo.UpdateRecipe(recipeId, recipe);
+        }
+
         public void ActivateRecipe(string recipeId)
         {
             _recipeRepo.ActivateRecipe(recipeId);
         }  //not implemented
 
+        //Timings Methodes
+        public List<Timing> GetTimingsFromRecipe(int recipeId)
+        {
+           return _timingRepository.GetAllTimingsFromRecipe(recipeId);
+        }
+
+        public void AddTiming(int recipeId, Timing timing)
+        {
+            _timingRepository.AddTimingToRecipe(recipeId, timing);
+        }
+
+        //ProductMethodes
+        public void addProduct(Product product)
+        {
+           _productRepo.AddProduct(product);
+        }
+
+        //BrandProductMethodes
+        
     }
 }

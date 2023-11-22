@@ -18,10 +18,37 @@ namespace CG.API.Mappers
             }
             catch(Exception ex)
             {
-                throw new MapToDomainException("Error wiht mapping to domain recipe", ex);
+                throw new MapToDomainException("MapToDomainRecipe", ex);
             }
 
-            throw new NotImplementedException();
+        }
+
+        public Product MapToDomainProduct(ProductRESTinputDTO productDTO)
+        {
+
+            try
+            {
+                Product product = new Product(productDTO.Name, productDTO.Category, productDTO.ImgUrl, new BrandProduct(productDTO.BrandId));
+                return product;
+            }
+            catch (Exception ex)
+            {
+                throw new MapToDomainException("MapToDomainProduct", ex);
+            }
+        }
+
+        public Timing mapToDomainTiming(TimingRESTinputDTO timingDTO)
+        {
+
+            try
+            {
+                Timing timing = new Timing(timingDTO.StartTime, timingDTO.EndTime, new Product(timingDTO.ProductId));
+                return timing;
+            }
+            catch(Exception ex)
+            {
+                throw new MapToDomainException("MapToDomainTiming",ex);
+            }
         }
     }
 

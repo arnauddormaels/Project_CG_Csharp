@@ -14,6 +14,11 @@ namespace CG.BL.Models
         private string  _description;
         private string  _imgUrl;
 
+        public BrandProduct(int brandId)
+        {
+            BrandId = brandId;
+        }
+
         public BrandProduct(int ID, string name, decimal price, string discription, string imgUrl)
         {
             _brandId = ID;

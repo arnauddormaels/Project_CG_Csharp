@@ -1,6 +1,7 @@
 ﻿using CG.API.Exceptions;
 using CG.API.Model.Output;
 using CG.BL.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CG.API.Mappers
 {
@@ -12,6 +13,7 @@ namespace CG.API.Mappers
             try
             {
                 ProductRESToutputDTO productDTO = new ProductRESToutputDTO(product.ProductId, product.ProductName, product.Category, product.ImgUrl);
+                productDTO.BrandId = product.BrandProduct.BrandId;
                 return productDTO;
             }
             catch (Exception ex)
@@ -29,14 +31,22 @@ namespace CG.API.Mappers
             }
             catch (Exception ex)
             {
-                throw new MapFromDomainException("Error with mapping from domain", ex);
+                throw new MapFromDomainException("Error with mapping to Recipe DTO", ex);
             }
         }
 
         public TimingRESToutputDTO MapFromTimingDomain(Timing timing, ProductRESToutputDTO productDTO)
         {
-            TimingRESToutputDTO timingDTO = new TimingRESToutputDTO(timing.TimingId,timing.StartTime,timing.EndTime,productDTO);
-            return timingDTO;
+            try
+            {
+                TimingRESToutputDTO timingDTO = new TimingRESToutputDTO(timing.TimingId, timing.StartTime, timing.EndTime, productDTO);
+                return timingDTO;
+            }
+            catch(Exception ex)
+            {
+                throw new MapFromDomainException("Error with mapping To Timing DTO", ex);
+            }
+
         }
 
         public List<ProductRESToutputDTO> MapProducs(List<Product> products)
@@ -49,5 +59,9 @@ namespace CG.API.Mappers
            return recipies.Select(r => MapFromRecipeDomain(r)).ToList();
         }
 
+        public List<TimingRESToutputDTO> MapTimings(List<Timing> Timings)
+        {
+            return Timings.Select(t => MapFromTimingDomain(t,MapFromProductDomain(t.Product))).ToList();
+        }
     }
 }

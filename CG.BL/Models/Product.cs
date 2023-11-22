@@ -12,10 +12,10 @@ namespace CG.BL.Models
         private string _productName;
         private string _imgUrl;
         private string _category;
-        private BrandProduct BrandProduct { get; set; }
+        public BrandProduct BrandProduct { get; set; }
 
 
-        public Product( string productName,string category ,string imgUrl, BrandProduct brandProduct)
+        public Product(string productName,string category ,string imgUrl, BrandProduct brandProduct)
         {
             ProductName = productName;
             Category = category;
@@ -34,6 +34,10 @@ namespace CG.BL.Models
             ProductName = productName;
             ProductId = productId;
             ImgUrl = imgUrl;
+        }
+        public Product(int productId)
+        {
+            ProductId = productId;
         }
 
         public string Category { get => _category; private set => _category = value; }

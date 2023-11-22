@@ -1,4 +1,7 @@
-﻿using CG.API.Model.Output;
+﻿using CG.API.Mappers;
+using CG.API.Model.Input;
+using CG.API.Model.Output;
+using CollectAndGO.Application;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,37 +31,68 @@ namespace CG.API.Controllers
                 new DummyTimingRESToutputDTO(13, "https://jenzvandevelde-images-host.onrender.com/gerasptekaas.jpeg", "https://jenzvandevelde-images-host.onrender.com/kaasspaghettimix.jpeg", "Gemalen Kaas", "Boni", "01:46", "01:50")
             };
 
+        private DomainManager manager;
+        private MapFromDTO mapFromDTO;
+        private MapToDTO mapToDTO;
+
+        public TimingController(DomainManager manager, MapFromDTO mapFromDTO, MapToDTO mapToDTO)
+        {
+            this.manager = manager;
+            this.mapFromDTO = mapFromDTO;
+            this.mapToDTO = mapToDTO;
+        }
+
 
         // GET: api/Timing
-        [HttpGet]
-        public ActionResult<IEnumerable<DummyTimingRESToutputDTO>> GetTimings()
+        [HttpGet("({recipeId})")]
+        public ActionResult<IEnumerable<TimingRESToutputDTO>> GetAllTimingsFromRecipe(int recipeId)
         {
-            return dummyTimings;
+            try
+            {
+               return mapToDTO.MapTimings(manager.GetTimingsFromRecipe(recipeId));
+            }
+            catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+                throw;
+            }
         }
 
-        // GET: api/Timing/{id}
-        [HttpGet("{id}")]
-        public ActionResult<DummyTimingRESToutputDTO> GetTiming(int id)
-        {
-            var timing = dummyTimings.FirstOrDefault(t => t.TimingId == id);
-            if (timing == null)
-            {
-                return NotFound("Timing not found");
-            }
-            return timing;
-        }
+        /*        // GET: api/Timing/{id}
+                [HttpGet("{id}")]
+                public ActionResult<DummyTimingRESToutputDTO> GetTiming(int id)
+                {
+                    var timing = dummyTimings.FirstOrDefault(t => t.TimingId == id);
+                    if (timing == null)
+                    {
+                        return NotFound("Timing not found");
+                    }
+                    return timing;
+                }*/
 
         // POST: api/Timing
         [HttpPost]
-        public ActionResult<DummyTimingRESToutputDTO> PostTiming([FromBody] DummyTimingRESToutputDTO timingDTO)
+        public ActionResult<TimingRESTinputDTO> AddTimingToRecipe(int recipeId,[FromBody] TimingRESTinputDTO timingInputDTO)
         {
-            if (dummyTimings.Any(t => t.TimingId == timingDTO.TimingId))
+            try
+            {
+                manager.AddTiming(recipeId, mapFromDTO.mapToDomainTiming(timingInputDTO));
+                return timingInputDTO;
+            }
+            catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+                throw;
+            }
+
+
+/*            if (dummyTimings.Any(t => t.TimingId == timingDTO.TimingId))
             {
                 return Conflict("Timing with the same ID already exists");
             }
 
             dummyTimings.Add(timingDTO);
-            return CreatedAtAction(nameof(GetTiming), new { id = timingDTO.TimingId }, timingDTO);
+            return CreatedAtAction(nameof(GetTiming), new { id = timingDTO.TimingId }, timingDTO);*/
         }
 
         // PUT: api/Timing/{id}

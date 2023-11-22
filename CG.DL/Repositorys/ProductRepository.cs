@@ -30,7 +30,10 @@ namespace CG.DL.Repositorys
 
         public void AddProduct(Product product)
         {
-            //ProductEntity productEntity = MapFromDomain
+            //controleer of die product all bestaat in de repository! en geef terug de ID
+            ProductEntity productEntity = mapToEntity.mapFromDomainProduct(product);
+            ctx.Product.Add(productEntity);
+            ctx.SaveChanges();
         }
 
         public List<Product> GetBrandProducts()

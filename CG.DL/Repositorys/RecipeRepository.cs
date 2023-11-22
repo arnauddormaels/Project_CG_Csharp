@@ -17,7 +17,7 @@ namespace CG.DL.Repositorys
     public class RecipeRepository : IRecipeRepository
     {
         readonly DatabaseContext ctx = new DatabaseContext();
-        //mappers die niet static mogen zijn! - nog injecteren in de constuctor! //TODO
+        //mappers die niet static mogen zijn! - nog injecteren in de constuctor!
         private MapFromEntity mapFromEntity;
         private MapToEntity mapToEntity;
 
@@ -70,6 +70,12 @@ namespace CG.DL.Repositorys
 
         public void RemoveRecipe(string recipe)
         {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateRecipe(int recipeId, Recipe recipe)
+        {
+            //here you override the table info - so make a remove and add the new value in it!
             throw new NotImplementedException();
         }
     }

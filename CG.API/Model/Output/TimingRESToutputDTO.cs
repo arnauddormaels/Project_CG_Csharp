@@ -5,11 +5,10 @@ namespace CG.API.Model.Output
     public class TimingRESToutputDTO
     {
         public int TimingId { get; set; }
-        public TimeSpan StartTime { get; set; }
-        public TimeSpan EndTime { get; set; }
+        public int StartTime { get; set; }
+        public int EndTime { get; set; }
         public ProductRESToutputDTO Product { get; set; }
-
-        public TimingRESToutputDTO(int timingId, TimeSpan startTime, TimeSpan endTime, ProductRESToutputDTO product)
+        public TimingRESToutputDTO(int timingId, int startTime, int endTime, ProductRESToutputDTO product)
         {
             TimingId = timingId;
             StartTime = startTime;

@@ -11,7 +11,7 @@ namespace CG.BL.Repositorys
     {
         List<Product> GetProducts();
         void AddProduct(Product product);
-        List<Product> GetBrandProducts();
+        List<BrandProduct> GetBrandProducts(int productId);
         void AddBrandProduct(BrandProduct brandproduct);
 
     }

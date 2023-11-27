@@ -58,5 +58,19 @@ namespace CG.API.Controllers
         //UpdateProduct
         //DeleteProduct
 
+        //GetALLBrandProduct
+        [HttpGet("({productId})")]
+        public ActionResult<List<BrandProductRESToutputDTO>> GetAllBrandProductOfProduct(int productId)
+        {
+            try
+            {
+                return mapToDTO.MapBrandProducts(manager.GetBrandProducts(productId));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+                throw;
+            }
+        }
     }
 }

@@ -26,6 +26,19 @@ namespace CG.DL.Mappers
 
         }
 
+        internal BrandEntity mapFromDomainBrandProduct(BrandProduct brandproduct)
+        {
+            try
+            {
+                BrandEntity brandEntity = new(brandproduct.Name, brandproduct.Price, brandproduct.Description, brandproduct.ImgUrl);
+                return brandEntity;
+            }
+            catch(Exception ex)
+            {
+                throw new MapFromDomainException("mapFromDomainBrandProduct");
+            }
+        }
+
         internal ProductEntity mapFromDomainProduct(Product product)
         {
             try

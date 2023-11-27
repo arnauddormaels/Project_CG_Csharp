@@ -69,6 +69,14 @@ namespace CollectAndGO.Application
         }
 
         //BrandProductMethodes
-        
+        public void AddBrandProduct(BrandProduct brandProduct)
+        {
+            _productRepo.AddBrandProduct(brandProduct);
+        }
+
+        public List<BrandProduct> GetBrandProducts(int productId)
+        {
+            return _productRepo.GetBrandProducts(productId);
+        }
     }
 }

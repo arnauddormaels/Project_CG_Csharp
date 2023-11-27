@@ -3,6 +3,7 @@ using CG.BL.Repositorys;
 using CG.DL.Data;
 using CG.DL.Entities;
 using CG.DL.Mappers;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,14 +37,23 @@ namespace CG.DL.Repositorys
             ctx.SaveChanges();
         }
 
-        public List<Product> GetBrandProducts()
-        {
-            throw new NotImplementedException();
-        }
-
         public void AddBrandProduct(BrandProduct brandproduct)
         {
-            throw new NotImplementedException();
+            BrandEntity brandEntity = mapToEntity.mapFromDomainBrandProduct(brandproduct);
+            ctx.Brand.Add(brandEntity);
+            ctx.SaveChanges();
+        }
+
+        public List<BrandProduct> GetBrandProducts(int brandId)
+        {
+            try
+            {
+                return ctx.Brand.AsNoTracking().Where(b => b.Id == brandId).Select(t => mapFromEntity.MapToDomainBrandProduct(t)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

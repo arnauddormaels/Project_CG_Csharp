@@ -16,12 +16,12 @@ namespace CG.StartUp
         private static MapToEntity toEntity = new();
         readonly static IRecipeRepository recipeRepo = new RecipeRepository(fromEntity,toEntity);
         readonly static IProductRepository productRepo = new ProductRepository(fromEntity, toEntity);
-        readonly static ITimingRepository timingRepo = new TimingRepository();
+        readonly static ITimingRepository timingRepo = new TimingRepository(fromEntity, toEntity);
         readonly static DomainManager manager = new DomainManager(recipeRepo, productRepo,timingRepo);
 
         static void Main(string[] args)
         {
-            //CreateDB();
+            CreateDB();
             //FillDatabase(); //work in progress
 
             //Testmethodes 
@@ -39,7 +39,8 @@ namespace CG.StartUp
         private static void FillDatabase()
         {
             //voeg Recipes
-
+            List<Recipe> recipe = { new Recipe (....)
+                                    , new RecipeRepository}
             //voeg timings
 
             //voeg products

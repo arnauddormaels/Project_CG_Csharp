@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,5 +25,7 @@ namespace CG.DL.Entities
         public string ImgUrl { get; set; }
         public string VideoUrl { get; set; }
         public List<TimingEntity> Timings { get; set; }
+        public DateTime TimeLog { get; set; }
+
     }
 }

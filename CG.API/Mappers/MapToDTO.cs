@@ -49,6 +49,19 @@ namespace CG.API.Mappers
 
         }
 
+        public BrandProductRESToutputDTO MapFromBrandProductDomain(BrandProduct brandProduct)
+        {
+            try
+            {
+                BrandProductRESToutputDTO BrandDTO = new BrandProductRESToutputDTO(brandProduct.BrandId,brandProduct.Name,brandProduct.Description,brandProduct.Price,brandProduct.ImgUrl);
+                return BrandDTO;
+            }
+            catch (Exception ex)
+            {
+                throw new MapFromDomainException("Error with mapping to BrandProduct DTO", ex);
+            }
+        }
+
         public List<ProductRESToutputDTO> MapProducs(List<Product> products)
         {
             return products.Select(p => MapFromProductDomain(p)).ToList();
@@ -62,6 +75,11 @@ namespace CG.API.Mappers
         public List<TimingRESToutputDTO> MapTimings(List<Timing> Timings)
         {
             return Timings.Select(t => MapFromTimingDomain(t,MapFromProductDomain(t.Product))).ToList();
+        }
+
+        public List<BrandProductRESToutputDTO> MapBrandProducts(List<BrandProduct> brandProducts)
+        {
+            return brandProducts.Select(b => MapFromBrandProductDomain(b)).ToList();    
         }
     }
 }

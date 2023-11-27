@@ -20,6 +20,7 @@ namespace CG.DL.Entities
         public int RecipeId {  get; set; }
         public int ProductId {  get; set; }
         public ProductEntity Product { get; set; }
+        public DateTime TimeLog { get; set; }
 
         
     }

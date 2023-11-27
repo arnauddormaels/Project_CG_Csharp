@@ -40,6 +40,14 @@ namespace CG.BL.Models
             VideoUrl = videoUrl;
             timings = new List<Timing>();
         }
+        public Recipe(int id, string name, string imgUrl, string videoUrl)
+        {
+            RecipeId = id;
+            Name = name;
+            ImgUrl = imgUrl;
+            VideoUrl = videoUrl;
+            timings = new List<Timing>();
+        }
 
         public List<Timing> GetTimings()
         {

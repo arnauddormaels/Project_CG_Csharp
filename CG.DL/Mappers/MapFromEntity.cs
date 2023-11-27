@@ -17,7 +17,7 @@ namespace CG.DL.Mappers
         {
             try
             {
-                Recipe recipe = new Recipe(recipeEntity.Id, recipeEntity.Name,recipeEntity.Category, recipeEntity.ImgUrl, recipeEntity.VideoUrl);
+                Recipe recipe = new Recipe(recipeEntity.Id, recipeEntity.Name,/*recipeEntity.Category,*/ recipeEntity.ImgUrl, recipeEntity.VideoUrl);
                 return recipe;
             }
             catch (Exception ex)
@@ -31,7 +31,7 @@ namespace CG.DL.Mappers
         {
             try
             {
-                Product product = new Product(productEntity.Id, productEntity.Name, productEntity.Category, productEntity.ImgUrl,new BrandProduct(productEntity.BrandId));
+                Product product = new Product(productEntity.Id, productEntity.Name,/*productEntity.Category,*/ productEntity.ImgUrl,new BrandProduct(productEntity.BrandId));
                 return product;
             }
             catch(Exception ex)

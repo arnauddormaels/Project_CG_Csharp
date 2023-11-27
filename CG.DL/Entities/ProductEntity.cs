@@ -8,16 +8,16 @@ namespace CG.DL.Entities
 {
     public class ProductEntity
     {
-        public ProductEntity(string name, string category, string imgUrl)
+        public ProductEntity(string name, /*string category,*/ string imgUrl)
         {
             Name = name;
-            Category = category;
+            //Category = category;
             ImgUrl = imgUrl;
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Category { get; set; }
+        //public string Category { get; set; }
         public string ImgUrl { get; set; }
         public int BrandId { get; set; }
         public BrandEntity Brand { get; set; }

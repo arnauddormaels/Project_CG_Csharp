@@ -22,7 +22,7 @@ namespace CG.StartUp
 
         static void Main(string[] args)
         {
-            CreateDB();
+            //CreateDB();
             //FillDatabase(); //work in progress
 
             //Testmethodes 
@@ -89,7 +89,7 @@ namespace CG.StartUp
                 new Product(8,"Selder","https://jenzvandevelde-images-host.onrender.com/selder.avif",brandProducts[7]),
                 new Product(9,"Tomatenpuree","https://jenzvandevelde-images-host.onrender.com/tomatenpuree.jpeg",brandProducts[8]),
                 new Product(10,"Uien","https://jenzvandevelde-images-host.onrender.com/ui.jpeg",brandProducts[9]),
-                new Product(11,"Wortelen","https://jenzvandevelde-images-host.onrender.com/wortelen.jpeg",brandProducts[11]),
+                new Product(11,"Wortelen","https://jenzvandevelde-images-host.onrender.com/wortelen.jpeg",brandProducts[10])
             };
             foreach (Product product in products)
             {

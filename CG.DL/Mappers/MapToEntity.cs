@@ -15,7 +15,7 @@ namespace CG.DL.Mappers
         {
             try
             {
-                RecipeEntity recipeEntity = new RecipeEntity(recipe.Name, recipe.Category,recipe.IsActive,recipe.ImgUrl, recipe.VideoUrl);       //voorlopig id gecast naar een string
+                RecipeEntity recipeEntity = new RecipeEntity(recipe.Name, /*recipe.Category,*/recipe.IsActive,recipe.ImgUrl, recipe.VideoUrl);       //voorlopig id gecast naar een string
                 //recipeEntity.Id = recipe.RecipeId;
                 return recipeEntity;
             }
@@ -43,7 +43,7 @@ namespace CG.DL.Mappers
         {
             try
             {
-                ProductEntity productEntity = new(product.ProductName, product.Category, product.ImgUrl);
+                ProductEntity productEntity = new(product.ProductName, /*product.Category,*/ product.ImgUrl);
                 productEntity.BrandId = product.BrandProduct.BrandId;
                 return productEntity;
             }

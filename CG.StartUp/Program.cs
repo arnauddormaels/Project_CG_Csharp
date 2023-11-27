@@ -1,4 +1,5 @@
-﻿using CG.BL.Repositorys;
+﻿using CG.BL.Models;
+using CG.BL.Repositorys;
 using CG.DL;
 using CG.DL.Data;
 using CG.DL.Mappers;
@@ -39,13 +40,50 @@ namespace CG.StartUp
         private static void FillDatabase()
         {
             //voeg Recipes
-            List<Recipe> recipe = { new Recipe (....)
-                                    , new RecipeRepository}
-            //voeg timings
-
-            //voeg products
+            List<Recipe> recipes = new()
+            {
+                new Recipe("Lasania", "https://jenzvandevelde-images-host.onrender.com/boter.jpeg", "videoUrl"),
+                new Recipe("Bolagne", "imgUrl", "VideoUrl")
+            };
+            foreach (Recipe recipe in recipes)
+            {
+                manager.AddRecipe(recipe);
+            }
 
             //voeg Brandproducts
+            List<BrandProduct> brandProducts = new()
+            {
+                new BrandProduct(),
+                new BrandProduct()
+            };
+            foreach(BrandProduct brandProduct in brandProducts)
+            {
+                manager.AddBrandProduct(brandProduct);
+            }
+
+            //voeg products
+            List<Product> products = new()
+            {
+                new Product(),
+                new Product()
+            };
+            foreach(Product product in products)
+            {
+                manager.AddProduct(product);
+            }
+
+            //voeg timings
+            List<Timing> timings = new()
+            {
+                new Timing(),
+                new Timing()
+            };
+            foreach (Timing timing in timings)
+            {
+                manager.AddTiming(timing);
+            }
+
+            
 
         }
 

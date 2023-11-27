@@ -32,7 +32,7 @@ namespace CG.DL.Repositorys
             TimingEntity timingEntity = mapToEntity.mapFromDomainTiming(timing);
             timingEntity.RecipeId = recipeId;
             //Voeg nu de timingToe waar nodig is!
-            ctx.Timing.Add(timingEntity)
+            ctx.Timing.Add(timingEntity);
             ctx.SaveChanges();
         }
 

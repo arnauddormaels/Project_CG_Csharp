@@ -63,7 +63,7 @@ namespace CollectAndGO.Application
         }
 
         //ProductMethodes
-        public void addProduct(Product product)
+        public void AddProduct(Product product)
         {
            _productRepo.AddProduct(product);
         }

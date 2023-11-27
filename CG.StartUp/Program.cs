@@ -39,52 +39,83 @@ namespace CG.StartUp
         
         private static void FillDatabase()
         {
+
+
             //voeg Recipes
             List<Recipe> recipes = new()
             {
-                new Recipe("Lasania", "https://jenzvandevelde-images-host.onrender.com/boter.jpeg", "videoUrl"),
-                new Recipe("Bolagne", "imgUrl", "VideoUrl")
+                new Recipe("Bavarios", "https://jenzvandevelde-images-host.onrender.com/frambozenbavarois.png", "https://jenzvandevelde-images-host.onrender.com/Bavarois.mp4"),
+                new Recipe("Scampi", "https://jenzvandevelde-images-host.onrender.com/ScampiDiabolique.png", "https://jenzvandevelde-images-host.onrender.com/ScampiDiabolique.mp4"),
+                new Recipe("SpagettiBolognaise","https://jenzvandevelde-images-host.onrender.com/spaghetti.jpeg","https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4"),
+                new Recipe("Stoofvlees","https://jenzvandevelde-images-host.onrender.com/Stoofvlees.png","https://jenzvandevelde-images-host.onrender.com/Stoofvlees.mp4")
             };
             foreach (Recipe recipe in recipes)
             {
                 manager.AddRecipe(recipe);
             }
 
+
             //voeg Brandproducts
             List<BrandProduct> brandProducts = new()
             {
-                new BrandProduct(),
-                new BrandProduct()
+                new BrandProduct(1,"Fama",12m,"boter","https://jenzvandevelde-images-host.onrender.com/famaboter.webp"),
+                new BrandProduct(2,"SpaghettiBarilla",10m,"spagetti","https://jenzvandevelde-images-host.onrender.com/spaghettibarilla.jpg"),
+                new BrandProduct(3,"KaasSpaghettiMixBoni",6.78m,"spagetti kaas mix","https://jenzvandevelde-images-host.onrender.com/kaasspaghettimix.jpeg"),
+                new BrandProduct(4,"LookEveryday",4m,"knoflook","https://jenzvandevelde-images-host.onrender.com/lookeveryday.jpeg"),
+                new BrandProduct(5,"PassataAlvea",3.7m,"Elvea Tradizionale is de perfecte basis voor een natuurlijk pastagerecht, of voor een snelle spaghetti (bolognaise).","https://jenzvandevelde-images-host.onrender.com/pasataelvea.avif"),
+                new BrandProduct(6,"RodewijnElvado",15.99m,"rode wijn","https://jenzvandevelde-images-host.onrender.com/rodewijnelvado.jpeg"),
+                new BrandProduct(7,"RundervleesGehaktWahid",5m,"rund gehakt","https://jenzvandevelde-images-host.onrender.com/rundervleesgehaktwahid.jpeg"),
+                new BrandProduct(8,"SelderBoni",2.4m,"selder","https://jenzvandevelde-images-host.onrender.com/selderbio.jpeg"),
+                new BrandProduct(9,"TomatenpureeHeinz",4,"tomatenpuree","https://jenzvandevelde-images-host.onrender.com/tomatenpureeheinz.jpeg"),
+                new BrandProduct(10,"UienEveryday",3,"uien","https://jenzvandevelde-images-host.onrender.com/uieneveryday.jpeg"),
+                new BrandProduct(11,"WortelenBoni",2.4m,"kleine wortelen","https://jenzvandevelde-images-host.onrender.com/wortelenboni.jpeg")
             };
             foreach(BrandProduct brandProduct in brandProducts)
             {
                 manager.AddBrandProduct(brandProduct);
             }
 
-            //voeg products
-            List<Product> products = new()
-            {
-                new Product(),
-                new Product()
-            };
-            foreach(Product product in products)
-            {
-                manager.AddProduct(product);
-            }
 
-            //voeg timings
-            List<Timing> timings = new()
-            {
-                new Timing(),
-                new Timing()
-            };
-            foreach (Timing timing in timings)
-            {
-                manager.AddTiming(timing);
-            }
+            ////voeg products
+            //list<product> products = new()
+            //{
+            //    new product(),
+            //    new product()
+            //};
+            //foreach (product product in products)
+            //{
+            //    manager.addproduct(product);
+            //}
 
-            
 
+            ////voeg timings
+            //list<timing> timings1 = new()
+            //{
+            //    new timing(),
+            //    new timing()
+            //};
+            //foreach (timing timing in timings1)
+            //{
+            //    manager.addtiming(1, timing);
+            //}
+            //list<timing> timings2 = new()
+            //{
+            //    new timing(),
+            //    new timing()
+            //};
+            //foreach (timing timing in timings1)
+            //{
+            //    manager.addtiming(2, timing);
+            //}
+            //list<timing> timings3 = new()
+            //{
+            //    new timing(),
+            //    new timing()
+            //};
+            //foreach (timing timing in timings1)
+            //{
+            //    manager.addtiming(3, timing);
+            //}
         }
 
         public static void CreateDB()

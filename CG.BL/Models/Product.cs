@@ -23,6 +23,14 @@ namespace CG.BL.Models
             BrandProduct = brandProduct;
         }
 
+        public Product(int productId, string productName, string imgUrl, BrandProduct brandProduct) 
+        {
+            ProductId = productId;
+            ProductName = productName;
+            ImgUrl = imgUrl;
+            BrandProduct = brandProduct;
+        }
+
         public Product(int productId, string productName, string category, string imgUrl,BrandProduct brandProduct) : this(productName,category, imgUrl,brandProduct)
         {
             ProductId = productId;

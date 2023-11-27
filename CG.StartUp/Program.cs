@@ -76,46 +76,67 @@ namespace CG.StartUp
             }
 
 
-            ////voeg products
-            //list<product> products = new()
-            //{
-            //    new product(),
-            //    new product()
-            //};
-            //foreach (product product in products)
-            //{
-            //    manager.addproduct(product);
-            //}
+            //voeg products
+            List<Product> products = new()
+            {
+                new Product(1,"boter","https://jenzvandevelde-images-host.onrender.com/boter.jpeg",brandProducts[0]),
+                new Product(2,"Spaghetti","https://jenzvandevelde-images-host.onrender.com/spaghetti.jpeg",brandProducts[1]),
+                new Product(3,"KaasSpaghettiMix","https://jenzvandevelde-images-host.onrender.com/kaasspaghettimix.jpeg",brandProducts[2]),
+                new Product(4,"Look","https://jenzvandevelde-images-host.onrender.com/look.jpeg",brandProducts[3]),
+                new Product(5,"Passata","https://jenzvandevelde-images-host.onrender.com/pasata.jpeg",brandProducts[4]),
+                new Product(6,"Rodewijn","https://jenzvandevelde-images-host.onrender.com/rodewijn.jpeg",brandProducts[5]),
+                new Product(7,"RundervleesGehakt","https://jenzvandevelde-images-host.onrender.com/rundervleesgehakt.webp",brandProducts[6]),
+                new Product(8,"Selder","https://jenzvandevelde-images-host.onrender.com/selder.avif",brandProducts[7]),
+                new Product(9,"Tomatenpuree","https://jenzvandevelde-images-host.onrender.com/tomatenpuree.jpeg",brandProducts[8]),
+                new Product(10,"Uien","https://jenzvandevelde-images-host.onrender.com/ui.jpeg",brandProducts[9]),
+                new Product(11,"Wortelen","https://jenzvandevelde-images-host.onrender.com/wortelen.jpeg",brandProducts[11]),
+            };
+            foreach (Product product in products)
+            {
+                manager.AddProduct(product);
+            }
 
 
-            ////voeg timings
-            //list<timing> timings1 = new()
-            //{
-            //    new timing(),
-            //    new timing()
-            //};
-            //foreach (timing timing in timings1)
-            //{
-            //    manager.addtiming(1, timing);
-            //}
-            //list<timing> timings2 = new()
-            //{
-            //    new timing(),
-            //    new timing()
-            //};
-            //foreach (timing timing in timings1)
-            //{
-            //    manager.addtiming(2, timing);
-            //}
-            //list<timing> timings3 = new()
-            //{
-            //    new timing(),
-            //    new timing()
-            //};
-            //foreach (timing timing in timings1)
-            //{
-            //    manager.addtiming(3, timing);
-            //}
+            //voeg timings
+            List<Timing> timings1 = new()
+            {
+                new Timing(1,5,products[1]),
+                new Timing(7,8,products[2])
+            };
+            foreach (Timing timing in timings1)
+            {
+                manager.AddTiming(1, timing);
+            }
+
+            List<Timing> timings2 = new()
+            {
+                new Timing(3,6,products[3]),
+                new Timing(6,9,products[4])
+            };
+            foreach (Timing timing in timings2)
+            {
+                manager.AddTiming(2, timing);
+            }
+
+            List<Timing> timings3 = new()
+            {
+                new Timing(5,7,products[5]),
+                new Timing(10,15,products[6])
+            };
+            foreach (Timing timing in timings3)
+            {
+                manager.AddTiming(3, timing);
+            }
+
+            List<Timing> timings4 = new()
+            {
+                new Timing(1,5,products[7]),
+                new Timing(1,5,products[8])
+            };
+            foreach (Timing timing in timings4)
+            {
+                manager.AddTiming(4, timing);
+            }
         }
 
         public static void CreateDB()

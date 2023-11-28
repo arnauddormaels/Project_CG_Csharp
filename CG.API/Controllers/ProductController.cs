@@ -45,7 +45,7 @@ namespace CG.API.Controllers
         {
             try
             {
-                manager.addProduct(mapFromDTO.MapToDomainProduct(productInputDTO));
+                manager.AddProduct(mapFromDTO.MapToDomainProduct(productInputDTO));
                 return productInputDTO;
             }
             catch(Exception ex)

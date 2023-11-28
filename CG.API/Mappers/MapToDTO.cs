@@ -26,7 +26,7 @@ namespace CG.API.Mappers
         {
             try
             {
-                RecipeRESToutputDTO recipeDTO = new RecipeRESToutputDTO(recipe.RecipeId, recipe.Name,recipe.Category ,recipe.ImgUrl, recipe.VideoUrl, recipe.IsActive) ;
+                RecipeRESToutputDTO recipeDTO = new RecipeRESToutputDTO(recipe.RecipeId, recipe.Name,/*recipe.Category ,*/recipe.ImgUrl, recipe.VideoUrl, recipe.IsActive) ;
                 return recipeDTO;
             }
             catch (Exception ex)

@@ -5,11 +5,11 @@ namespace CG.API.Model.Output
     public class RecipeRESToutputDTO
     {
 
-        public RecipeRESToutputDTO(int recipeId, string name,string category,string imgUrl, string videoUrl, bool isActive)
+        public RecipeRESToutputDTO(int recipeId, string name,/*string category,*/string imgUrl, string videoUrl, bool isActive)
         {
             RecipeId = recipeId;
             Name = name;
-            Category = category;
+           // Category = category;
             ImgUrl = imgUrl;
             VideoUrl = videoUrl;
             IsActive = isActive;
@@ -17,7 +17,7 @@ namespace CG.API.Model.Output
 
         public int RecipeId { get; set; }
         public string Name { get; set; }
-        public string Category { get; set; }
+       // public string Category { get; set; }
         public string ImgUrl { get; set; }
         public string VideoUrl { get; set; }
         public bool IsActive { get; set; }

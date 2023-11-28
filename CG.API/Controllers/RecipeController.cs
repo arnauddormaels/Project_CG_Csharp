@@ -13,7 +13,7 @@ namespace CG.API.Controllers
     [ApiController]
     public class RecipeController : ControllerBase
     {
-        private RecipeRESToutputDTO dummyDTO = new RecipeRESToutputDTO(1, "pasta Bolognaise", "Pasta", "https://jenzvandevelde-images-host.onrender.com/tagliatelle%20bolognaise.jpeg", "https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4", true);
+        private RecipeRESToutputDTO dummyDTO = new RecipeRESToutputDTO(1, "pasta Bolognaise",/* "Pasta",*/ "https://jenzvandevelde-images-host.onrender.com/tagliatelle%20bolognaise.jpeg", "https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4", true);
         private List<RecipeRESToutputDTO> dummyDTOlist;
         private string url = "http://localhost:5209";
         //mappers - moet nog injecteert worden!
@@ -26,7 +26,7 @@ namespace CG.API.Controllers
             this.manager = manager;
             this.mapFromDTO = mapFromDTO;
             this.mapToDTO = mapToDTO;
-            dummyDTOlist = new List<RecipeRESToutputDTO> { dummyDTO, new RecipeRESToutputDTO(2, "lasagne", "lasagne","https://jenzvandevelde-images-host.onrender.com/ui.jpeg", "vidUrl", true) };
+            dummyDTOlist = new List<RecipeRESToutputDTO> { dummyDTO, new RecipeRESToutputDTO(2, "lasagne",/* "lasagne",*/"https://jenzvandevelde-images-host.onrender.com/ui.jpeg", "vidUrl", true) };
         }
 
         [HttpGet]

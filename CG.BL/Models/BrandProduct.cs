@@ -14,21 +14,22 @@ namespace CG.BL.Models
         private string  _description;
         private string  _imgUrl;
 
-
-        public BrandProduct(int ID, string name, decimal price, string discription, string imgUrl)
+        public BrandProduct(string name, decimal price, string description, string imgUrl)
         {
-            _brandId = ID;
-            _name = name;
-            _price = price;
-            _description = discription;
-            _imgUrl = imgUrl;
+            Name = name;
+            Price = price;
+            Description = description;
+            ImgUrl = imgUrl;
         }
 
-        public BrandProduct(int brandId)
+        public BrandProduct(int brandId, string name, decimal price, string description, string imgUrl)
         {
             BrandId = brandId;
+            Name = name;
+            Price = price;
+            Description = description;
+            ImgUrl = imgUrl;
         }
-
 
         public int BrandId { get => _brandId; private set => _brandId = value; }
         public string Name { get => _name; private set => _name = value; }

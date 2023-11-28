@@ -1,7 +1,9 @@
 ﻿using CG.BL.Models;
+using CG.BL.Models.DTO;
 using CG.BL.Repositorys;
 using CG.DL.Data;
 using CG.DL.Entities;
+using CG.DL.Exceptions;
 using CG.DL.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
@@ -27,39 +29,65 @@ namespace CG.DL.Repositorys
             this.mapToEntity = mapToEntity;
         }
 
-        public void ActivateRecipe(string recipeId)
+        public void ActivateRecipe(int recipeId)
         {
             throw new NotImplementedException();
         }
 
         public void AddRecipe(Recipe recipe)
         {
-            //how to convert bl to dl??? Timings???
-            RecipeEntity recipeEntity = mapToEntity.MapFromDomainRecipe(recipe);
-            ctx.Recipe.Add(recipeEntity);
-            ctx.SaveChanges();
+            try
+            {
+                //how to convert bl to dl??? Timings???
+                //voeg een recipe toe zonder timings! addtiming gebruiken om timing toe te voegen!
+                RecipeEntity recipeEntity = mapToEntity.MapFromDomainRecipe(recipe);
+                ctx.Recipe.Add(recipeEntity);
+                ctx.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                throw new RecipeRepositoryException("AddRecipe", ex);
+            }
+
         }
 
-        public Recipe GetRecipe(int recipeId)
+        public Recipe GetRecipeById(int recipeId)
         {
             try
             {
                 //throw exception if the id doesnt match! TODO
-                return mapFromEntity.MapToDomainRecipe(ctx.Recipe.Where(r => r.Id == recipeId)
-                    .AsNoTracking().FirstOrDefault());
+                if(!ctx.Recipe.Any(r => r.Id == recipeId)) throw new RecipeRepositoryException("The recipe id doesn't exist in the database");
+
+                //Voeg de timing toe van de recept en de producten en hun brandproduct
+
+                RecipeEntity recipeEntities = ctx.Recipe.Where(r => r.Id == recipeId)
+                    .AsNoTracking().FirstOrDefault();
+                
+                List<TimingEntity> timingEntities = ctx.Timing.Where(t => t.RecipeId == recipeEntities.Id).AsNoTracking().ToList();
+
+                timingEntities.ForEach(timingEntity =>
+                {
+                    ProductEntity productEntity = ctx.Product.Where(p => p.Id == timingEntity.ProductId).AsNoTracking().FirstOrDefault();
+                    productEntity.Brand = ctx.Brand.Where(b => b.Id == productEntity.BrandId).AsNoTracking().FirstOrDefault();
+                    timingEntity.Product = productEntity;
+                });
+
+                recipeEntities.Timings = timingEntities;
+  
+                return mapFromEntity.MapToDomainRecipe(recipeEntities);
             }
             catch (Exception ex)
             {
-                //add custom exception
-                throw new NotImplementedException();
+                throw new RecipeRepositoryException("GetRecipeById", ex);
             }
         }
 
-        public List<Recipe> GetRecipes()
+        public List<RecipeDTO> GetRecipes()
         {
             try
             {
-                return ctx.Recipe.AsNoTracking().Select(r => mapFromEntity.MapToDomainRecipe(r)).ToList();
+                //return a list of recipes without their timings - recipeDTO!
+                return ctx.Recipe.Where(r => r.TimeLog == null).AsNoTracking().Select(r => mapFromEntity.MapToDomainRecipeDTO(r)).ToList();
             }
             catch(Exception ex)
             {
@@ -68,15 +96,38 @@ namespace CG.DL.Repositorys
             }
         }
 
-        public void RemoveRecipe(string recipe)
+        public void RemoveRecipe(int recipeId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //throw exception if the id doesnt match! TODO
+                if (!ctx.Recipe.Any(r => r.Id == recipeId)) throw new RecipeRepositoryException("The recipe id doesn't exist in the database");
+
+                ctx.Entry(ctx.Recipe.Where(r => r.Id == recipeId).First()).Property("TimeLog").CurrentValue = DateTime.Now;
+                ctx.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new RecipeRepositoryException("RemoveRecipe", ex);
+            }
+            
         }
 
         public void UpdateRecipe(int recipeId, Recipe recipe)
         {
-            //here you override the table info - so make a remove and add the new value in it!
-            throw new NotImplementedException();
+            try
+            {
+                RecipeEntity recipeEntity = mapToEntity.MapFromDomainRecipe(recipe);
+                recipeEntity.Id = recipeId;
+                ctx.Update(recipeEntity);
+                ctx.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                //here you override the table info -Update method of EF
+                throw new RecipeRepositoryException("UpdateRecipe", ex);
+            }
+
         }
     }
 }

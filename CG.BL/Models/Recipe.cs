@@ -15,49 +15,37 @@ namespace CG.BL.Models
     {
         private int _recipeId;
         private string _name;
-        private string _category;
+    /*private string _category;*/
         private string _imgUrl;
         private string _videoUrl;
-        private List<Timing> timings;
+        private List<Timing> _timings;
         private bool _isActive = false;
 
-        public Recipe(int id, string name,string category,string imgUrl, string videoUrl) : this(name,category,imgUrl,videoUrl)
+
+        public Recipe(int recipeId, string name, string imgUrl, string videoUrl, bool isActive, List<Timing> timings)
         {
-            RecipeId = id;           
-        }
-        public Recipe(string name, string category, string imgUrl, string videoUrl)
-        {
-            Name = name;
-            Category = category;
-            ImgUrl = imgUrl;
-            VideoUrl = videoUrl;
-            timings= new List<Timing>();
-        }
-        public Recipe(string name, string imgUrl, string videoUrl)
-        {
+            RecipeId = recipeId;
             Name = name;
             ImgUrl = imgUrl;
             VideoUrl = videoUrl;
-            timings = new List<Timing>();
-        }
-        public Recipe(int id, string name, string imgUrl, string videoUrl)
-        {
-            RecipeId = id;
-            Name = name;
-            ImgUrl = imgUrl;
-            VideoUrl = videoUrl;
-            timings = new List<Timing>();
+            IsActive = isActive;
+            Timings = timings;
         }
 
-        public List<Timing> GetTimings()
+        public Recipe(string name, string imgUrl, string videoUrl, bool isActive, List<Timing> timings)
         {
-            return timings;
+            Name = name;
+            ImgUrl = imgUrl;
+            VideoUrl = videoUrl;
+            IsActive = isActive;
+            Timings = timings;
         }
-        public Timing GetTiming(int timingid)
+
+        public Timing GetTimingById(int timingid)
         {
-            if (timings.Any(timing => timing.TimingId == timingid))
+            if (_timings.Any(timing => timing.TimingId == timingid))
             {
-                return timings.First(t => t.TimingId == timingid);
+                return _timings.First(t => t.TimingId == timingid);
             }else
             {
                 throw new RecipeException("No timing found with this Id");
@@ -65,12 +53,11 @@ namespace CG.BL.Models
             
         }
 
-
         public void AddTiming(Timing timing)
         {
             if (timing != null)
             {
-                timings.Add(timing);
+                _timings.Add(timing);
             }
             else
             {
@@ -80,10 +67,11 @@ namespace CG.BL.Models
 
         public int RecipeId { get { return _recipeId; } private set { _recipeId = value; } }
         public string Name { get { return _name;} private set { _name = value; } }
-        public string Category { get { return _category; } private set { _category = value; } }
+        /*public string Category { get { return _category; } private set { _category = value; } }*/
         public string ImgUrl { get { return _imgUrl;} private set { _imgUrl = value; } }
         public string VideoUrl { get { return _videoUrl;} private set {_videoUrl = value; } }
         public bool IsActive { get => _isActive; set => _isActive = value; }
+        public List<Timing> Timings { get { return _timings; } set { _timings = value; } }
 
         public override string? ToString()
         {

@@ -1,4 +1,6 @@
-﻿using CG.BL.Models;
+﻿using CG.BL.Exceptions;
+using CG.BL.Models;
+using CG.BL.Models.DTO;
 using CG.BL.Repositorys;
 
 namespace CollectAndGO.Application
@@ -17,66 +19,161 @@ namespace CollectAndGO.Application
         }
 
         //Recipes Methodes
-        public List<Recipe> GetRecipes()
+        public List<RecipeDTO> GetRecipes()
         {
-            return _recipeRepo.GetRecipes();
+            try
+            {
+                return _recipeRepo.GetRecipes();
+            }
+            catch(Exception ex)
+            {
+                throw new DomainManagerException("GetRecipes", ex);
+            }
+            
         }
         public List<Product> GetProducts() 
         {
-            return _productRepo.GetProducts();
+            try
+            {
+                return _productRepo.GetProducts();
+            }
+            catch (Exception ex)
+            {
+                throw new DomainManagerException("GetProducts", ex);
+            }
+            
         }
 
-        public Recipe GetRecipe(int recipeId)
+        public Recipe GetRecipeById(int recipeId)
         {
-            return _recipeRepo.GetRecipe(recipeId);
+            try
+            {
+                return _recipeRepo.GetRecipeById(recipeId);
+            }
+            catch (Exception ex)
+            {
+                throw new DomainManagerException("GetRecipeById", ex);
+            }
+            
         }
 
         public void AddRecipe(Recipe recipe)
         {
-            //Recipe recipe = new Recipe(recipeInfo[0], recipeInfo[1], recipeInfo[2]);
-            _recipeRepo.AddRecipe(recipe);
+            try
+            {
+                _recipeRepo.AddRecipe(recipe);
+            }
+            catch (Exception ex)
+            {
+                throw new DomainManagerException("AddRecipe", ex);
+            }
+            
         }
-        public void RemoveRecipe(string recipeId)   
+        public void RemoveRecipe(int recipeId)   
         {
-            _recipeRepo.RemoveRecipe(recipeId);
-        }       //Not Implemented
+            try
+            {
+                _recipeRepo.RemoveRecipe(recipeId);  
+            }
+            catch (Exception ex)
+            {
+                throw new DomainManagerException("RemoveRecipe", ex);
+            }
+            
+        }      
 
         public void UpdateRecipe(int recipeId, Recipe recipe)
         {
-            _recipeRepo.UpdateRecipe(recipeId, recipe);
+            try
+            {
+                _recipeRepo.UpdateRecipe(recipeId, recipe);
+            }
+            catch (Exception ex)
+            {
+                throw new DomainManagerException("UpdateRecipe", ex);
+            }
+        
         }
 
-        public void ActivateRecipe(string recipeId)
+        public void ActivateRecipe(int recipeId)
         {
-            _recipeRepo.ActivateRecipe(recipeId);
-        }  //not implemented
+            try
+            {
+                _recipeRepo.ActivateRecipe(recipeId); //not implemented
+            }
+            catch (Exception ex)
+            {
+                throw new DomainManagerException("ActivateRecipe", ex);
+            }
+            
+        }  
 
         //Timings Methodes
         public List<Timing> GetTimingsFromRecipe(int recipeId)
         {
-           return _timingRepository.GetAllTimingsFromRecipe(recipeId);
+            try
+            {
+                return _timingRepository.GetAllTimingsFromRecipe(recipeId);
+            }
+            catch(Exception ex)
+            {
+                throw new DomainManagerException("GetTimingsFromRecipe", ex);
+            }
+           
         }
 
         public void AddTiming(int recipeId, Timing timing)
         {
-            _timingRepository.AddTimingToRecipe(recipeId, timing);
+            try
+            {
+                _timingRepository.AddTimingToRecipe(recipeId, timing);
+            }
+            catch (Exception ex)
+            {
+                throw new DomainManagerException("AddTiming", ex);
+            }
+            
         }
 
         //ProductMethodes
         public void AddProduct(Product product)
         {
-           _productRepo.AddProduct(product);
+            try
+            {
+                _productRepo.AddProduct(product);
+            }
+            catch (Exception ex)
+            {
+                throw new DomainManagerException("AddProduct", ex);
+            }
+            
         }
 
         //BrandProductMethodes
         public void AddBrandProduct(BrandProduct brandProduct)
         {
-            _productRepo.AddBrandProduct(brandProduct);
+            try
+            {
+                _productRepo.AddBrandProduct(brandProduct);
+            }
+            catch (Exception ex)
+            {
+                throw new DomainManagerException("AddBrandProduct", ex);
+            }
+            
         }
 
         public List<BrandProduct> GetBrandProducts(int productId)
         {
-            return _productRepo.GetBrandProducts(productId);
+            try
+            {
+                return _productRepo.GetBrandProducts(productId);
+            }
+            catch (Exception ex)
+            {
+                throw new DomainManagerException("GetBrandProducts", ex);
+            }
+            
         }
     }
 }

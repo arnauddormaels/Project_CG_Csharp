@@ -21,6 +21,7 @@ namespace CG.API.Model.Output
         public string ImgUrl { get; set; }
         public string VideoUrl { get; set; }
         public bool IsActive { get; set; }
-
+        //list mag veraneren naar only observable list enzo!
+        public List<TimingRESToutputDTO> Timings { get; set; }
     }
 }

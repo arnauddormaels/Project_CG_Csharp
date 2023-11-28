@@ -46,8 +46,7 @@ namespace CG.DL.Repositorys
                         .ToList();
 
                 return timingsEntity
-                    .Select(t => mapFromEntity.MapToDomainTiming(t,ctx.Product.Where(p => p.Id == t.ProductId)
-                    .AsNoTracking().FirstOrDefault())).ToList(); 
+                    .Select(t => mapFromEntity.MapToDomainTiming(t)).ToList();
             }
             catch (Exception ex)
             {

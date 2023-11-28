@@ -14,16 +14,12 @@
             Product = product;
         }
 
-        public Timing(int timingId, int startTime, int endTime)
+        public Timing(int timingId, int startTime, int endTime, Product product)
         {
             TimingId = timingId;
             StartTime = startTime;
             EndTime = endTime;
-        }
-
-        public Timing(int timingId, int startTime, int endTime, Product product) : this(startTime, endTime, product)
-        {
-                TimingId = timingId;    
+            Product = product;
         }
 
         public int TimingId { get => _timingId; private set => _timingId = value; }

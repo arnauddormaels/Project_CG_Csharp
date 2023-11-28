@@ -45,11 +45,11 @@ namespace CG.API.Controllers
 
         //[Route("https://localhost:7226/api/Recipe")]
         [HttpGet("({recipeId})")]
-        public ActionResult<RecipeRESToutputDTO>GetRecipe(int recipeId)
+        public ActionResult<RecipeRESToutputDTO>GetRecipeById(int recipeId)
         {
             try
             {
-                return mapToDTO.MapFromRecipeDomain(manager.GetRecipe(recipeId));
+                return mapToDTO.MapFromRecipeDomain(manager.GetRecipeById(recipeId));
                 /*return dummyDTOlist.Where(r => r.RecipeId == recipeId).First();*/
             }
             catch (Exception ex)
@@ -78,13 +78,14 @@ namespace CG.API.Controllers
         }
         
         //
-        [HttpPut("{id}")]
-        public ActionResult<RecipeRESTinputDTO> EditRecipe(int id ,[FromBody] RecipeRESTinputDTO recipeRESTinputDTO)
+        [HttpPut("{recipeId}")]
+        public ActionResult<RecipeRESTinputDTO> EditRecipe(int recipeId ,[FromBody] RecipeRESTinputDTO recipeRESTinputDTO)
         {
             try
             {
                 //Update recipe zonder timers updaten in de databank!
-                return null;
+                manager.UpdateRecipe(recipeId, mapFromDTO.MapToDomainRecipe(recipeRESTinputDTO));
+                return recipeRESTinputDTO;
             }
             catch (Exception ex)
             {
@@ -98,12 +99,25 @@ namespace CG.API.Controllers
 
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult<List<RecipeRESToutputDTO>> DeleteRecipe(int id)
+        [HttpDelete("{recipeId}")]
+        public ActionResult<List<RecipeRESToutputDTO>> RemoveRecipe(int recipeId)
         {
-            int index = dummyDTOlist.IndexOf(dummyDTOlist.Where(r => r.RecipeId == id).First());
+
+            try
+            {
+                manager.RemoveRecipe(recipeId);
+                //moet dit hier nog goed inplementeren!
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+                throw;
+            }
+
+            /*int index = dummyDTOlist.IndexOf(dummyDTOlist.Where(r => r.RecipeId == id).First());
             dummyDTOlist.Remove(dummyDTOlist[index]);
-            return dummyDTOlist;
+            return dummyDTOlist;*/
         }
 
     }

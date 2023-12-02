@@ -31,7 +31,7 @@ namespace CG.BL.Models
 
         public string Category { get => _category; private set => _category = value; }
         public string ProductName { get => _productName; private set => _productName = value; }
-        public int ProductId { get => _productId; private set => _productId = value; }
+        public int ProductId { get => _productId; set => _productId = value; }
         public string ImgUrl { get => _imgUrl; set => _imgUrl = value; }
         public BrandProduct BrandProduct { get => _brandProduct; set => _brandProduct = value; }
 

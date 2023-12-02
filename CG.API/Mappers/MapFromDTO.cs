@@ -13,8 +13,7 @@ namespace CG.API.Mappers
 
             try
             {
-                List<Timing> timings = new List<Timing>();
-                Recipe recipe = new Recipe(recipeDTO.Name, /*recipeDTO.Category,*/ recipeDTO.ImgUrl, recipeDTO.VideoUrl,recipeDTO.IsActive, timings);
+                Recipe recipe = new Recipe(recipeDTO.Name, /*recipeDTO.Category,*/ recipeDTO.ImgUrl, recipeDTO.VideoUrl,recipeDTO.IsActive);
                 return recipe;
             }
             catch(Exception ex)
@@ -29,8 +28,8 @@ namespace CG.API.Mappers
 
             try
             {
-               // Product product = new Product(productDTO.Name, /*productDTO.Category,*/ productDTO.ImgUrl, new BrandProduct(productDTO.BrandId));
-                return null;
+               Product product = new Product(productDTO.Name, /*productDTO.Category,*/ productDTO.ImgUrl, MapToDomainBrandProduct(productDTO.BrandProduct));
+                return product;
             }
             catch (Exception ex)
             {
@@ -38,13 +37,28 @@ namespace CG.API.Mappers
             }
         }
 
-        public Timing mapToDomainTiming(TimingRESTinputDTO timingDTO) //not implemented
+        private BrandProduct MapToDomainBrandProduct(BrandProductRESTinputDTO brandProductDTO)
+        {
+            try
+            {
+                BrandProduct brandProduct = new BrandProduct(brandProductDTO.Name, brandProductDTO.Price, brandProductDTO.Description, brandProductDTO.ImgUrl);
+                return brandProduct;
+            }
+            catch (Exception ex)
+            {
+                throw new MapToDomainException("MapToDomainBrandProduct", ex);
+            }
+        }
+
+        public Timing MapToDomainTiming(TimingRESTinputDTO timingDTO) //not implemented
         {
 
             try
             {
-                //Timing timing = new Timing(timingDTO.StartTime, timingDTO.EndTime, new Product(timingDTO.ProductId));
-                return null;
+                Timing timing = new Timing(timingDTO.StartTime, timingDTO.EndTime,MapToDomainProduct(timingDTO.Product));
+                //voorlopig id toevoegen - 
+                timing.Product.ProductId = timingDTO.ProductId;
+                return timing;
             }
             catch(Exception ex)
             {

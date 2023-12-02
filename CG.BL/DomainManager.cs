@@ -1,6 +1,5 @@
 ﻿using CG.BL.Exceptions;
 using CG.BL.Models;
-using CG.BL.Models.DTO;
 using CG.BL.Repositorys;
 
 namespace CollectAndGO.Application
@@ -19,7 +18,7 @@ namespace CollectAndGO.Application
         }
 
         //Recipes Methodes
-        public List<RecipeDTO> GetRecipes()
+        public List<Recipe> GetRecipes()
         {
             try
             {
@@ -147,6 +146,18 @@ namespace CollectAndGO.Application
                 throw new DomainManagerException("AddProduct", ex);
             }
             
+        }
+
+        public Product GetProductById(int productId)
+        {
+            try
+            {
+               return _productRepo.GetProductById(productId);
+            }
+            catch (Exception ex)
+            {
+                throw new DomainManagerException("GetProductById", ex);
+            }
         }
 
         //BrandProductMethodes

@@ -44,10 +44,10 @@ namespace CG.StartUp
             //voeg Recipes
             List<Recipe> recipes = new()
             {
-                new Recipe("Bavarios", "https://jenzvandevelde-images-host.onrender.com/frambozenbavarois.png", "https://jenzvandevelde-images-host.onrender.com/Bavarois.mp4"),
-                new Recipe("Scampi", "https://jenzvandevelde-images-host.onrender.com/ScampiDiabolique.png", "https://jenzvandevelde-images-host.onrender.com/ScampiDiabolique.mp4"),
-                new Recipe("SpagettiBolognaise","https://jenzvandevelde-images-host.onrender.com/spaghetti.jpeg","https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4"),
-                new Recipe("Stoofvlees","https://jenzvandevelde-images-host.onrender.com/Stoofvlees.png","https://jenzvandevelde-images-host.onrender.com/Stoofvlees.mp4")
+                new Recipe("Bavarios", "https://jenzvandevelde-images-host.onrender.com/frambozenbavarois.png", "https://jenzvandevelde-images-host.onrender.com/Bavarois.mp4",false),
+                new Recipe("Scampi", "https://jenzvandevelde-images-host.onrender.com/ScampiDiabolique.png", "https://jenzvandevelde-images-host.onrender.com/ScampiDiabolique.mp4", false),
+                new Recipe("SpagettiBolognaise","https://jenzvandevelde-images-host.onrender.com/spaghetti.jpeg","https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4", false),
+                new Recipe("Stoofvlees","https://jenzvandevelde-images-host.onrender.com/Stoofvlees.png","https://jenzvandevelde-images-host.onrender.com/Stoofvlees.mp4",false)
             };
             foreach (Recipe recipe in recipes)
             {

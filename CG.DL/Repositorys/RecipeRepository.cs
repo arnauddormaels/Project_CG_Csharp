@@ -1,5 +1,4 @@
 ﻿using CG.BL.Models;
-using CG.BL.Models.DTO;
 using CG.BL.Repositorys;
 using CG.DL.Data;
 using CG.DL.Entities;
@@ -59,7 +58,6 @@ namespace CG.DL.Repositorys
                 if(!ctx.Recipe.Any(r => r.Id == recipeId)) throw new RecipeRepositoryException("The recipe id doesn't exist in the database");
 
                 //Voeg de timing toe van de recept en de producten en hun brandproduct
-
                 RecipeEntity recipeEntities = ctx.Recipe.Where(r => r.Id == recipeId)
                     .AsNoTracking().FirstOrDefault();
                 
@@ -82,12 +80,12 @@ namespace CG.DL.Repositorys
             }
         }
 
-        public List<RecipeDTO> GetRecipes()
+        public List<Recipe> GetRecipes()
         {
             try
             {
                 //return a list of recipes without their timings - recipeDTO!
-                return ctx.Recipe.Where(r => r.TimeLog == null).AsNoTracking().Select(r => mapFromEntity.MapToDomainRecipeDTO(r)).ToList();
+                return ctx.Recipe.Where(r => r.TimeLog == null).AsNoTracking().Select(r => mapFromEntity.MapToDomainRecipe(r)).ToList();
             }
             catch(Exception ex)
             {

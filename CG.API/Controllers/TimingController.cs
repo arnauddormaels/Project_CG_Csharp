@@ -14,7 +14,7 @@ namespace CG.API.Controllers
     {
         //bij timings geef je ook alle producten mee die daar bij horen!
 
-        private List<DummyTimingRESToutputDTO> dummyTimings = new List<DummyTimingRESToutputDTO>
+/*        private List<DummyTimingRESToutputDTO> dummyTimings = new List<DummyTimingRESToutputDTO>
             {
                 new DummyTimingRESToutputDTO(1, "https://jenzvandevelde-images-host.onrender.com/boter.jpeg", "https://jenzvandevelde-images-host.onrender.com/famaboter.webp", "Boter", "Fama", "00:34", "00:40"),
                 new DummyTimingRESToutputDTO(2, "https://jenzvandevelde-images-host.onrender.com/ui.jpeg", "https://jenzvandevelde-images-host.onrender.com/uieneveryday.jpeg", "Uien", "Everyday", "00:34", "00:40"),
@@ -29,7 +29,7 @@ namespace CG.API.Controllers
                 new DummyTimingRESToutputDTO(11, "https://jenzvandevelde-images-host.onrender.com/tomatenpuree.jpeg", "https://jenzvandevelde-images-host.onrender.com/tomatenpureeheinz.jpeg", "Tomatenpuree", "Heinz", "00:59", "01:00"),
                 new DummyTimingRESToutputDTO(12, "https://jenzvandevelde-images-host.onrender.com/spaghetti.jpeg", "https://jenzvandevelde-images-host.onrender.com/spaghettibarilla.jpg", "Spaghetti", "Barilla", "01:36", "1:43"),
                 new DummyTimingRESToutputDTO(13, "https://jenzvandevelde-images-host.onrender.com/gerasptekaas.jpeg", "https://jenzvandevelde-images-host.onrender.com/kaasspaghettimix.jpeg", "Gemalen Kaas", "Boni", "01:46", "01:50")
-            };
+            };*/
 
         private DomainManager manager;
         private MapFromDTO mapFromDTO;
@@ -58,25 +58,14 @@ namespace CG.API.Controllers
             }
         }
 
-        /*        // GET: api/Timing/{id}
-                [HttpGet("{id}")]
-                public ActionResult<DummyTimingRESToutputDTO> GetTiming(int id)
-                {
-                    var timing = dummyTimings.FirstOrDefault(t => t.TimingId == id);
-                    if (timing == null)
-                    {
-                        return NotFound("Timing not found");
-                    }
-                    return timing;
-                }*/
-
         // POST: api/Timing
         [HttpPost]
         public ActionResult<TimingRESTinputDTO> AddTimingToRecipe(int recipeId,[FromBody] TimingRESTinputDTO timingInputDTO)
         {
             try
             {
-                manager.AddTiming(recipeId, mapFromDTO.mapToDomainTiming(timingInputDTO));
+                //voorlopig zal dit de productId alleen gebruiken om de timing te linken met een bestaan product!
+                manager.AddTiming(recipeId, mapFromDTO.MapToDomainTiming(timingInputDTO));
                 return timingInputDTO;
             }
             catch(Exception ex)
@@ -85,18 +74,10 @@ namespace CG.API.Controllers
                 throw;
             }
 
-
-/*            if (dummyTimings.Any(t => t.TimingId == timingDTO.TimingId))
-            {
-                return Conflict("Timing with the same ID already exists");
-            }
-
-            dummyTimings.Add(timingDTO);
-            return CreatedAtAction(nameof(GetTiming), new { id = timingDTO.TimingId }, timingDTO);*/
         }
 
         // PUT: api/Timing/{id}
-        [HttpPut("{id}")]
+        /*[HttpPut("{id}")]
         public IActionResult PutTiming(int id, [FromBody] DummyTimingRESToutputDTO timingDTO)
         {
             var timing = dummyTimings.FirstOrDefault(t => t.TimingId == id);
@@ -126,6 +107,6 @@ namespace CG.API.Controllers
 
             dummyTimings.Remove(timing);
             return NoContent();
-        }
+        }*/
     }
 }

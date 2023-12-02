@@ -2,17 +2,16 @@
 {
     public class ProductRESTinputDTO
     {
-        public ProductRESTinputDTO(string name, string category, string imgUrl, int brandId)
+        public ProductRESTinputDTO(string name,/* string category,*/ string imgUrl)
         {
             Name = name;
-            Category = category;
+           /* Category = category;*/
             ImgUrl = imgUrl;
-            BrandId = brandId;
         }
 
         public string Name { get; set; }
-        public string Category { get; set; }
+       /* public string Category { get; set; }*/
         public string ImgUrl { get; set; }
-        public int BrandId { get; set; }
+        public BrandProductRESTinputDTO BrandProduct { get; set; }
     }
 }

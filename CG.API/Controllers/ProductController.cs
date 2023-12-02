@@ -37,11 +37,23 @@ namespace CG.API.Controllers
         }
 
         //GetProductByID
-
+        [HttpGet("({productId})")]
+        public ActionResult<ProductRESToutputDTO> GetProductById(int productId)
+        {
+            try
+            {
+                return mapToDTO.MapFromProductDomain(manager.GetProductById(productId));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+                throw;
+            }
+        }
 
         //AddProduct
         [HttpPost]
-        public ActionResult<ProductRESTinputDTO> AddProduct(ProductRESTinputDTO productInputDTO)
+        public ActionResult<ProductRESTinputDTO> AddProduct([FromBody] ProductRESTinputDTO productInputDTO)
         {
             try
             {
@@ -55,22 +67,9 @@ namespace CG.API.Controllers
             }
         }
 
+        //uitbreiding!
         //UpdateProduct
         //DeleteProduct
 
-        //GetALLBrandProduct
-        [HttpGet("({productId})")]
-        public ActionResult<List<BrandProductRESToutputDTO>> GetAllBrandProductOfProduct(int productId)
-        {
-            try
-            {
-                return mapToDTO.MapBrandProducts(manager.GetBrandProducts(productId));
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-                throw;
-            }
-        }
     }
 }

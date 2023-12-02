@@ -32,13 +32,21 @@ namespace CG.BL.Models
             Timings = timings;
         }
 
-        public Recipe(string name, string imgUrl, string videoUrl, bool isActive, List<Timing> timings)
+        /*public Recipe(string name, string imgUrl, string videoUrl, bool isActive, List<Timing> timings)
         {
             Name = name;
             ImgUrl = imgUrl;
             VideoUrl = videoUrl;
             IsActive = isActive;
             Timings = timings;
+        }*/
+
+        public Recipe(string name, string imgUrl, string videoUrl, bool isActive)
+        {
+            Name = name;
+            ImgUrl = imgUrl;
+            VideoUrl = videoUrl;
+            IsActive = isActive;
         }
 
         public Timing GetTimingById(int timingid)

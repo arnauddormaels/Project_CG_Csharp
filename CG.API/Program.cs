@@ -30,7 +30,7 @@ namespace Project_Collect_and_Go_t5
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddCors(options =>
+           /* builder.Services.AddCors(options =>
             {
                 options.AddPolicy("MyCorsPolicy", builder =>
                 {
@@ -39,10 +39,17 @@ namespace Project_Collect_and_Go_t5
                         .AllowAnyOrigin();
                         
                 }); ;
-            });
+            });*/
 
             var app = builder.Build();
-            app.UseCors("MyCorsPolicy");
+            //app.UseCors("MyCorsPolicy");
+            app.UseCors(policy =>
+            {
+                policy.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin();
+            }
+            );
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

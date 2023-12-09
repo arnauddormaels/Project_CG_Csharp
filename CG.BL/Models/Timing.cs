@@ -1,4 +1,6 @@
-﻿namespace CG.BL.Models
+﻿using CG.BL.Exceptions;
+
+namespace CG.BL.Models
 {
     public class Timing
     {
@@ -22,11 +24,59 @@
             Product = product;
         }
 
-        public int TimingId { get => _timingId; private set => _timingId = value; }
-        public int StartTime { get => _startTime; private set => _startTime = value; }
-        public int EndTime { get => _endTime; private set => _endTime = value; }
-        public Product Product { get => _product; private set => _product = value; }
-    
-    
+        public int TimingId { get => _timingId; private set
+            {
+                if (value <= 0)
+                {
+                    var ex = new DomainModelException("Timing-SetTimingId-SmallerThanOne");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(TimingId)));
+                    ex.Error = new Error("timingId is smaller than 1");
+                    ex.Error.Values.Add(new PropertyInfo("TimingId", value));
+                    throw ex;
+                }
+                TimingId = value;
+            }
+        }
+        public int StartTime { get => _startTime; private set
+            {
+                if (value < 0)
+                {
+                    var ex = new DomainModelException("Timing-SetStartTime-SmallerThanZero");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(StartTime)));
+                    ex.Error = new Error("startTime is smaller than 0");
+                    ex.Error.Values.Add(new PropertyInfo("StartTime", value));
+                    throw ex;
+                }
+                StartTime = value;
+            }
+        }
+        public int EndTime { get => _endTime; private set
+            {
+                if (value < 0)
+                {
+                    var ex = new DomainModelException("Timing-SetEndTime-SmallerThanZero");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(EndTime)));
+                    ex.Error = new Error("endTime is smaller than 0");
+                    ex.Error.Values.Add(new PropertyInfo("EndTime", value));
+                    throw ex;
+                }
+                EndTime = value;
+            }
+        }
+        public Product Product { get => _product; private set
+            {
+                if (Product == null)
+                {
+                    var ex = new DomainModelException("Timing-SetProduct-Null");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(Product)));
+                    ex.Error = new Error("product is null ");
+                    ex.Error.Values.Add(new PropertyInfo("Product", value));
+                    throw ex;
+                }
+                Product = value;
+            }
+        }
+
+
     }
 }

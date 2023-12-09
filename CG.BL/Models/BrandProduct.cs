@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CG.BL.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CG.BL.Models
 {
@@ -31,11 +33,73 @@ namespace CG.BL.Models
             ImgUrl = imgUrl;
         }
 
-        public int BrandId { get => _brandId; private set => _brandId = value; }
-        public string Name { get => _name; private set => _name = value; }
-        public decimal Price { get => _price; private set => _price = value; }
-        public string Description { get => _description; private set => _description = value; }
-        public string ImgUrl { get => _imgUrl; private set => _imgUrl = value; }
+        public int BrandId { get => _brandId; private set
+            {
+                if (value <= 0)
+                {
+                    var ex = new DomainModelException("BrandProduct-SetBrandId-SmallerThanOne");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(BrandId)));
+                    ex.Error = new Error("brandId is smaller than 1");
+                    ex.Error.Values.Add(new PropertyInfo("BrandId", value));
+                    throw ex;
+                }
+                BrandId = value;
+            }
+        }
+        public string Name { get => _name; private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    var ex = new DomainModelException("BrandProduct-SetName-NullOrWhiteSpace");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(Name)));
+                    ex.Error = new Error("name is null or white space");
+                    ex.Error.Values.Add(new PropertyInfo("Name", value));
+                    throw ex;
+                }
+                Name = value;
+            }
+        }
+        public decimal Price { get => _price; private set
+            {
+                if (value < 0)
+                {
+                    var ex = new DomainModelException("BrandProduct-SetPrice-SmallerThanZero");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(Price)));
+                    ex.Error = new Error("price is smaller than 0");
+                    ex.Error.Values.Add(new PropertyInfo("Price", value));
+                    throw ex;
+                }
+                Price = value;
+            }
+        }
+        public string Description { get => _description; private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    var ex = new DomainModelException("BrandProduct-SetDescription-NullOrWhiteSpace");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(Description)));
+                    ex.Error = new Error("description is null or white space");
+                    ex.Error.Values.Add(new PropertyInfo("Description", value));
+                    throw ex;
+                }
+                Description = value;
+            }
+        }
+        public string ImgUrl { get => _imgUrl; private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    var ex = new DomainModelException("BrandProduct-SetImgUrl-NullOrWhiteSpace");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(ImgUrl)));
+                    ex.Error = new Error("imgUrl is null or white space");
+                    ex.Error.Values.Add(new PropertyInfo("ImgUrl", value));
+                    throw ex;
+                }
+                ImgUrl = value;
+            }
+        }
+
+
 
         public override string ToString()
         {

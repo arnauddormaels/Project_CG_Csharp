@@ -22,8 +22,8 @@ namespace CG.StartUp
 
         static void Main(string[] args)
         {
-            //CreateDB();
-            //FillDatabase(); //work in progress
+            CreateDB();
+            FillDatabase(); //work in progress
 
             //Testmethodes 
             /*
@@ -44,10 +44,10 @@ namespace CG.StartUp
             //voeg Recipes
             List<Recipe> recipes = new()
             {
-                new Recipe("Bavarios",Category.Hoofdgerecht.ToString(),"https://jenzvandevelde-images-host.onrender.com/frambozenbavarois.png", "https://jenzvandevelde-images-host.onrender.com/Bavarois.mp4",false),
-                new Recipe("Scampi",Category.Hoofdgerecht.ToString(), "https://jenzvandevelde-images-host.onrender.com/ScampiDiabolique.png", "https://jenzvandevelde-images-host.onrender.com/ScampiDiabolique.mp4", false),
-                new Recipe("SpagettiBolognaise",Category.Hoofdgerecht.ToString(), "https://jenzvandevelde-images-host.onrender.com/spaghetti.jpeg","https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4", false),
-                new Recipe("Stoofvlees",Category.Hoofdgerecht.ToString(), "https://jenzvandevelde-images-host.onrender.com/Stoofvlees.png","https://jenzvandevelde-images-host.onrender.com/Stoofvlees.mp4",false)
+                new Recipe("Frambozen Bavarios",Category.Dessert.ToString(),"https://jenzvandevelde-images-host.onrender.com/frambozenbavarois.png", "https://jenzvandevelde-images-host.onrender.com/Bavarois.mp4",false),
+                new Recipe("Scampi Diapolique",Category.Hoofdgerecht.ToString(), "https://jenzvandevelde-images-host.onrender.com/ScampiDiabolique.png", "https://jenzvandevelde-images-host.onrender.com/ScampiDiabolique.mp4", false),
+                new Recipe("Spagetti Bolognaise",Category.Hoofdgerecht.ToString(), "https://jenzvandevelde-images-host.onrender.com/spaghetti.jpeg","https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4", false),
+                new Recipe("Stoofvlees met frietjes",Category.Hoofdgerecht.ToString(), "https://jenzvandevelde-images-host.onrender.com/Stoofvlees.png","https://jenzvandevelde-images-host.onrender.com/Stoofvlees.mp4",false)
             };
             foreach (Recipe recipe in recipes)
             {

@@ -58,9 +58,11 @@ namespace CG.BusinessLayer.Tests
             string name = "Recipe Name";
             string imgUrl = "recipe_image_url";
             string videoUrl = "recipe_video_url";
+            string category = "Hoofdgerecht";
+            bool isActive = false;
 
             // Act
-            var recipe = new Recipe(recipeId, name, imgUrl, videoUrl);
+            Recipe recipe = new Recipe(name, category, imgUrl, videoUrl, isActive);
 
             // Assert
             Assert.Equal(recipeId, recipe.RecipeId);
@@ -83,8 +85,8 @@ namespace CG.BusinessLayer.Tests
         public void Recipe_AddTiming_AddsTimingToList()
         {
             // Arrange
-            var recipe = new Recipe("Recipe Name", "recipe_image_url", "recipe_video_url");
-            var timing = new Timing(1, TimeSpan.FromHours(0), TimeSpan.FromHours(1), null);
+            var recipe = new Recipe("Recipe Name","recipe category", "recipe_image_url", "recipe_video_url",false);
+            var timing = new Timing(1, 0, 1, null);
 
             // Act
             recipe.AddTiming(timing);
@@ -98,7 +100,7 @@ namespace CG.BusinessLayer.Tests
         public void Recipe_AddTiming_ThrowsExceptionWhenTimingIsNull()
         {
             // Arrange
-            var recipe = new Recipe("Recipe Name", "recipe_image_url", "recipe_video_url");
+            var recipe = new Recipe("Recipe Name", "recipe category", "recipe_image_url", "recipe_video_url", false);
 
             // Act & Assert
             Assert.Throws<RecipeException>(() => recipe.AddTiming(null));

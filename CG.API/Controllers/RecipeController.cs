@@ -74,7 +74,6 @@ namespace CG.API.Controllers
             }
 
         }
-
         
         
         [HttpPut("IsActive/({recipeId})")]

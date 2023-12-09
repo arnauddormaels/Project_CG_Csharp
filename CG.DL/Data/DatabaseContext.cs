@@ -25,7 +25,8 @@ namespace CG.DL.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-
+            optionsBuilder.UseSqlServer(_connectionString)
+                .LogTo(Console.WriteLine, LogLevel.Information);
 
         }
 

@@ -1,4 +1,4 @@
-﻿using CG.BL.Exceptions;
+﻿using CG.BL.OldExceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -22,6 +22,14 @@ namespace CG.BL.Models
         private List<Timing> _timings;
         private bool _isActive = false;
 
+        public Recipe(string name, string category, string imgUrl, string videoUrl, bool isActive)
+        {
+            Name = name;
+            Category = (Category)Enum.Parse(typeof(Category), category);
+            ImgUrl = imgUrl;
+            VideoUrl = videoUrl;
+            IsActive = isActive;
+        }
 
         public Recipe(int recipeId, string name, string category ,string imgUrl, string videoUrl, bool isActive, List<Timing> timings)
         {
@@ -32,15 +40,6 @@ namespace CG.BL.Models
             VideoUrl = videoUrl;
             IsActive = isActive;
             Timings = timings;
-        }
-
-        public Recipe(string name, string category ,string imgUrl, string videoUrl, bool isActive)
-        {
-            Name = name;
-            Category = (Category)Enum.Parse(typeof(Category), category);
-            ImgUrl = imgUrl;
-            VideoUrl = videoUrl;
-            IsActive = isActive;
         }
 
         public Timing GetTimingById(int timingid)

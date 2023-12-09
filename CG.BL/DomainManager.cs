@@ -2,6 +2,7 @@
 using CG.BL.OldExceptions;
 using CG.BL.Models;
 using CG.BL.Repositorys;
+using CG.BL.Exceptions;
 
 namespace CollectAndGO.Application
 {
@@ -25,11 +26,18 @@ namespace CollectAndGO.Application
             {
                 return _recipeRepo.GetRecipes();
             }
-            catch(Exception ex)
+            catch (BLException ex)
             {
-                throw new DomainManagerException("GetRecipes", ex);
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetRecipes)));
+                throw ex;
             }
-            
+            catch (Exception ex)
+            {
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetRecipes)));
+                throw bex;
+            }
+
         }
         public List<Product> GetProducts() 
         {
@@ -37,11 +45,18 @@ namespace CollectAndGO.Application
             {
                 return _productRepo.GetProducts();
             }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetProducts)));
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw new DomainManagerException("GetProducts", ex);
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetProducts)));
+                throw bex;
             }
-            
+
         }
 
         public Recipe GetRecipeById(int recipeId)
@@ -50,11 +65,18 @@ namespace CollectAndGO.Application
             {
                 return _recipeRepo.GetRecipeById(recipeId);
             }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetRecipeById)));
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw new DomainManagerException("GetRecipeById", ex);
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetRecipeById)));
+                throw bex;
             }
-            
+
         }
 
         public void AddRecipe(Recipe recipe)
@@ -63,11 +85,18 @@ namespace CollectAndGO.Application
             {
                 _recipeRepo.AddRecipe(recipe);
             }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddRecipe)));
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw new DomainManagerException("AddRecipe", ex);
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddRecipe)));
+                throw bex;
             }
-            
+
         }
         public void RemoveRecipe(int recipeId)   
         {
@@ -75,11 +104,18 @@ namespace CollectAndGO.Application
             {
                 _recipeRepo.RemoveRecipe(recipeId);  
             }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(RemoveRecipe)));
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw new DomainManagerException("RemoveRecipe", ex);
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(RemoveRecipe)));
+                throw bex;
             }
-            
+
         }      
 
         public void UpdateRecipe(int recipeId, Recipe recipe)
@@ -88,11 +124,18 @@ namespace CollectAndGO.Application
             {
                 _recipeRepo.UpdateRecipe(recipeId, recipe);
             }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(UpdateRecipe)));
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw new DomainManagerException("UpdateRecipe", ex);
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(UpdateRecipe)));
+                throw bex;
             }
-        
+
         }
 
         public bool ActivateRecipe(int recipeId)
@@ -101,11 +144,18 @@ namespace CollectAndGO.Application
             {
                 return _recipeRepo.ActivateRecipe(recipeId);
             }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(ActivateRecipe)));
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw new DomainManagerException("ActivateRecipe", ex);
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(ActivateRecipe)));
+                throw bex;
             }
-            
+
         }  
 
         //Timings Methodes
@@ -115,11 +165,18 @@ namespace CollectAndGO.Application
             {
                 return _timingRepository.GetAllTimingsFromRecipe(recipeId);
             }
-            catch(Exception ex)
+            catch (BLException ex)
             {
-                throw new DomainManagerException("GetTimingsFromRecipe", ex);
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetTimingsFromRecipe)));
+                throw ex;
             }
-           
+            catch (Exception ex)
+            {
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetTimingsFromRecipe)));
+                throw bex;
+            }
+
         }
 
         public void AddTiming(int recipeId, Timing timing)
@@ -128,11 +185,18 @@ namespace CollectAndGO.Application
             {
                 _timingRepository.AddTimingToRecipe(recipeId, timing);
             }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddTiming)));
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw new DomainManagerException("AddTiming", ex);
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddTiming)));
+                throw bex;
             }
-            
+
         }
 
         //ProductMethodes
@@ -142,11 +206,18 @@ namespace CollectAndGO.Application
             {
                 _productRepo.AddProduct(product);
             }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddProduct)));
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw new DomainManagerException("AddProduct", ex);
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddProduct)));
+                throw bex;
             }
-            
+
         }
 
         public Product GetProductById(int productId)
@@ -155,9 +226,16 @@ namespace CollectAndGO.Application
             {
                return _productRepo.GetProductById(productId);
             }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetProductById)));
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw new DomainManagerException("GetProductById", ex);
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetProductById)));
+                throw bex;
             }
         }
 
@@ -168,11 +246,18 @@ namespace CollectAndGO.Application
             {
                 _productRepo.AddBrandProduct(brandProduct);
             }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddBrandProduct)));
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw new DomainManagerException("AddBrandProduct", ex);
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddBrandProduct)));
+                throw bex;
             }
-            
+
         }
 
         public List<BrandProduct> GetBrandProducts(int productId)
@@ -181,11 +266,18 @@ namespace CollectAndGO.Application
             {
                 return _productRepo.GetBrandProducts(productId);
             }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetBrandProducts)));
+                throw ex;
+            }
             catch (Exception ex)
             {
-                throw new DomainManagerException("GetBrandProducts", ex);
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetBrandProducts)));
+                throw bex;
             }
-            
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CG.BL.OldExceptions;
+﻿using CG.BL.Exceptions;
+using CG.BL.OldExceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -42,6 +43,87 @@ namespace CG.BL.Models
             Timings = timings;
         }
 
+        public int RecipeId { get => _recipeId; private set
+            {
+                if (value <= 0)
+                {
+                    var ex = new DomainModelException("Recipe-SetRecipeId-SmallerThanOne");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(RecipeId)));
+                    ex.Error = new Error("recipeId is smaller than 1");
+                    ex.Error.Values.Add(new PropertyInfo("RecipeId", value));
+                    throw ex;
+                }
+                RecipeId = value;
+            }
+        }
+        public string Name { get => _name; private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    var ex = new DomainModelException("Recipe-SetName-NullOrWhiteSpace");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(Name)));
+                    ex.Error = new Error("name is null or white space");
+                    ex.Error.Values.Add(new PropertyInfo("Name", value));
+                    throw ex;
+                }
+                Name = value;
+            }
+        }
+        public Category Category { get => _category; private set
+            {
+                if (Enum.IsDefined(value))
+                {
+                    var ex = new DomainModelException("Recipe-SetCategory-IsDefined");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(Category)));
+                    ex.Error = new Error("category is not a valid category");
+                    ex.Error.Values.Add(new PropertyInfo("Category", value));
+                    throw ex;
+                }
+                Category = value;
+            }
+        }
+        public string ImgUrl { get => _imgUrl; private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    var ex = new DomainModelException("Recipe-SetImgUrl-NullOrWhiteSpace");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(ImgUrl)));
+                    ex.Error = new Error("imgUrl is null or white space");
+                    ex.Error.Values.Add(new PropertyInfo("ImgUrl", value));
+                    throw ex;
+                }
+                ImgUrl = value;
+            }
+        }
+        public string VideoUrl { get => _videoUrl; private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    var ex = new DomainModelException("Recipe-SetVideoUrl-NullOrWhiteSpace");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(VideoUrl)));
+                    ex.Error = new Error("videoUrl is null or white space");
+                    ex.Error.Values.Add(new PropertyInfo("VideoUrl", value));
+                    throw ex;
+                }
+                VideoUrl = value;
+            }
+        }
+        public bool IsActive { get => _isActive; private set
+            {
+                if (value == null)
+                {
+                    var ex = new DomainModelException("Recipe-SetIsActive-Null");
+                    ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(IsActive)));
+                    ex.Error = new Error("ksActive is null ");
+                    ex.Error.Values.Add(new PropertyInfo("IsActive", value));
+                    throw ex;
+                }
+                IsActive = value;
+            }
+        }
+        public List<Timing> Timings { get => _timings; set { _timings = value; } }
+
+
         public Timing GetTimingById(int timingid)
         {
             if (_timings.Any(timing => timing.TimingId == timingid))
@@ -53,7 +135,6 @@ namespace CG.BL.Models
             }
             
         }
-
         public void AddTiming(Timing timing)
         {
             if (timing != null)
@@ -66,13 +147,6 @@ namespace CG.BL.Models
             }
         }
 
-        public int RecipeId { get { return _recipeId; } private set { _recipeId = value; } }
-        public string Name { get { return _name;} private set { _name = value; } }
-        public Category Category { get { return _category; } private set { _category = value; } }
-        public string ImgUrl { get { return _imgUrl;} private set { _imgUrl = value; } }
-        public string VideoUrl { get { return _videoUrl;} private set {_videoUrl = value; } }
-        public bool IsActive { get => _isActive; set => _isActive = value; }
-        public List<Timing> Timings { get { return _timings; } set { _timings = value; } }
 
         public override string? ToString()
         {

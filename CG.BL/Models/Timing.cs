@@ -65,7 +65,7 @@ namespace CG.BL.Models
         }
         public Product Product { get => _product; private set
             {
-                if (Product == null)
+                if (value == null)
                 {
                     var ex = new DomainModelException("Timing-SetProduct-Null");
                     ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(Product)));

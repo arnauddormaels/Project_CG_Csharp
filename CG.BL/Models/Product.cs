@@ -59,9 +59,7 @@ namespace CG.BL.Models
                 ProductName = value;
             }
         }
-        public string Category
-        {
-            get => _category; private set
+        public string Category{ get => _category; private set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
@@ -89,7 +87,7 @@ namespace CG.BL.Models
         }
         public BrandProduct BrandProduct { get => _brandProduct; private set
             {
-                if (BrandProduct == null)
+                if (value == null)
                 {
                     var ex = new DomainModelException("Product-SetBrandProduct-Null");
                     ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(BrandProduct)));

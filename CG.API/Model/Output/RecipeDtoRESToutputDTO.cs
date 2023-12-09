@@ -1,12 +1,10 @@
 ﻿using CG.BL.Models;
-using System.Xml.Linq;
 
 namespace CG.API.Model.Output
 {
-    public class RecipeRESToutputDTO
+    public class RecipeDtoRESToutputDTO
     {
-
-        public RecipeRESToutputDTO(int recipeId, string name, string category,string imgUrl, string videoUrl, bool isActive)
+        public RecipeDtoRESToutputDTO(int recipeId, string name, string category, string imgUrl, string videoUrl, bool isActive)
         {
             RecipeId = recipeId;
             Name = name;
@@ -22,7 +20,5 @@ namespace CG.API.Model.Output
         public string ImgUrl { get; set; }
         public string VideoUrl { get; set; }
         public bool IsActive { get; set; }
-        //list mag veranderen naar only observable list enzo!
-        public List<TimingRESToutputDTO> Timings { get; set; }
     }
 }

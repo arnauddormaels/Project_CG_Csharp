@@ -1,5 +1,6 @@
 ﻿using CG.API.Exceptions;
 using CG.API.Model.Output;
+using CG.BL.DTO_s;
 using CG.BL.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,12 +8,24 @@ namespace CG.API.Mappers
 {
     public class MapToDTO
     {
+        public RecipeDtoRESToutputDTO MapFromRecipeDTODomain(RecipeDTO recipe)
+        {
+            try
+            {
+                RecipeDtoRESToutputDTO recipeDTO = new RecipeDtoRESToutputDTO(recipe.RecipeId, recipe.Name,recipe.Category.ToString(), recipe.ImgUrl, recipe.VideoUrl, recipe.IsActive);
+                return recipeDTO;
+            }
+            catch (Exception ex)
+            {
+                throw new MapFromDomainException("Error with mapping to Recipe DTO", ex);
+            }
+        }
 
         public RecipeRESToutputDTO MapFromRecipeDomain(Recipe recipe)
         {
             try
             {
-                RecipeRESToutputDTO recipeDTO = new RecipeRESToutputDTO(recipe.RecipeId, recipe.Name,/*recipe.Category ,*/recipe.ImgUrl, recipe.VideoUrl, recipe.IsActive);
+                RecipeRESToutputDTO recipeDTO = new RecipeRESToutputDTO(recipe.RecipeId, recipe.Name,recipe.Category.ToString() ,recipe.ImgUrl, recipe.VideoUrl, recipe.IsActive);
                 //TimingsOutputDTO toevoegen met de nodige product en brandbroducten!
                 if(recipe.Timings != null)
                 {
@@ -72,9 +85,9 @@ namespace CG.API.Mappers
             return products.Select(p => MapFromProductDomain(p)).ToList();
         }
 
-        public List<RecipeRESToutputDTO> MapRecipies(List<Recipe> recipies)
+        public List<RecipeDtoRESToutputDTO> MapRecipies(List<RecipeDTO> recipies)
         {
-           return recipies.Select(r => MapFromRecipeDomain(r)).ToList();
+           return recipies.Select(r => MapFromRecipeDTODomain(r)).ToList();
         }
 
         public List<TimingRESToutputDTO> MapTimings(List<Timing> Timings)

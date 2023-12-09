@@ -1,4 +1,5 @@
 ﻿
+using CG.BL.DTO_s;
 using CG.BL.Models;
 using CG.DL.Data;
 using CG.DL.Entities;
@@ -14,6 +15,18 @@ namespace CG.DL.Mappers
 {
     public class MapFromEntity
     {
+        public RecipeDTO MapToDomainRecipeDTO(RecipeEntity r)
+        {
+            try
+            {
+                RecipeDTO recipe = new RecipeDTO(r.Id, r.Name, r.Category,r.ImgUrl, r.VideoUrl, r.Active);
+                return recipe;
+            }
+            catch (Exception ex)
+            {
+                throw new MapFromDomainException("Error with mapping recipe to domain in Data Layer", ex);
+            }
+        }
         public Recipe MapToDomainRecipe(RecipeEntity recipeEntity)
         {
             try
@@ -23,7 +36,7 @@ namespace CG.DL.Mappers
                 {
                     timings= recipeEntity.Timings.Select(t => MapToDomainTiming(t)).ToList();
                 }
-                Recipe recipe = new Recipe(recipeEntity.Id, recipeEntity.Name,recipeEntity.ImgUrl, recipeEntity.VideoUrl,recipeEntity.Active,timings);
+                Recipe recipe = new Recipe(recipeEntity.Id, recipeEntity.Name, recipeEntity.Category, recipeEntity.ImgUrl, recipeEntity.VideoUrl,recipeEntity.Active,timings);
                 return recipe;
             }
             catch (Exception ex)
@@ -76,6 +89,7 @@ namespace CG.DL.Mappers
                 throw new MapFromDomainException("MapToDomainBrandProduct", ex);
             }
         }
+
 
     }
 }

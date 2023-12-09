@@ -42,6 +42,8 @@ namespace Project_Collect_and_Go_t5
             });*/
 
             var app = builder.Build();
+
+
             //app.UseCors("MyCorsPolicy");
             app.UseCors(policy =>
             {

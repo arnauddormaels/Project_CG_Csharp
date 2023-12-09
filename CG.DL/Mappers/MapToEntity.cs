@@ -15,7 +15,7 @@ namespace CG.DL.Mappers
         {
             try
             {
-                RecipeEntity recipeEntity = new RecipeEntity(recipe.Name, /*recipe.Category,*/recipe.IsActive, recipe.ImgUrl, recipe.VideoUrl);
+                RecipeEntity recipeEntity = new RecipeEntity(recipe.Name, recipe.Category.ToString(),recipe.IsActive, recipe.ImgUrl, recipe.VideoUrl);
                 return recipeEntity;
             }
             catch (Exception ex)

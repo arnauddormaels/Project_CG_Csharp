@@ -9,13 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CG.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/")]
     [ApiController]
     public class RecipeController : ControllerBase
     {
-        private RecipeRESToutputDTO dummyDTO = new RecipeRESToutputDTO(1, "pasta Bolognaise",/* "Pasta",*/ "https://jenzvandevelde-images-host.onrender.com/tagliatelle%20bolognaise.jpeg", "https://jenzvandevelde-images-host.onrender.com/SpaghettiBolognaise.mp4", true);
-        private List<RecipeRESToutputDTO> dummyDTOlist;
-        private string url = "http://localhost:5209";
         //mappers - moet nog injecteert worden!
         private DomainManager manager;
         private MapFromDTO mapFromDTO;
@@ -26,11 +23,13 @@ namespace CG.API.Controllers
             this.manager = manager;
             this.mapFromDTO = mapFromDTO;
             this.mapToDTO = mapToDTO;
-            dummyDTOlist = new List<RecipeRESToutputDTO> { dummyDTO, new RecipeRESToutputDTO(2, "lasagne",/* "lasagne",*/"https://jenzvandevelde-images-host.onrender.com/ui.jpeg", "vidUrl", true) };
         }
 
+        //vergeet de Badrequest (status code) door te geven 
+        //Logging inplementeren!
+
         [HttpGet]
-        public ActionResult<List<RecipeRESToutputDTO>> GetAllRecipes()         //Eerste connectie met de databank is geslaag whoop whoop 
+        public ActionResult<List<RecipeDtoRESToutputDTO>> GetAllRecipes() 
         {
             try
             {
@@ -73,12 +72,28 @@ namespace CG.API.Controllers
                 return NotFound(ex.Message);
                 throw;
             }
-/*            dummyDTOlist.Add(recipeRESToutputDTO);
-            return recipeRESToutputDTO;*/
+
+        }
+
+        
+        
+        [HttpPut("IsActive/({recipeId})")]
+        public ActionResult<string> IsActiveOfRecipe(int RecipeId)
+        {
+            try
+            {
+                bool isActive = manager.ActivateRecipe(RecipeId);
+                return "The value of recipeId [" + RecipeId + "] has been set to " + isActive;
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+                throw;
+            }
         }
         
         //
-        [HttpPut("{recipeId}")]
+        [HttpPut("({recipeId})")]
         public ActionResult<RecipeRESTinputDTO> EditRecipe(int recipeId ,[FromBody] RecipeRESTinputDTO recipeRESTinputDTO)
         {
             try
@@ -92,10 +107,6 @@ namespace CG.API.Controllers
                 return NotFound(ex.Message);
                 throw;
             }
-
-            /* int index = dummyDTOlist.IndexOf(dummyDTOlist.Where(r => r.RecipeId == id).First());
-            dummyDTOlist[index] = recipeRESTinputDTO;
-            return dummyDTOlist[index];*/
 
         }
 
@@ -115,9 +126,6 @@ namespace CG.API.Controllers
                 throw;
             }
 
-            /*int index = dummyDTOlist.IndexOf(dummyDTOlist.Where(r => r.RecipeId == id).First());
-            dummyDTOlist.Remove(dummyDTOlist[index]);
-            return dummyDTOlist;*/
         }
 
     }

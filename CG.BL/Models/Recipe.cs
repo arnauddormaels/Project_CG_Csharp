@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,35 +16,28 @@ namespace CG.BL.Models
     {
         private int _recipeId;
         private string _name;
-    /*private string _category;*/
+        private Category _category;
         private string _imgUrl;
         private string _videoUrl;
         private List<Timing> _timings;
         private bool _isActive = false;
 
 
-        public Recipe(int recipeId, string name, string imgUrl, string videoUrl, bool isActive, List<Timing> timings)
+        public Recipe(int recipeId, string name, string category ,string imgUrl, string videoUrl, bool isActive, List<Timing> timings)
         {
             RecipeId = recipeId;
             Name = name;
+            Category = (Category)Enum.Parse(typeof(Category), category);
             ImgUrl = imgUrl;
             VideoUrl = videoUrl;
             IsActive = isActive;
             Timings = timings;
         }
 
-        /*public Recipe(string name, string imgUrl, string videoUrl, bool isActive, List<Timing> timings)
+        public Recipe(string name, string category ,string imgUrl, string videoUrl, bool isActive)
         {
             Name = name;
-            ImgUrl = imgUrl;
-            VideoUrl = videoUrl;
-            IsActive = isActive;
-            Timings = timings;
-        }*/
-
-        public Recipe(string name, string imgUrl, string videoUrl, bool isActive)
-        {
-            Name = name;
+            Category = (Category)Enum.Parse(typeof(Category), category);
             ImgUrl = imgUrl;
             VideoUrl = videoUrl;
             IsActive = isActive;
@@ -75,7 +69,7 @@ namespace CG.BL.Models
 
         public int RecipeId { get { return _recipeId; } private set { _recipeId = value; } }
         public string Name { get { return _name;} private set { _name = value; } }
-        /*public string Category { get { return _category; } private set { _category = value; } }*/
+        public Category Category { get { return _category; } private set { _category = value; } }
         public string ImgUrl { get { return _imgUrl;} private set { _imgUrl = value; } }
         public string VideoUrl { get { return _videoUrl;} private set {_videoUrl = value; } }
         public bool IsActive { get => _isActive; set => _isActive = value; }

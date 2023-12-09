@@ -1,4 +1,5 @@
-﻿using CG.BL.Models;
+﻿using CG.BL.DTO_s;
+using CG.BL.Models;
 using CG.BL.Repositorys;
 using CG.DL.Data;
 using CG.DL.Entities;
@@ -28,9 +29,23 @@ namespace CG.DL.Repositorys
             this.mapToEntity = mapToEntity;
         }
 
-        public void ActivateRecipe(int recipeId)
+        public bool ActivateRecipe(int recipeId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //throw exception if the id doesnt match!
+                if (!ctx.Recipe.Any(r => r.Id == recipeId)) throw new RecipeRepositoryException("The recipe id doesn't exist in the database");
+                //haal de waarde uit!
+                RecipeEntity re = ctx.Recipe.Where(r => r.Id == recipeId).First();
+                //verander de waarde
+                ctx.Entry(re).Property("Active").CurrentValue = !re.Active;
+                ctx.SaveChanges();
+                return !re.Active;
+            }
+            catch(Exception ex)
+            {
+                throw new RecipeRepositoryException("ActivateRecipe", ex);
+            }
         }
 
         public void AddRecipe(Recipe recipe)
@@ -47,7 +62,7 @@ namespace CG.DL.Repositorys
             {
                 throw new RecipeRepositoryException("AddRecipe", ex);
             }
-
+            
         }
 
         public Recipe GetRecipeById(int recipeId)
@@ -80,17 +95,16 @@ namespace CG.DL.Repositorys
             }
         }
 
-        public List<Recipe> GetRecipes()
+        public List<RecipeDTO> GetRecipes()
         {
             try
             {
                 //return a list of recipes without their timings - recipeDTO!
-                return ctx.Recipe.Where(r => r.TimeLog == null).AsNoTracking().Select(r => mapFromEntity.MapToDomainRecipe(r)).ToList();
+                return ctx.Recipe.Where(r => r.TimeLog == null).AsNoTracking().Select(r => mapFromEntity.MapToDomainRecipeDTO(r)).ToList();
             }
             catch(Exception ex)
             {
-                //add custom exception
-                throw new NotImplementedException();
+                throw new RecipeRepositoryException("GetRecipes", ex);
             }
         }
 

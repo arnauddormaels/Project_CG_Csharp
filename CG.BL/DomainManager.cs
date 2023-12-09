@@ -1,4 +1,5 @@
-﻿using CG.BL.Exceptions;
+﻿using CG.BL.DTO_s;
+using CG.BL.Exceptions;
 using CG.BL.Models;
 using CG.BL.Repositorys;
 
@@ -17,8 +18,8 @@ namespace CollectAndGO.Application
             _timingRepository = timingRepository;
         }
 
-        //Recipes Methodes
-        public List<Recipe> GetRecipes()
+        //Recipes Methodes - Vergeet de logging niet!
+        public List<RecipeDTO> GetRecipes()
         {
             try
             {
@@ -94,11 +95,11 @@ namespace CollectAndGO.Application
         
         }
 
-        public void ActivateRecipe(int recipeId)
+        public bool ActivateRecipe(int recipeId)
         {
             try
             {
-                _recipeRepo.ActivateRecipe(recipeId); //not implemented
+                return _recipeRepo.ActivateRecipe(recipeId);
             }
             catch (Exception ex)
             {

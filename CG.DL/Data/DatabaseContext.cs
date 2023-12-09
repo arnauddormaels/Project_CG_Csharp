@@ -24,8 +24,8 @@ namespace CG.DL.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_connectionString)
-                .LogTo(Console.WriteLine, LogLevel.Information);
+
+
 
         }
 
@@ -49,7 +49,7 @@ namespace CG.DL.Data
         {
             modelBuilder.Entity<BrandEntity>().ToTable("Brand");
             modelBuilder.Entity<ProductEntity>().ToTable("Product");
-            modelBuilder.Entity<TimingEntity>().ToTable("Timing");
+            modelBuilder.Entity<TimingEntity>().ToTable("Timing");  
             modelBuilder.Entity<RecipeEntity>().ToTable("Recipe");
         }
         private void ConfigTimingFKs(ModelBuilder modelBuilder)

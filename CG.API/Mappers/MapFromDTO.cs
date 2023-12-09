@@ -13,7 +13,7 @@ namespace CG.API.Mappers
 
             try
             {
-                Recipe recipe = new Recipe(recipeDTO.Name, /*recipeDTO.Category,*/ recipeDTO.ImgUrl, recipeDTO.VideoUrl,recipeDTO.IsActive);
+                Recipe recipe = new Recipe(recipeDTO.Name, recipeDTO.Category, recipeDTO.ImgUrl, recipeDTO.VideoUrl,recipeDTO.IsActive);
                 return recipe;
             }
             catch(Exception ex)

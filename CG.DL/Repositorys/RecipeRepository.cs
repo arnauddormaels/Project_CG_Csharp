@@ -74,14 +74,14 @@ namespace CG.DL.Repositorys
 
                 //Voeg de timing toe van de recept en de producten en hun brandproduct
                 RecipeEntity recipeEntities = ctx.Recipe.Where(r => r.Id == recipeId)
-                    .AsNoTracking().FirstOrDefault();
+                    .AsNoTracking().First();
                 
                 List<TimingEntity> timingEntities = ctx.Timing.Where(t => t.RecipeId == recipeEntities.Id).AsNoTracking().ToList();
 
                 timingEntities.ForEach(timingEntity =>
                 {
-                    ProductEntity productEntity = ctx.Product.Where(p => p.Id == timingEntity.ProductId).AsNoTracking().FirstOrDefault();
-                    productEntity.Brand = ctx.Brand.Where(b => b.Id == productEntity.BrandId).AsNoTracking().FirstOrDefault();
+                    ProductEntity productEntity = ctx.Product.Where(p => p.Id == timingEntity.ProductId).AsNoTracking().First();
+                    productEntity.Brand = ctx.Brand.Where(b => b.Id == productEntity.BrandId).AsNoTracking().First();
                     timingEntity.Product = productEntity;
                 });
 

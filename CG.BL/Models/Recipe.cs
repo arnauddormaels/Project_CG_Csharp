@@ -53,7 +53,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("RecipeId", value));
                     throw ex;
                 }
-                RecipeId = value;
+                _recipeId = value;
             }
         }
         public string Name { get => _name; private set
@@ -66,12 +66,12 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("Name", value));
                     throw ex;
                 }
-                Name = value;
+                _name = value;
             }
         }
         public Category Category { get => _category; private set
             {
-                if (Enum.IsDefined(value))
+                if (!Enum.IsDefined(value))
                 {
                     var ex = new DomainModelException("Recipe-SetCategory-IsDefined");
                     ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(Category)));
@@ -79,7 +79,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("Category", value));
                     throw ex;
                 }
-                Category = value;
+                _category = value;
             }
         }
         public string ImgUrl { get => _imgUrl; private set
@@ -92,7 +92,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("ImgUrl", value));
                     throw ex;
                 }
-                ImgUrl = value;
+                _imgUrl = value;
             }
         }
         public string VideoUrl { get => _videoUrl; private set
@@ -105,7 +105,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("VideoUrl", value));
                     throw ex;
                 }
-                VideoUrl = value;
+                _videoUrl = value;
             }
         }
         public bool IsActive { get => _isActive; private set
@@ -118,7 +118,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("IsActive", value));
                     throw ex;
                 }
-                IsActive = value;
+                _isActive = value;
             }
         }
         public List<Timing> Timings { get => _timings; set { _timings = value; } }
@@ -146,7 +146,6 @@ namespace CG.BL.Models
                 throw new RecipeException("Can't Add timing in Recipe.timings => timing is null");
             }
         }
-
 
         public override string? ToString()
         {

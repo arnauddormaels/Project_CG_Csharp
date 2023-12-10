@@ -43,7 +43,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("BrandId", value));
                     throw ex;
                 }
-                BrandId = value;
+                _brandId = value;
             }
         }
         public string Name { get => _name; private set
@@ -56,7 +56,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("Name", value));
                     throw ex;
                 }
-                Name = value;
+                _name = value;
             }
         }
         public decimal Price { get => _price; private set
@@ -69,7 +69,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("Price", value));
                     throw ex;
                 }
-                Price = value;
+                _price = value;
             }
         }
         public string Description { get => _description; private set
@@ -82,7 +82,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("Description", value));
                     throw ex;
                 }
-                Description = value;
+                _description = value;
             }
         }
         public string ImgUrl { get => _imgUrl; private set
@@ -95,7 +95,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("ImgUrl", value));
                     throw ex;
                 }
-                ImgUrl = value;
+                _imgUrl = value;
             }
         }
 

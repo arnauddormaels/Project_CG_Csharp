@@ -12,8 +12,6 @@ namespace CG.API.Controllers
     [ApiController]
     public class TimingController : ControllerBase
     {
-        //bij timings geef je ook alle producten mee die daar bij horen!
-
 /*        private List<DummyTimingRESToutputDTO> dummyTimings = new List<DummyTimingRESToutputDTO>
             {
                 new DummyTimingRESToutputDTO(1, "https://jenzvandevelde-images-host.onrender.com/boter.jpeg", "https://jenzvandevelde-images-host.onrender.com/famaboter.webp", "Boter", "Fama", "00:34", "00:40"),
@@ -41,7 +39,6 @@ namespace CG.API.Controllers
             this.mapFromDTO = mapFromDTO;
             this.mapToDTO = mapToDTO;
         }
-
 
         // GET: api/Timing
         [HttpGet("({recipeId})")]

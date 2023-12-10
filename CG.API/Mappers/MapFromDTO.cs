@@ -50,7 +50,7 @@ namespace CG.API.Mappers
             }
         }
 
-        public Timing MapToDomainTiming(TimingRESTinputDTO timingDTO) //not implemented
+        public Timing MapToDomainTiming(TimingRESTinputDTO timingDTO)
         {
 
             try

@@ -34,7 +34,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("TimingId", value));
                     throw ex;
                 }
-                TimingId = value;
+                _timingId = value;
             }
         }
         public int StartTime { get => _startTime; private set
@@ -47,7 +47,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("StartTime", value));
                     throw ex;
                 }
-                StartTime = value;
+                _startTime = value;
             }
         }
         public int EndTime { get => _endTime; private set
@@ -60,7 +60,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("EndTime", value));
                     throw ex;
                 }
-                EndTime = value;
+                _endTime = value;
             }
         }
         public Product Product { get => _product; private set
@@ -73,7 +73,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("Product", value));
                     throw ex;
                 }
-                Product = value;
+                _product = value;
             }
         }
 

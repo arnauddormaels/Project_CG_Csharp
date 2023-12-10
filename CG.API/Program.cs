@@ -1,3 +1,4 @@
+using CG.API.LoggingMiddlewares;
 using CG.API.Mappers;
 using CG.BL.Repositorys;
 using CG.DL.Data;
@@ -43,7 +44,6 @@ namespace Project_Collect_and_Go_t5
 
             var app = builder.Build();
 
-
             //app.UseCors("MyCorsPolicy");
             app.UseCors(policy =>
             {
@@ -63,6 +63,8 @@ namespace Project_Collect_and_Go_t5
 
             app.UseAuthorization();
 
+            //voeg de middelware logging toe
+            app.UseLoggingMiddleware();
 
             app.MapControllers();
 

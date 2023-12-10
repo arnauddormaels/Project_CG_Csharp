@@ -33,7 +33,8 @@ namespace CG.BL.Models
 
         public int ProductId
         {
-            get => _productId; private set
+            //Voorlopig is setter public voor de timing toe te voegen en die te linken met productId 
+            get => _productId; set
             {
                 if (value <= 0)
                 {
@@ -43,7 +44,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("ProductId", value));
                     throw ex;
                 }
-                ProductId = value;
+                _productId = value;
             }
         }
         public string ProductName { get => _productName; private set
@@ -56,7 +57,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("ProductName", value));
                     throw ex;
                 }
-                ProductName = value;
+                _productName = value;
             }
         }
         public string Category{ get => _category; private set
@@ -69,7 +70,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("Category", value));
                     throw ex;
                 }
-                Category = value;
+                _category = value;
             }
         }
         public string ImgUrl { get => _imgUrl; private set
@@ -82,7 +83,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("ImgUrl", value));
                     throw ex;
                 }
-                ImgUrl = value;
+                _imgUrl = value;
             }
         }
         public BrandProduct BrandProduct { get => _brandProduct; private set
@@ -95,7 +96,7 @@ namespace CG.BL.Models
                     ex.Error.Values.Add(new PropertyInfo("BrandProduct", value));
                     throw ex;
                 }
-                BrandProduct = value;
+                _brandProduct = value;
             }
         }
 

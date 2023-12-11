@@ -1,4 +1,5 @@
 ﻿using CG.BL.DTO_s;
+using CG.BL.Exceptions;
 using CG.BL.Models;
 using CG.BL.Repositorys;
 using CG.DL.Data;
@@ -44,7 +45,9 @@ namespace CG.DL.Repositorys
             }
             catch(Exception ex)
             {
-                throw new RecipeRepositoryException("ActivateRecipe", ex);
+                var iex = new InfrastructureException("RecipeRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(ActivateRecipe)));
+                throw iex;
             }
         }
 
@@ -60,7 +63,9 @@ namespace CG.DL.Repositorys
             }
             catch(Exception ex)
             {
-                throw new RecipeRepositoryException("AddRecipe", ex);
+                var iex = new InfrastructureException("RecipeRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddRecipe)));
+                throw iex;
             }
             
         }
@@ -91,7 +96,9 @@ namespace CG.DL.Repositorys
             }
             catch (Exception ex)
             {
-                throw new RecipeRepositoryException("GetRecipeById", ex);
+                var iex = new InfrastructureException("RecipeRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetRecipeById)));
+                throw iex;
             }
         }
 
@@ -104,7 +111,9 @@ namespace CG.DL.Repositorys
             }
             catch(Exception ex)
             {
-                throw new RecipeRepositoryException("GetRecipes", ex);
+                var iex = new InfrastructureException("RecipeRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetRecipes)));
+                throw iex;
             }
         }
 
@@ -120,7 +129,9 @@ namespace CG.DL.Repositorys
             }
             catch (Exception ex)
             {
-                throw new RecipeRepositoryException("RemoveRecipe", ex);
+                var iex = new InfrastructureException("RecipeRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(RemoveRecipe)));
+                throw iex;
             }
             
         }
@@ -137,7 +148,9 @@ namespace CG.DL.Repositorys
             catch (Exception ex)
             {
                 //here you override the table info -Update method of EF
-                throw new RecipeRepositoryException("UpdateRecipe", ex);
+                var iex = new InfrastructureException("RecipeRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(UpdateRecipe)));
+                throw iex;
             }
 
         }

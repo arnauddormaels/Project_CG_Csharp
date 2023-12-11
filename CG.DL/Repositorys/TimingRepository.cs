@@ -1,4 +1,5 @@
-﻿using CG.BL.Models;
+﻿using CG.BL.Exceptions;
+using CG.BL.Models;
 using CG.BL.Repositorys;
 using CG.DL.Data;
 using CG.DL.Entities;
@@ -28,12 +29,21 @@ namespace CG.DL.Repositorys
 
         public void AddTimingToRecipe(int recipeId, Timing timing)
         {
-            //is dit de correcte manier om data op te slaan?
-            TimingEntity timingEntity = mapToEntity.MapFromDomainTiming(timing);
-            timingEntity.RecipeId = recipeId;
-            //Voeg nu de timingToe waar nodig is!
-            ctx.Timing.Add(timingEntity);
-            ctx.SaveChanges();
+            try
+            {
+                //is dit de correcte manier om data op te slaan?
+                TimingEntity timingEntity = mapToEntity.MapFromDomainTiming(timing);
+                timingEntity.RecipeId = recipeId;
+                //Voeg nu de timingToe waar nodig is!
+                ctx.Timing.Add(timingEntity);
+                ctx.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                var iex = new InfrastructureException("TimingRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddTimingToRecipe)));
+                throw iex;
+            }
         }
 
         //it is not the correct way to do it! But it does iets job!
@@ -61,14 +71,26 @@ namespace CG.DL.Repositorys
             }
             catch (Exception ex)
             {
-                throw new TimingRepositoryException("GetAllTimingsFromRecipe", ex);
+                var iex = new InfrastructureException("TimingRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetAllTimingsFromRecipe)));
+                throw iex;
             }
 
         }
 
         public void RemoveTimingFromRecipe(string timing)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch(Exception  ex)
+            {
+                var iex = new InfrastructureException("TimingRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(RemoveTimingFromRecipe)));
+                throw iex;
+            }
+            
         }
     }
 }

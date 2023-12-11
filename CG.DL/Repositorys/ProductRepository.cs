@@ -1,4 +1,5 @@
-﻿using CG.BL.Models;
+﻿using CG.BL.Exceptions;
+using CG.BL.Models;
 using CG.BL.Repositorys;
 using CG.DL.Data;
 using CG.DL.Entities;
@@ -27,15 +28,24 @@ namespace CG.DL.Repositorys
 
         public List<Product> GetProducts()
         {
-            //Kijkt eerst de brandproduct die bijhoren bij product!
-            List<ProductEntity> productEntity = ctx.Product.ToList();
-            //voeg de brandproduct bij de entit!
-            productEntity.ForEach(p =>
+            try
             {
-                p.Brand = ctx.Brand.Where(b => b.Id == p.BrandId).AsNoTracking().FirstOrDefault();
-            });
+                //Kijkt eerst de brandproduct die bijhoren bij product!
+                List<ProductEntity> productEntity = ctx.Product.ToList();
+                //voeg de brandproduct bij de entit!
+                productEntity.ForEach(p =>
+                {
+                    p.Brand = ctx.Brand.Where(b => b.Id == p.BrandId).AsNoTracking().FirstOrDefault();
+                });
 
-            return productEntity.Select(p => mapFromEntity.MapToDomainProduct(p)).ToList();
+                return productEntity.Select(p => mapFromEntity.MapToDomainProduct(p)).ToList();
+            }
+            catch(Exception ex) 
+            {
+                var iex = new InfrastructureException("ProductRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetProducts)));
+                throw iex;
+            }
         }
 
         public Product GetProductById(int productId)
@@ -52,7 +62,9 @@ namespace CG.DL.Repositorys
             }
             catch (Exception ex)
             {
-                throw new ProductRepositoryException("GetProductById", ex);
+                var iex = new InfrastructureException("ProductRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetProductById)));
+                throw iex;
             }
         }
 
@@ -67,16 +79,27 @@ namespace CG.DL.Repositorys
             }
             catch(Exception ex)
             {
-                throw new ProductRepositoryException("AddProduct", ex);
+                var iex = new InfrastructureException("ProductRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddProduct)));
+                throw iex;
             }
 
         }
 
         public void AddBrandProduct(BrandProduct brandproduct)
         {
-            BrandEntity brandEntity = mapToEntity.MapFromDomainBrandProduct(brandproduct);
-            ctx.Brand.Add(brandEntity);
-            ctx.SaveChanges();
+            try
+            {
+                BrandEntity brandEntity = mapToEntity.MapFromDomainBrandProduct(brandproduct);
+                ctx.Brand.Add(brandEntity);
+                ctx.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                var iex = new InfrastructureException("ProductRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(AddBrandProduct)));
+                throw iex;
+            }
         }
 
         public List<BrandProduct> GetBrandProducts(int brandId)
@@ -87,7 +110,9 @@ namespace CG.DL.Repositorys
             }
             catch (Exception ex)
             {
-                throw new NotImplementedException();
+                var iex = new InfrastructureException("ProductRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetBrandProducts)));
+                throw iex;
             }
         }
     }

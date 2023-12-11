@@ -1,4 +1,5 @@
-﻿using CG.BL.Models;
+﻿using CG.BL.Exceptions;
+using CG.BL.Models;
 using CG.DL.Entities;
 using CG.DL.Exceptions;
 using System;
@@ -18,6 +19,10 @@ namespace CG.DL.Mappers
                 RecipeEntity recipeEntity = new RecipeEntity(recipe.Name, recipe.Category.ToString(),recipe.IsActive, recipe.ImgUrl, recipe.VideoUrl);
                 return recipeEntity;
             }
+            catch (DomainModelException ex)
+            {
+                ex.Sources.Add(new ErrorSource("MapToEntity", "MapFromDomainRecipe")); throw ex;
+            }
             catch (Exception ex)
             {
                 throw new MapFromDomainException("Error with mapping from domain into Data Layer", ex);
@@ -35,6 +40,10 @@ namespace CG.DL.Mappers
 
                 return timingEntity;
             }
+            catch (DomainModelException ex)
+            {
+                ex.Sources.Add(new ErrorSource("MapToEntity", "MapFromDomainTiming")); throw ex;
+            }
             catch (Exception ex)
             {
                 throw new MapFromDomainException("mapFromDomainTiming", ex);
@@ -49,6 +58,10 @@ namespace CG.DL.Mappers
                 productEntity.Brand = MapFromDomainBrandProduct(product.BrandProduct);
                 return productEntity;
             }
+            catch (DomainModelException ex)
+            {
+                ex.Sources.Add(new ErrorSource("MapToEntity", "MapFromDomainProduct")); throw ex;
+            }
             catch (Exception ex)
             {
                 throw new MapFromDomainException("mapFromDomainProduct", ex);
@@ -62,14 +75,14 @@ namespace CG.DL.Mappers
                 BrandEntity brandEntity = new(brandproduct.Name, brandproduct.Price, brandproduct.Description, brandproduct.ImgUrl);
                 return brandEntity;
             }
-            catch(Exception ex)
+            catch (DomainModelException ex)
+            {
+                ex.Sources.Add(new ErrorSource("MapToEntity", "MapFromDomainBrandProduct")); throw ex;
+            }
+            catch (Exception ex)
             {
                 throw new MapFromDomainException("mapFromDomainBrandProduct");
             }
         }
-
-
-
-
     }
 }

@@ -17,22 +17,22 @@ namespace CG.API.Controllers
         private DomainManager manager;
         private MapFromDTO mapFromDTO;
         private MapToDTO mapToDTO;
-        /*private readonly ILogger logger;*/
+        private readonly ILogger logger;
 
-        public RecipeController(DomainManager manager, MapFromDTO mapFromDTO, MapToDTO mapToDTO/*, ILogger<RecipeController> logger*/)
+        public RecipeController(DomainManager manager, MapFromDTO mapFromDTO, MapToDTO mapToDTO, ILoggerFactory loggerFactory)
         {
             this.manager = manager;
             this.mapFromDTO = mapFromDTO;
             this.mapToDTO = mapToDTO;
+            this.logger = loggerFactory.CreateLogger("RecipeController");
         }
-
-        //Logging inplementeren - Welke methodes dat je uitvoerd bij de controllers
 
         [HttpGet]
         public ActionResult<List<RecipeDtoRESToutputDTO>> GetAllRecipes() 
         {
             try
-            { 
+            {
+                logger.LogInformation(1001,"GetAllRecipes called");
                 return Ok(mapToDTO.MapRecipies(manager.GetRecipes()));
             }
             catch (Exception ex)
@@ -47,6 +47,7 @@ namespace CG.API.Controllers
         {
             try
             {
+                logger.LogInformation("GetRecipeById called");
                 Recipe recipe = manager.GetRecipeById(recipeId);
                 if(recipe == null)
                 {
@@ -61,13 +62,13 @@ namespace CG.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        //inputDTo aanmaken waar er geen id in zit!
+
         [HttpPost]
         public ActionResult<RecipeRESTinputDTO> AddRecipe([FromBody] RecipeRESTinputDTO recipeRESTinputDTO)
         {
             try
             {
-                //voeg toe? return de toegevoegde waarde?
+                logger.LogInformation("AddRecipe called");
                 Recipe recipe = mapFromDTO.MapToDomainRecipe(recipeRESTinputDTO);
                 manager.AddRecipe(recipe);
                 return CreatedAtAction(nameof(GetRecipeById), new { recipeId = recipe.RecipeId }, recipeRESTinputDTO);
@@ -85,6 +86,7 @@ namespace CG.API.Controllers
         {
             try
             {
+                logger.LogInformation("IsActiveOfRecipe called");
                 bool isActive = manager.ActivateRecipe(recipeId);
                 return Ok("The value of recipeId [" + recipeId + "] has been set to " + !isActive);
             }
@@ -100,6 +102,7 @@ namespace CG.API.Controllers
             try
             {
                 //Update recipe zonder timers updaten in de databank!
+                logger.LogInformation("EditRecipe called");
                 Recipe recipe = mapFromDTO.MapToDomainRecipe(recipeRESTinputDTO);
                 manager.UpdateRecipe(recipeId,recipe);
                 return Ok(recipeRESTinputDTO);
@@ -116,6 +119,7 @@ namespace CG.API.Controllers
         {
             try
             {
+                logger.LogInformation("RemoveRecipe called");
                 manager.RemoveRecipe(recipeId);
                 return NoContent();
             }

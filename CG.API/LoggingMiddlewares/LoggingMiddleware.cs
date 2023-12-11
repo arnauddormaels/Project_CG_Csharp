@@ -27,75 +27,38 @@ namespace CG.API.LoggingMiddlewares
 
             try
             {
-                // Set the correlation ID and request timestamp in the context
-                context.Items["CorrelationId"] = correlationId;
-                context.Items["RequestReceivedTime"] = requestReceivedTime;
-
                 // Log request information at the Information level with the timestamp, correlation ID, and client IP address
                 _logger.LogInformation($"Received request ({correlationId}) at {requestReceivedTime} from {context.Connection.RemoteIpAddress}: {context.Request.Method} {context.Request.Path}");
 
-                // Log request headers at the Information level with the timestamp and correlation ID
-                _logger.LogInformation($"Request headers ({correlationId}) at {requestReceivedTime}:");
-                foreach (var header in context.Request.Headers)
-                {
-                    _logger.LogInformation($"{header.Key}: {header.Value}");
-                }
-
-                // Log request body at the Information level with the timestamp and correlation ID
-                context.Request.EnableBuffering();
-                using (StreamReader reader = new StreamReader(context.Request.Body, Encoding.UTF8, true, 1024, true))
-                {
-                    var requestBody = await reader.ReadToEndAsync();
-                    if (!string.IsNullOrEmpty(requestBody))
-                    {
-                        _logger.LogInformation($"Request body ({correlationId}) at {requestReceivedTime}: {requestBody}");
-                    }
-
-                    // Reset the position of the request body stream so that it can be read again by other middleware
-                    context.Request.Body.Position = 0;
-                }
+                // Log only specific headers (e.g., "Referer", "Accept", "Date" and "Content-Type")
+                // Log request headers at the Information level
+                _logger.LogInformation($"Request headers:\n" +
+                    $"\tReferer: {context.Request.Headers["Referer"]}\n" +
+                    $"\tAccept: {context.Request.Headers["Accept"]}");
 
                 await _next(context);
 
                 // Log response information at the Information level with the timestamp, correlation ID, and client IP address
                 _logger.LogInformation($"Sent response ({correlationId}) at {DateTime.UtcNow} to {context.Connection.RemoteIpAddress}: {context.Response.StatusCode}");
 
-                // Log response headers at the Information level with the timestamp and correlation ID
-                _logger.LogInformation($"Response headers ({correlationId}) at {DateTime.UtcNow}:");
-                foreach (var header in context.Response.Headers)
-                {
-                    _logger.LogInformation($"{header.Key}: {header.Value}");
-                }
+                // Log response headers at the Information level
+                _logger.LogInformation($"Response headers:\n" +
+                    $"\tContent-Type: {context.Response.Headers["Content-type"]}\n" +
+                    $"\tDate: {context.Response.Headers["Date"]}");
 
-                // Log response body at the Information level with the timestamp and correlation ID
-                Stream originalBodyStream = context.Response.Body;
-                using (MemoryStream memoryStream = new MemoryStream())
-                {
-                    context.Response.Body = memoryStream;
-                    memoryStream.Position = 0;
-
-                    string responseBody = await new StreamReader(memoryStream).ReadToEndAsync();
-                    if (!string.IsNullOrEmpty(responseBody))
-                    {
-                        _logger.LogInformation($"Response body ({correlationId}) at {DateTime.UtcNow}: {responseBody}");
-                    }
-
-                    await memoryStream.CopyToAsync(originalBodyStream);
-                }
             }
             catch (Exception ex)
             {
-                // Log error information at the Error level with the timestamp, correlation ID, and client IP address
                 _logger.LogError($"An error occurred ({correlationId}) at {DateTime.UtcNow} from {context.Connection.RemoteIpAddress}: {ex}");
                 throw;
             }
             finally
                 {
-                // Log the URL for every request in the finally block at the Information level with the correlation ID
+                // Log the URL for every request in the finally block at the Information level with the ID
                 _logger.LogInformation(
-                    "Request ({correlationId}) {datetime}: {method} {url} => {statusCode}",
+                    "Request ({correlationId}) duration {time}s : {method} {url} => {statusCode}",
                     correlationId,
-                    DateTime.UtcNow,
+                    Math.Round((DateTime.UtcNow - requestReceivedTime).TotalSeconds,2),
                     context.Request?.Method,
                     context.Request?.Path.Value,
                     context.Response?.StatusCode);

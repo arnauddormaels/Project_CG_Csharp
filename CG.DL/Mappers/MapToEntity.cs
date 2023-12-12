@@ -81,7 +81,7 @@ namespace CG.DL.Mappers
             }
             catch (Exception ex)
             {
-                throw new MapFromDomainException("mapFromDomainBrandProduct");
+                throw new MapFromDomainException("mapFromDomainBrandProduct",ex);
             }
         }
     }

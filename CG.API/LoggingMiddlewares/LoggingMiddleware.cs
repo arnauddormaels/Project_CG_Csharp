@@ -27,6 +27,9 @@ namespace CG.API.LoggingMiddlewares
 
             try
             {
+                //context id toevoegen
+
+
                 // Log request information at the Information level with the timestamp, correlation ID, and client IP address
                 _logger.LogInformation($"Received request ({correlationId}) at {requestReceivedTime} from {context.Connection.RemoteIpAddress}: {context.Request.Method} {context.Request.Path}");
 

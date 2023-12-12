@@ -13,10 +13,11 @@ namespace CG.PresentationLayer.Tests
             string name = "Recipe Name";
             string imgUrl = "recipe_image_url";
             string videoUrl = "recipe_video_url";
+            string category = "recipe category";
             bool isActive = true;
 
             // Act
-            var dto = new RecipeRESToutputDTO(recipeId, name, imgUrl, videoUrl, isActive);
+            var dto = new RecipeRESToutputDTO(recipeId, name, category,imgUrl, videoUrl, isActive);
 
             // Assert
             Assert.Equal(recipeId, dto.RecipeId);
@@ -30,7 +31,7 @@ namespace CG.PresentationLayer.Tests
         public void RecipeRESToutputDTO_Properties_CanBeSetIndependently()
         {
             // Arrange
-            var dto = new RecipeRESToutputDTO(1, "Recipe Name", "recipe_image_url", "recipe_video_url", true);
+            var dto = new RecipeRESToutputDTO(1, "Recipe Name", "recipe category", "recipe_image_url", "recipe_video_url", true);
 
             // Act
             dto.Name = "New Recipe Name";
@@ -49,8 +50,8 @@ namespace CG.PresentationLayer.Tests
         public void RecipeRESToutputDTO_Equality_Test()
         {
             // Arrange
-            var dto1 = new RecipeRESToutputDTO(1, "Recipe Name", "recipe_image_url", "recipe_video_url", true);
-            var dto2 = new RecipeRESToutputDTO(1, "Recipe Name", "recipe_image_url", "recipe_video_url", true);
+            var dto1 = new RecipeRESToutputDTO(1, "Recipe Name", "recipe category", "recipe_image_url", "recipe_video_url", true);
+            var dto2 = new RecipeRESToutputDTO(1, "Recipe Name", "recipe category", "recipe_image_url", "recipe_video_url", true);
 
             // Act
 
@@ -68,8 +69,8 @@ namespace CG.PresentationLayer.Tests
         public void RecipeRESToutputDTO_Inequality_Test()
         {
             // Arrange
-            var dto1 = new RecipeRESToutputDTO(1, "Recipe Name", "recipe_image_url", "recipe_video_url", true);
-            var dto2 = new RecipeRESToutputDTO(2, "Other Recipe", "other_image_url", "other_video_url", false);
+            var dto1 = new RecipeRESToutputDTO(1, "Recipe Name", "recipe category", "recipe_image_url", "recipe_video_url", true);
+            var dto2 = new RecipeRESToutputDTO(2, "Other Recipe", "recipe category", "other_image_url", "other_video_url", false);
 
             // Assert
             Assert.NotEqual(dto1, dto2);

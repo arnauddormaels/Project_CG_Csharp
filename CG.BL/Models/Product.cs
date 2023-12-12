@@ -73,7 +73,8 @@ namespace CG.BL.Models
                 _category = value;
             }
         }
-        public string ImgUrl { get => _imgUrl; private set
+        //Voorlopig is setter public voor de testing om die appart toe te voegen
+        public string ImgUrl { get => _imgUrl; set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {

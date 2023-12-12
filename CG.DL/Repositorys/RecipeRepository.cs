@@ -37,7 +37,7 @@ namespace CG.DL.Repositorys
                 //throw exception if the id doesnt match!
                 if (!ctx.Recipe.Any(r => r.Id == recipeId)) throw new RecipeRepositoryException("The recipe id doesn't exist in the database");
                 //haal de waarde uit!
-                RecipeEntity re = ctx.Recipe.Where(r => r.Id == recipeId).First();
+                RecipeEntity re = ctx.Recipe.Where(r => r.Id == recipeId).FirstOrDefault();
                 //verander de waarde
                 ctx.Entry(re).Property("Active").CurrentValue = !re.Active;
                 ctx.SaveChanges();
@@ -79,14 +79,14 @@ namespace CG.DL.Repositorys
 
                 //Voeg de timing toe van de recept en de producten en hun brandproduct
                 RecipeEntity recipeEntities = ctx.Recipe.Where(r => r.Id == recipeId)
-                    .AsNoTracking().First();
+                    .AsNoTracking().FirstOrDefault();
                 
                 List<TimingEntity> timingEntities = ctx.Timing.Where(t => t.RecipeId == recipeEntities.Id).AsNoTracking().ToList();
 
                 timingEntities.ForEach(timingEntity =>
                 {
-                    ProductEntity productEntity = ctx.Product.Where(p => p.Id == timingEntity.ProductId).AsNoTracking().First();
-                    productEntity.Brand = ctx.Brand.Where(b => b.Id == productEntity.BrandId).AsNoTracking().First();
+                    ProductEntity productEntity = ctx.Product.Where(p => p.Id == timingEntity.ProductId).AsNoTracking().FirstOrDefault();
+                    productEntity.Brand = ctx.Brand.Where(b => b.Id == productEntity.BrandId).AsNoTracking().FirstOrDefault();
                     timingEntity.Product = productEntity;
                 });
 
@@ -142,6 +142,14 @@ namespace CG.DL.Repositorys
             {
                 RecipeEntity recipeEntity = mapToEntity.MapFromDomainRecipe(recipe);
                 recipeEntity.Id = recipeId;
+
+                //detach any existing tracking for this entity
+                RecipeEntity existingEntity = ctx.Recipe.Local.FirstOrDefault(r => r.Id.Equals(recipeId));
+                if(existingEntity != null)
+                {
+                    ctx.Entry(existingEntity).State = EntityState.Detached;
+                }
+
                 ctx.Update(recipeEntity);
                 ctx.SaveChanges();
             }

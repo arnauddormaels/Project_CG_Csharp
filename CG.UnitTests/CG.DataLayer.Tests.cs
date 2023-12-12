@@ -30,15 +30,15 @@ namespace CG.DL.Model.Tests
         {
             // Arrange
             string name = "ProductName";
-            string category = "ProductCategory";
+            //string category = "ProductCategory";
             string imgUrl = "product_image_url";
 
             // Act
-            var product = new ProductEntity(name, category, imgUrl);
+            var product = new ProductEntity(name,imgUrl);
 
             // Assert
             Assert.Equal(name, product.Name);
-            Assert.Equal(category, product.Category);
+            //Assert.Equal(category, product.Category);
             Assert.Equal(imgUrl, product.ImgUrl);
         }
 

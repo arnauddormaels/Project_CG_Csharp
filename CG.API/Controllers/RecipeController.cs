@@ -37,7 +37,8 @@ namespace CG.API.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
+                throw;
             }
         }
 
@@ -60,6 +61,7 @@ namespace CG.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+                throw;
             }
         }
 
@@ -70,12 +72,14 @@ namespace CG.API.Controllers
             {
                 logger.LogInformation("AddRecipe called");
                 Recipe recipe = mapFromDTO.MapToDomainRecipe(recipeRESTinputDTO);
+                //dit werkt alleen als de manager de aangemaakte object terug geeft zo kan je de id toeveogen!
                 manager.AddRecipe(recipe);
                 return CreatedAtAction(nameof(GetRecipeById), new { recipeId = recipe.RecipeId }, recipeRESTinputDTO);
             }
             catch(Exception ex)
             {
                 return BadRequest(ex.Message);
+                throw;
             }
 
         }
@@ -93,6 +97,7 @@ namespace CG.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+                throw;
             }
         }
         
@@ -110,6 +115,7 @@ namespace CG.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+                throw;
             }
 
         }
@@ -126,6 +132,7 @@ namespace CG.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+                throw;
             }
 
         }

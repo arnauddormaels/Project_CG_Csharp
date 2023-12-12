@@ -1,6 +1,7 @@
 ﻿using CG.API.Mappers;
 using CG.API.Model.Input;
 using CG.API.Model.Output;
+using CG.BL.Models;
 using CollectAndGO.Application;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -46,12 +47,20 @@ namespace CG.API.Controllers
         {
             try
             {
-               return mapToDTO.MapTimings(manager.GetTimingsFromRecipe(recipeId));
+                List<Timing> timings = manager.GetTimingsFromRecipe(recipeId);
+
+                if (timings.Any())
+                {
+                    return Ok(mapToDTO.MapTimings(timings));
+                }
+                else
+                {
+                    return NotFound($"No timings found for recipe with ID {recipeId}");
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return NotFound(ex.Message);
-                throw;
+                return BadRequest(ex.Message);
             }
         }
 
@@ -67,7 +76,7 @@ namespace CG.API.Controllers
             }
             catch(Exception ex)
             {
-                return NotFound(ex.Message);
+                return BadRequest(ex.Message);
                 throw;
             }
 

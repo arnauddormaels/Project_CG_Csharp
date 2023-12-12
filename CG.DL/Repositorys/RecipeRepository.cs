@@ -74,23 +74,16 @@ namespace CG.DL.Repositorys
         {
             try
             {
+
                 //throw exception if the id doesnt match! TODO
-                if(!ctx.Recipe.Any(r => r.Id == recipeId)) throw new RecipeRepositoryException("The recipe id doesn't exist in the database");
+                if (!ctx.Recipe.Any(r => r.Id == recipeId)) throw new RecipeRepositoryException("The recipe id doesn't exist in the database");
 
-                //Voeg de timing toe van de recept en de producten en hun brandproduct
-                RecipeEntity recipeEntities = ctx.Recipe.Where(r => r.Id == recipeId)
-                    .AsNoTracking().FirstOrDefault();
-                
-                List<TimingEntity> timingEntities = ctx.Timing.Where(t => t.RecipeId == recipeEntities.Id).AsNoTracking().ToList();
-
-                timingEntities.ForEach(timingEntity =>
-                {
-                    ProductEntity productEntity = ctx.Product.Where(p => p.Id == timingEntity.ProductId).AsNoTracking().FirstOrDefault();
-                    productEntity.Brand = ctx.Brand.Where(b => b.Id == productEntity.BrandId).AsNoTracking().FirstOrDefault();
-                    timingEntity.Product = productEntity;
-                });
-
-                recipeEntities.Timings = timingEntities;
+                RecipeEntity recipeEntities = ctx.Recipe
+                    .Include(r => r.Timings)
+                    .ThenInclude(t => t.Product)
+                    .ThenInclude(p => p.Brand)
+                    .AsNoTracking()
+                    .FirstOrDefault(r => r.Id == recipeId);
   
                 return mapFromEntity.MapToDomainRecipe(recipeEntities);
             }
@@ -140,16 +133,24 @@ namespace CG.DL.Repositorys
         {
             try
             {
-                RecipeEntity recipeEntity = mapToEntity.MapFromDomainRecipe(recipe);
-                recipeEntity.Id = recipeId;
 
+                //throw exception if the id doesnt match!
                 //detach any existing tracking for this entity
                 RecipeEntity existingEntity = ctx.Recipe.Local.FirstOrDefault(r => r.Id.Equals(recipeId));
-                if(existingEntity != null)
+                if (existingEntity != null)
                 {
                     ctx.Entry(existingEntity).State = EntityState.Detached;
                 }
+                else
+                {
+                    throw new RecipeRepositoryException("The recipe id doesn't exist in the database");
+                }
 
+                //maak de nieuwe object en voeg de id toe
+                RecipeEntity recipeEntity = mapToEntity.MapFromDomainRecipe(recipe);
+                recipeEntity.Id = recipeId;
+
+                //update de database for the existing entity
                 ctx.Update(recipeEntity);
                 ctx.SaveChanges();
             }

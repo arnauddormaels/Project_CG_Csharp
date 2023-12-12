@@ -1,6 +1,7 @@
 ﻿using CG.API.Mappers;
 using CG.API.Model.Input;
 using CG.API.Model.Output;
+using CG.BL.Models;
 using CollectAndGO.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
@@ -27,7 +28,7 @@ namespace CG.API.Controllers
         {
             try
             {
-                return mapToDTO.MapProducs(manager.GetProducts());
+                return Ok(mapToDTO.MapProducs(manager.GetProducts()));
             }
             catch (Exception ex)
             {
@@ -57,12 +58,14 @@ namespace CG.API.Controllers
         {
             try
             {
-                manager.AddProduct(mapFromDTO.MapToDomainProduct(productInputDTO));
-                return productInputDTO;
+                Product product = mapFromDTO.MapToDomainProduct(productInputDTO);
+                //dit werkt alleen als de manager de aangemaakte object terug geeft zo kan je de id toeveogen!
+                manager.AddProduct(product);
+                return CreatedAtAction(nameof(GetProductById), new {productId = product.ProductId},productInputDTO);
             }
             catch(Exception ex)
             {
-                return NotFound(ex.Message);
+                return BadRequest(ex.Message);
                 throw;
             }
         }

@@ -10,13 +10,13 @@ namespace CollectAndGO.Application
     {
         private readonly IRecipeRepository _recipeRepo;
         private readonly IProductRepository _productRepo;
-        private readonly ITimingRepository _timingRepository;
+        private readonly ITimingRepository _timingRepo;
 
         public DomainManager(IRecipeRepository recipeRepo, IProductRepository productRepo, ITimingRepository timingRepository)
         {
             _recipeRepo = recipeRepo;
             _productRepo = productRepo;
-            _timingRepository = timingRepository;
+            _timingRepo = timingRepository;
         }
 
         //Recipes Methodes - Vergeet de logging niet!
@@ -163,7 +163,7 @@ namespace CollectAndGO.Application
         {
             try
             {
-                return _timingRepository.GetAllTimingsFromRecipe(recipeId);
+                return _timingRepo.GetAllTimingsFromRecipe(recipeId);
             }
             catch (BLException ex)
             {
@@ -183,7 +183,7 @@ namespace CollectAndGO.Application
         {
             try
             {
-                _timingRepository.AddTimingToRecipe(recipeId, timing);
+                _timingRepo.AddTimingToRecipe(recipeId, timing);
             }
             catch (BLException ex)
             {
@@ -197,6 +197,44 @@ namespace CollectAndGO.Application
                 throw bex;
             }
 
+        }
+
+        public void UpdateTiming(int timingId, Timing timing)
+        {
+            try
+            {
+                _timingRepo.UpdateTimingWithId(timingId, timing);
+            }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(UpdateTiming)));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(UpdateTiming)));
+                throw bex;
+            }
+        }
+
+        public void RemoveTiming(int timingId)
+        {
+            try
+            {
+                _timingRepo.RemoveTimingFromRecipe(timingId);
+            }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(RemoveTiming)));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(RemoveTiming)));
+                throw bex;
+            }
         }
 
         //ProductMethodes
@@ -279,5 +317,6 @@ namespace CollectAndGO.Application
             }
 
         }
+
     }
 }

@@ -61,6 +61,7 @@ namespace CG.API.Controllers
                 Product product = mapFromDTO.MapToDomainProduct(productInputDTO);
                 //dit werkt alleen als de manager de aangemaakte object terug geeft zo kan je de id toeveogen!
                 manager.AddProduct(product);
+                //dit is om de id te kunnen achterhalen door een andere methode!
                 return CreatedAtAction(nameof(GetProductById), new {productId = product.ProductId},productInputDTO);
             }
             catch(Exception ex)

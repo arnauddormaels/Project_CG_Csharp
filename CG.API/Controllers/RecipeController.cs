@@ -17,6 +17,7 @@ namespace CG.API.Controllers
         private DomainManager manager;
         private MapFromDTO mapFromDTO;
         private MapToDTO mapToDTO;
+        //zie of je de logger op 1 plaats de methodes kan loggen
         private readonly ILogger logger;
 
         public RecipeController(DomainManager manager, MapFromDTO mapFromDTO, MapToDTO mapToDTO, ILoggerFactory loggerFactory)
@@ -102,13 +103,15 @@ namespace CG.API.Controllers
         }
         
         [HttpPut("({recipeId})")]
-        public ActionResult<RecipeRESTinputDTO> EditRecipe(int recipeId ,[FromBody] RecipeRESTinputDTO recipeRESTinputDTO)
+        public ActionResult<RecipeRESToutputDTO> EditRecipe(int recipeId ,[FromBody] RecipeRESTinputDTO recipeRESTinputDTO)
         {
             try
             {
                 //Update recipe zonder timers updaten in de databank!
                 logger.LogInformation("EditRecipe called");
                 Recipe recipe = mapFromDTO.MapToDomainRecipe(recipeRESTinputDTO);
+                //Ideaal zal deze methode de geupdated object terug geven om aan de ui te geven met zijn id!
+                //voorlopig wordt de recepten lijst opnieuw opgevraagd telkens!
                 manager.UpdateRecipe(recipeId,recipe);
                 return Ok(recipeRESTinputDTO);
             }
@@ -121,7 +124,7 @@ namespace CG.API.Controllers
         }
 
         [HttpDelete("{recipeId}")]
-        public ActionResult<List<RecipeRESToutputDTO>> RemoveRecipe(int recipeId)
+        public ActionResult RemoveRecipe(int recipeId)
         {
             try
             {

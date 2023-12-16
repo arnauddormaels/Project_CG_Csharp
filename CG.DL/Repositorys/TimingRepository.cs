@@ -51,23 +51,19 @@ namespace CG.DL.Repositorys
         {
             try
             {
-                //Is dit de best manier van werken?
-                List<TimingEntity> timingsEntity = ctx.Timing.AsNoTracking()
-                        .Where(r => r.RecipeId == recipeId)
-                        .ToList();
+                //dit is de beter manier!
+                List<Timing> timings = ctx.Timing
+                    .AsNoTracking()
+                    .Where(t => t.RecipeId == recipeId)
+                    //Voeg de Producten toe!
+                    .Include(t => t.Product)
+                        //voeg de BrandProduct toe
+                        .ThenInclude(p => p.Brand)
+                    //map het naar model timing
+                    .Select(t => mapFromEntity.MapToDomainTiming(t))
+                    .ToList();
 
-                //Voeg de Producten toe!
-                //voeg de BrandProduct toe
-                timingsEntity.ForEach(t =>
-                {
-                    ProductEntity product = ctx.Product.AsNoTracking().Where(p=> p.Id == t.ProductId).FirstOrDefault();
-                    BrandEntity brand = ctx.Brand.AsNoTracking().Where(b => b.Id == product.BrandId).FirstOrDefault();
-                    product.Brand = brand;
-                    t.Product = product;
-                });
-
-                return timingsEntity
-                    .Select(t => mapFromEntity.MapToDomainTiming(t)).ToList();
+                return timings;
             }
             catch (Exception ex)
             {
@@ -78,19 +74,53 @@ namespace CG.DL.Repositorys
 
         }
 
-        public void RemoveTimingFromRecipe(string timing)
+        public void RemoveTimingFromRecipe(int timingId)
         {
             try
             {
-                throw new NotImplementedException();
+                TimingEntity timingToRemove = ctx.Timing.SingleOrDefault(t => t.Id == timingId);
+
+                if (timingToRemove == null)
+                {
+                    throw new RecipeRepositoryException("The recipe id doesn't exist in the database");
+                }
+
+                timingToRemove.TimeLog = DateTime.Now;
+                ctx.SaveChanges();
             }
-            catch(Exception  ex)
+            catch (Exception  ex)
             {
                 var iex = new InfrastructureException("TimingRepository", ex);
                 iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(RemoveTimingFromRecipe)));
                 throw iex;
             }
             
+        }
+
+        public void UpdateTimingWithId(int timingId, Timing timing)
+        {
+            //throw exception if the id doesnt match!
+            //detach any existing tracking for this entity
+            TimingEntity existingEntity = ctx.Timing.Local.FirstOrDefault(t => t.Id.Equals(timingId));
+            if (existingEntity != null)
+            {
+                ctx.Entry(existingEntity).State = EntityState.Detached;
+            }
+            else
+            {
+                throw new RecipeRepositoryException("The timing id doesn't exist in the database");
+            }
+
+            //maak de nieuwe object timingEntity
+            TimingEntity timingEntity = mapToEntity.MapFromDomainTiming(timing);
+
+            //voeg de id's in van timing and recept
+            timingEntity.Id = timingId;
+            timingEntity.RecipeId = existingEntity.RecipeId;
+
+            //update de database for the existing entity
+            ctx.Update(timingEntity);
+            ctx.SaveChanges();
         }
     }
 }

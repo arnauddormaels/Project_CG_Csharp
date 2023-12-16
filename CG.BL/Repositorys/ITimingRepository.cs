@@ -11,6 +11,7 @@ namespace CG.BL.Repositorys
     {
         public List<Timing> GetAllTimingsFromRecipe(int recipeId);
         public void AddTimingToRecipe(int recipeId, Timing timing);
-        public void RemoveTimingFromRecipe(string timing);
+        public void RemoveTimingFromRecipe(int timingId);
+        public void UpdateTimingWithId(int timingId, Timing timing);
     }
 }

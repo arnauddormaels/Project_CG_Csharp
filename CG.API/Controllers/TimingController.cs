@@ -4,6 +4,7 @@ using CG.API.Model.Output;
 using CG.BL.Models;
 using CollectAndGO.Application;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,6 +35,7 @@ namespace CG.API.Controllers
         private MapFromDTO mapFromDTO;
         private MapToDTO mapToDTO;
 
+        //zie of je de logger op 1 plaats de methodes kan loggen
         public TimingController(DomainManager manager, MapFromDTO mapFromDTO, MapToDTO mapToDTO)
         {
             this.manager = manager;
@@ -83,36 +85,39 @@ namespace CG.API.Controllers
         }
 
         // PUT: api/Timing/{id}
-        /*[HttpPut("{id}")]
-        public IActionResult PutTiming(int id, [FromBody] DummyTimingRESToutputDTO timingDTO)
+        [HttpPut("{timingId}")]
+        public ActionResult<TimingRESToutputDTO> PutTiming(int timingId, [FromBody] TimingRESTinputDTO timingDTO)
         {
-            var timing = dummyTimings.FirstOrDefault(t => t.TimingId == id);
-            if (timing == null)
+            try
             {
-                return NotFound("Timing not found");
+                Timing timing = mapFromDTO.MapToDomainTiming(timingDTO);
+                //Ideaal zal deze methode de geupdated object terug geven om aan de ui te geven met zijn id!
+                //voorlopig wordt de timing lijst opnieuw opgevraagd telkens!
+                manager.UpdateTiming(timingId, timing);
+                return Ok(timingDTO);
             }
-
-            timing.BoterImgUrl = timingDTO.BoterImgUrl;
-            timing.FamaImgUrl = timingDTO.FamaImgUrl;
-            timing.BoterName = timingDTO.BoterName;
-            timing.FamaName = timingDTO.FamaName;
-            timing.BeginTime = timingDTO.BeginTime;
-            timing.EndTime = timingDTO.EndTime;
-            return NoContent();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+                throw;
+            }
         }
 
         // DELETE: api/Timing/{id}
-        [HttpDelete("{id}")]
-        public IActionResult DeleteTiming(int id)
+        [HttpDelete("{timingId}")]
+        public ActionResult RemoveTiming(int timingId)
         {
-            var timing = dummyTimings.FirstOrDefault(t => t.TimingId == id);
-            if (timing == null)
+            try
             {
-                return NotFound("Timing not found");
+                manager.RemoveTiming(timingId);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+                throw;
             }
 
-            dummyTimings.Remove(timing);
-            return NoContent();
-        }*/
+        }
     }
 }

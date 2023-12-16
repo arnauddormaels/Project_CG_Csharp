@@ -112,12 +112,29 @@ namespace CG.DL.Repositorys
 
         public void RemoveRecipe(int recipeId)
         {
+            //because of tracking it is possible to change the entity and save it!
             try
             {
-                //throw exception if the id doesnt match! TODO
-                if (!ctx.Recipe.Any(r => r.Id == recipeId)) throw new RecipeRepositoryException("The recipe id doesn't exist in the database");
+                //Search for the recipeEntity
+                RecipeEntity recipeToRemove = ctx.Recipe
+                    .Include(t => t.Timings)
+                    .SingleOrDefault(r => r.Id == recipeId);
 
-                ctx.Entry(ctx.Recipe.Where(r => r.Id == recipeId).First()).Property("TimeLog").CurrentValue = DateTime.Now;
+                //if not found throw exception
+                if (recipeToRemove == null)
+                {
+                    throw new RecipeRepositoryException("The recipe id doesn't exist in the database");
+                }
+
+                //update the TimeLog of recipe to now! the time that is deleted
+                recipeToRemove.TimeLog = DateTime.Now;
+
+                //update the Timelg of Timings too of recipe!
+                recipeToRemove.Timings.ForEach(t =>
+                {
+                    t.TimeLog = DateTime.Now;
+                });
+
                 ctx.SaveChanges();
             }
             catch (Exception ex)

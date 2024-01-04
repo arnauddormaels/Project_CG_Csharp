@@ -59,6 +59,7 @@ namespace CG.DL.Repositorys
                     .Include(t => t.Product)
                         //voeg de BrandProduct toe
                         .ThenInclude(p => p.Brand)
+                        .Where(t => t.TimeLog ==null)
                     //map het naar model timing
                     .Select(t => mapFromEntity.MapToDomainTiming(t))
                     .ToList();
@@ -101,7 +102,7 @@ namespace CG.DL.Repositorys
         {
             //throw exception if the id doesnt match!
             //detach any existing tracking for this entity
-            TimingEntity existingEntity = ctx.Timing.Local.FirstOrDefault(t => t.Id.Equals(timingId));
+            TimingEntity existingEntity = ctx.Timing.FirstOrDefault(t => t.Id.Equals(timingId));
             if (existingEntity != null)
             {
                 ctx.Entry(existingEntity).State = EntityState.Detached;

@@ -153,7 +153,7 @@ namespace CG.DL.Repositorys
 
                 //throw exception if the id doesnt match!
                 //detach any existing tracking for this entity
-                RecipeEntity existingEntity = ctx.Recipe.Local.FirstOrDefault(r => r.Id.Equals(recipeId));
+                RecipeEntity existingEntity = ctx.Recipe.FirstOrDefault(r => r.Id.Equals(recipeId));
                 if (existingEntity != null)
                 {
                     ctx.Entry(existingEntity).State = EntityState.Detached;

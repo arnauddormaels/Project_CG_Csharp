@@ -60,8 +60,8 @@ namespace CG.DL.Data
                 .HasForeignKey(t =>t.RecipeId)                                                     //Gebruik t.recipeId voor deze relatie + column naam wordt RecipeId
                 .HasConstraintName("FK_Recipe");                                                   //naam van de FK bepalen
 
-            modelBuilder.Entity<TimingEntity>().HasOne(t => t.Product).WithOne().IsRequired()
-                .HasForeignKey<TimingEntity>(t => t.ProductId)
+            modelBuilder.Entity<TimingEntity>().HasOne(t => t.Product).WithMany().IsRequired()
+                .HasForeignKey(t => t.ProductId)
                 .HasConstraintName("FK_Product");
 
         }

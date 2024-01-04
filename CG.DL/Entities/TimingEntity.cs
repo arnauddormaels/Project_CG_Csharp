@@ -14,6 +14,12 @@ namespace CG.DL.Entities
             EndTijd = endTijd;
         }
 
+        public TimingEntity(int startTijd, int endTijd, int recipeId, int productId) : this(startTijd, endTijd)
+        {
+            RecipeId = recipeId;
+            ProductId = productId;
+        }
+
         public int Id { get; set; }
         public int StartTijd { get; set; }
         public int EndTijd { get; set; }

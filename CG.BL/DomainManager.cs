@@ -39,6 +39,25 @@ namespace CollectAndGO.Application
             }
 
         }
+        public List<RecipeDTO> GetActiveRecipes()
+        {
+            try
+            {
+                return _recipeRepo.GetActiveRecipes();
+            }
+            catch (BLException ex)
+            {
+                ex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetActiveRecipes)));
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                var bex = new BLException("Business Layer", ex);
+                bex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetActiveRecipes)));
+                throw bex;
+            }
+
+        }
         public List<Product> GetProducts() 
         {
             try

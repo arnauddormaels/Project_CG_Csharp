@@ -42,6 +42,20 @@ namespace CG.API.Controllers
                 throw;
             }
         }
+        [HttpGet]
+        public ActionResult<List<RecipeDtoRESToutputDTO>> GetAllActiveRecipes()
+        {
+            try
+            {
+                logger.LogInformation(1001, "GetAllActiveRecipes called");
+                return Ok(mapToDTO.MapRecipies(manager.GetActiveRecipes()));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+                throw;
+            }
+        }
 
         //[Route("https://localhost:7226/api/Recipe")]
         [HttpGet("({recipeId})")]

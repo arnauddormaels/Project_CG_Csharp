@@ -29,7 +29,6 @@ namespace CG.DL.Repositorys
             this.mapFromEntity = mapFromEntity;
             this.mapToEntity = mapToEntity;
         }
-
         public bool ActivateRecipe(int recipeId)
         {
             try
@@ -50,7 +49,6 @@ namespace CG.DL.Repositorys
                 throw iex;
             }
         }
-
         public void AddRecipe(Recipe recipe)
         {
             try
@@ -69,7 +67,6 @@ namespace CG.DL.Repositorys
             }
             
         }
-
         public Recipe GetRecipeById(int recipeId)
         {
             try
@@ -94,7 +91,6 @@ namespace CG.DL.Repositorys
                 throw iex;
             }
         }
-
         public List<RecipeDTO> GetRecipes()
         {
             try
@@ -109,7 +105,20 @@ namespace CG.DL.Repositorys
                 throw iex;
             }
         }
-
+        public List<RecipeDTO> GetActiveRecipes()
+        {
+            try
+            {
+                //return a list of recipes that are active without their timings - recipeDTO!
+                return ctx.Recipe.Where(r => r.TimeLog == null & r.Active == true).AsNoTracking().Select(r => mapFromEntity.MapToDomainRecipeDTO(r)).ToList();
+            }
+            catch (Exception ex)
+            {
+                var iex = new InfrastructureException("RecipeRepository", ex);
+                iex.Sources.Add(new ErrorSource(this.GetType().Name, nameof(GetRecipes)));
+                throw iex;
+            }
+        }
         public void RemoveRecipe(int recipeId)
         {
             //because of tracking it is possible to change the entity and save it!
@@ -145,7 +154,6 @@ namespace CG.DL.Repositorys
             }
             
         }
-
         public void UpdateRecipe(int recipeId, Recipe recipe)
         {
             try

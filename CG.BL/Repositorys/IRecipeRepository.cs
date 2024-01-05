@@ -11,6 +11,7 @@ namespace CG.BL.Repositorys
     public interface IRecipeRepository
     {
         public List<RecipeDTO> GetRecipes();
+        public List<RecipeDTO> GetActiveRecipes();
         public Recipe GetRecipeById(int recipeId);
         public void AddRecipe(Recipe recipe);
         public void RemoveRecipe(int recipeId);

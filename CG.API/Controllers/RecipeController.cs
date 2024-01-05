@@ -42,7 +42,7 @@ namespace CG.API.Controllers
                 throw;
             }
         }
-        [HttpGet]
+        [HttpGet("getActiveRecipes")]
         public ActionResult<List<RecipeDtoRESToutputDTO>> GetAllActiveRecipes()
         {
             try
